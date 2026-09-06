@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eden 的个人世界 | AI 应用探索者</title>
+<meta name="description" content="Eden 的个人作品集 —— 26 届软件工程应届生，春秋星链 OPC 社区 OPC，AI 应用探索者。">
+
+<!-- ✏️ 想改浏览器标签页标题 / 网站描述，就改上面两行 -->
+
+<!-- 漫画风字体（从 Google Fonts 加载；加载失败会自动用系统字体兜底，不影响排版） -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============================================================
+     图标库（内联 SVG，不依赖任何外部图标字体，断网也能显示）
+     ✏️ 一般不需要改这里；如果你想换图标，改 <symbol> 里的 path 即可
+     ============================================================ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L18.5 9.5a2.1 2.1 0 0 0-3-3L5 17v3z"/><path d="M13.5 7.5l3 3"/></g></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M9 7V5h6v2"/><path d="M6 7l1 13h10l1-13"/><path d="M10 11v6M14 11v6"/></g></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></g></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.5 15.5A9 9 0 1 1 9 3.4a7.2 7.2 0 0 0 11.5 12.1z" fill="currentColor"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 20V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20.2c0-3.6 3.2-5.9 7.2-5.9s7.2 2.3 7.2 5.9"/></g></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7.2A2.2 2.2 0 0 1 5.2 5h3.6l2 2h8A2.2 2.2 0 0 1 21 9.2v7.6A2.2 2.2 0 0 1 18.8 19H5.2A2.2 2.2 0 0 1 3 16.8z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M4 20h4L19.5 8.5a2.1 2.1 0 0 0-3-3L5 17z"/><path d="M14.5 5.5l3 3"/></g></symbol>
+    <symbol id="i-dumbbell" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6.5 8v8M3.6 10v4M17.5 8v8M20.4 10v4M6.5 12h11"/></g></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20.3S4.4 16 4.4 10.6A4 4 0 0 1 12 8.2a4 4 0 0 1 7.6 2.4c0 5.4-7.6 9.7-7.6 9.7z" fill="currentColor"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.4"/><path d="M3.8 7.2L12 13l8.2-5.8"/></g></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path d="M12 2.2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.9c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.8.8.1-.6.4-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7 1 .7 2v2.9c0 .3.2.6.7.5A10 10 0 0 0 12 2.2z" fill="currentColor"/></symbol>
+    <symbol id="i-wechat" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M9.5 3.5C5.4 3.5 2 6.3 2 9.8c0 2 1.2 3.8 3 4.9l-.7 2.3 2.6-1.3c.8.2 1.7.3 2.6.3h.6"/><path d="M22 15c0-2.9-2.9-5.2-6.5-5.2S9 12.1 9 15c0 2.9 2.9 5.2 6.5 5.2.8 0 1.6-.1 2.3-.3l2.3 1.2-.6-2c1.4-.9 2.5-2.4 2.5-4.1z"/><g fill="currentColor" stroke="none"><circle cx="7" cy="9" r="1.05"/><circle cx="11.5" cy="9" r="1.05"/><circle cx="13.2" cy="14.6" r=".95"/><circle cx="17.4" cy="14.6" r=".95"/></g></g></symbol>
+    <symbol id="i-location" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 21.2s7.2-6.5 7.2-11.4a7.2 7.2 0 1 0-14.4 0c0 4.9 7.2 11.4 7.2 11.4z"/><circle cx="12" cy="9.6" r="2.6"/></g></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M6 3h8l4 4v13.6a.4.4 0 0 1-.4.4H6.4a.4.4 0 0 1-.4-.4V3.4A.4.4 0 0 1 6.4 3z"/><path d="M14 3v4h4"/><path d="M9 12.5h6M9 16.5h6"/></g></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3.5v11M7.2 10.2L12 15l4.8-4.8M4.5 20h15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.4 15.4L20.5 20.5"/></g></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"><rect x="2.8" y="6.5" width="18.4" height="13.5" rx="2.4"/><path d="M8.4 6.5l1.4-2.2h4.4l1.4 2.2"/><circle cx="12" cy="13" r="3.4"/></g></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.2l2.7 5.6 6.1.8-4.4 4.2 1.1 6.1-5.5-3-5.5 3 1.1-6.1L3.2 9.6l6.1-.8z" fill="currentColor"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13.4 2L5 13.4h5.2L9 22l8.6-11.4h-5.4z" fill="currentColor"/></symbol>
+    <symbol id="i-gamepad" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"><rect x="2.2" y="7.6" width="19.6" height="9.6" rx="4.4"/><path d="M6.6 12.4h3.2M8.2 10.8v3.2"/><circle cx="16" cy="11.8" r="1.05" fill="currentColor"/><circle cx="18.1" cy="13.9" r="1.05" fill="currentColor"/></g></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M4.2 5.4A2.4 2.4 0 0 1 6.6 3H20v15.6H6.6a2.4 2.4 0 0 0-2.4 2.4z"/><path d="M4.2 19.8A2.4 2.4 0 0 1 6.6 17.4H20v3.2H6.6a2.4 2.4 0 0 1-2.4-.8z"/></g></symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><circle cx="12" cy="12" r="8.8"/><path d="M15.6 8.4l-2.1 5.1-5.1 2.1 2.1-5.1z"/></g></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><circle cx="12" cy="9" r="5.6"/><path d="M8.6 13.6L7.4 21.2l4.6-2.4 4.6 2.4-1.2-7.6"/></g></symbol>
+    <symbol id="i-utensils" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3v7.5M4.2 3v4.6a2.3 2.3 0 0 0 4.6 0V3M7.6 10.5V21"/><path d="M18 21v-8.2M18 12.8c-2.2 0-3.6-1.6-3.6-3.9S15.8 5 18 5s3.6 1.6 3.6 3.9-1.4 3.9-3.6 3.9z"/></g></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4.5h5.5V10"/><path d="M19.5 4.5L11 13"/><path d="M17.5 14v5a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 19V8.5A1.5 1.5 0 0 1 5 7h5"/></g></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="M9 6.5L3.5 12 9 17.5M15 6.5L20.5 12 15 17.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-db" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7.6" ry="3"/><path d="M4.4 6v6c0 1.7 3.4 3 7.6 3s7.6-1.3 7.6-3V6"/><path d="M4.4 12v6c0 1.7 3.4 3 7.6 3s7.6-1.3 7.6-3v-6"/></g></symbol>
+    <symbol id="i-robot" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"><rect x="4.6" y="8" width="14.8" height="11.4" rx="3.2"/><path d="M12 8V4.6"/><circle cx="12" cy="3.6" r="1.2" fill="currentColor"/><path d="M2 12.5v3.5M22 12.5V16"/><g fill="currentColor" stroke="none"><circle cx="9.4" cy="13" r="1.25"/><circle cx="14.6" cy="13" r="1.25"/></g><path d="M9.6 16.6h4.8" stroke-linecap="round"/></g></symbol>
+    <symbol id="i-team" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="9.2" cy="8" r="3.3"/><path d="M3.2 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><path d="M16.4 5.2a3.3 3.3 0 0 1 0 6.4"/><path d="M17.6 14.9c2.2.4 3.9 2 3.9 4.4"/></g></symbol>
+    <symbol id="i-plane" viewBox="0 0 24 24"><path d="M21.5 3.2L2.8 9.4l6.6 2.6 2.6 6.6z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/><path d="M21.5 3.2L9.4 12" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/></symbol>
+    <symbol id="i-juejin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"><path d="M12 3.2l7 5.2L12 13.6 5 8.4z"/><path d="M5 11.6L12 16.8l7-5.2"/><path d="M5 14.8L12 20l7-5.2"/></g></symbol>
+    <symbol id="i-zhihu" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"><path d="M3.6 5.6h16.8v13.2H8.4L3.6 21.4z"/><path d="M7.4 10.2h8.2M7.4 14.2h5.2"/></g></symbol>
+    <symbol id="i-bilibili" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="2.8" y="7.4" width="18.4" height="12.4" rx="3.6"/><path d="M7.2 7.4V4.2M16.8 7.4V4.2"/><g fill="currentColor" stroke="none"><circle cx="8.8" cy="13.2" r="1.15"/><circle cx="15.2" cy="13.2" r="1.15"/></g></g></symbol>
+    <symbol id="i-xhs" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.1"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="4.4"/><path d="M12 16.4S7.6 13.6 7.6 10.9A2.5 2.5 0 0 1 12 9.6a2.5 2.5 0 0 1 4.4 1.3c0 2.7-4.4 5.5-4.4 5.5z" fill="currentColor" stroke="none"/></g></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.8l5 5 10-11" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="8.6"/><path d="M12 7.2V12l3.6 2.2"/></g></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 2.5l1.9 5.4 5.4 1.9-5.4 1.9L12 17.1l-1.9-5.4L4.7 9.8l5.4-1.9z" fill="currentColor"/><path d="M18.6 15.2l.9 2.3 2.3.9-2.3.9-.9 2.3-.9-2.3-2.3-.9 2.3-.9z" fill="currentColor"/></symbol>
+  </defs>
+</svg>
+
+<!-- ============================================================
+     顶部导航
+     ✏️ 改导航名称：搜索 “nav__link” 即可找到
+     ============================================================ -->
+<a class="skip-link" href="#home">跳到主要内容</a>
+
+<header class="navbar" id="navbar">
+  <div class="navbar__inner container">
+    <a href="#home" class="logo">
+      <span class="logo__mark">E</span>
+      <span class="logo__text">EDEN<span class="logo__bang">!</span></span>
+    </a>
+
+    <nav class="nav" id="primaryNav" aria-label="主导航">
+      <ul class="nav__list">
+        <li><a class="nav__link is-active" href="#home">首页</a></li>
+        <li><a class="nav__link" href="#about">关于我</a></li>
+        <li><a class="nav__link" href="#projects">项目作品</a></li>
+        <li><a class="nav__link" href="#blog">技术博客</a></li>
+        <li><a class="nav__link" href="#fitness">健身记录</a></li>
+        <li><a class="nav__link" href="#story">我们的故事</a></li>
+        <li><a class="nav__link" href="#contact">联系我</a></li>
+        <li><a class="nav__link" href="#studio">内容管理</a></li>
+      </ul>
+    </nav>
+
+    <div class="navbar__actions">
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="切换深色/浅色模式" title="切换深色/浅色模式">
+        <svg class="icon icon--sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        <svg class="icon icon--moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      </button>
+      <button class="icon-btn nav__burger" id="navToggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="primaryNav">
+        <svg class="icon icon--menu" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="icon icon--close" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="nav__backdrop" id="navBackdrop" hidden></div>
+</header>
+
+<main>
+
+<!-- ==========================================================================
+     板块 1 · 首页 #home
+     ========================================================================== -->
+<section id="home" class="section section--home">
+  <div class="bg-halftone" aria-hidden="true"></div>
+  <div class="bg-speedlines" aria-hidden="true"></div>
+
+  <div class="container">
+    <!-- ---------- 首屏：自我介绍 ---------- -->
+    <div class="hero">
+      <div class="hero__text">
+        <p class="hero__eyebrow"><svg class="icon" aria-hidden="true"><use href="#i-sparkle"/></svg> 欢迎来到我的数字世界</p>
+
+        <!-- ✏️ 改成你自己的名字 -->
+        <h1 class="hero__title">你好，我是<span class="hero__name">Eden</span></h1>
+
+        <!-- ✏️ 改成一两句话介绍你自己 -->
+        <p class="hero__subtitle">AI 应用探索者 / 春秋星链 OPC 社区 OPC / 26 届软件工程应届生</p>
+
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="#projects">
+            <svg class="icon" aria-hidden="true"><use href="#i-folder"/></svg> 查看我的作品
+          </a>
+          <!-- ✏️ 把 href 换成你的简历 PDF 文件名（放到网站根目录） -->
+          <a class="btn btn--ghost" href="resume.pdf" download>
+            <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg> 下载简历
+          </a>
+        </div>
+
+        <ul class="hero__facts">
+          <li><b>2026</b><span>届毕业生</span></li>
+          <li><b>OPC</b><span>春秋星链社区</span></li>
+          <li><b>AI</b><span>学习中 · 实操中</span></li>
+        </ul>
+      </div>
+
+      <div class="hero__visual">
+        <!-- ✏️ 换头像：直接替换 images/me.jpg 这个文件即可（想换图，把新照片命名成 me.jpg 覆盖它） -->
+        <div class="comic-polaroid rotate--l">
+          <img class="ph ph--avatar" src="images/me.jpg" alt="Eden 的个人照片">
+          <p class="comic-polaroid__cap">EDEN · 2026</p>
+        </div>
+
+        <div class="bubble bubble--tail-tl">
+          欢迎来到我的数字世界！
+        </div>
+
+        <!-- 拟声词：✏️ 想换词直接改文字即可 -->
+        <span class="ono ono--hey" aria-hidden="true">HEY!</span>
+      </div>
+    </div>
+
+    <!-- ---------- 快速导航：6 个漫画分格 ---------- -->
+    <div class="block">
+      <h2 class="section-title reveal">快速导航 <span class="ono-inline">GO!</span></h2>
+      <div class="quick-grid">
+        <a class="quick-card reveal rotate--s-l" href="#about" data-tilt>
+          <span class="quick-card__icon" data-color="blue"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg></span>
+          <h3>关于我</h3>
+          <p>一个曾经摆烂、现在被 AI 点燃的人</p>
+        </a>
+        <a class="quick-card reveal rotate--s-r" href="#projects" data-tilt>
+          <span class="quick-card__icon" data-color="orange"><svg class="icon" aria-hidden="true"><use href="#i-folder"/></svg></span>
+          <h3>项目作品</h3>
+          <p>每一个项目都是一次冒险</p>
+        </a>
+        <a class="quick-card reveal rotate--s-l" href="#blog" data-tilt>
+          <span class="quick-card__icon" data-color="yellow"><svg class="icon" aria-hidden="true"><use href="#i-pen"/></svg></span>
+          <h3>技术博客</h3>
+          <p>记录学习，分享思考</p>
+        </a>
+        <a class="quick-card reveal rotate--s-r" href="#fitness" data-tilt>
+          <span class="quick-card__icon" data-color="pink"><svg class="icon" aria-hidden="true"><use href="#i-dumbbell"/></svg></span>
+          <h3>健身记录</h3>
+          <p>每一次训练都是对自己的投资</p>
+        </a>
+        <a class="quick-card reveal rotate--s-l" href="#story" data-tilt>
+          <span class="quick-card__icon" data-color="pink"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg></span>
+          <h3>我们的故事</h3>
+          <p>故事还在继续，未来请多指教</p>
+        </a>
+        <a class="quick-card reveal rotate--s-r" href="#contact" data-tilt>
+          <span class="quick-card__icon" data-color="teal"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></span>
+          <h3>联系我</h3>
+          <p>有想法？来聊聊吧！</p>
+        </a>
+      </div>
+    </div>
+
+    <!-- ---------- 精选作品 ---------- -->
+    <div class="block">
+      <h2 class="section-title reveal">精选作品 <span class="ono-inline">POW!</span></h2>
+      <p class="section-sub reveal">挑了三个我最想拿出来说的 —— 想看全部请去「项目作品」</p>
+
+      <div class="card-grid card-grid--3">
+        <!-- ✏️ 复制这一段就能加第 4 个精选项目，改文字和图片即可 -->
+        <article class="project-card reveal" data-tilt data-category="全栈">
+          <div class="project-card__media">
+            <div class="ph ph--16x10">
+              <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
+              <span class="ph__label">项目截图占位</span>
+              <span class="ph__hint">images/project-1.jpg</span>
+            </div>
+            <span class="badge badge--floating">全栈</span>
+            <div class="project-card__hover">
+              <p class="bubble bubble--sm">一句话说清这个项目解决了什么问题。</p>
+            </div>
+          </div>
+          <div class="project-card__body">
+            <h3 class="project-card__title">{{精选项目一}}</h3>
+            <p class="project-card__desc">{{一句话简介：它解决了什么问题、我做了什么}}</p>
+            <div class="tag-row">
+              <span class="tag">{{React}}</span><span class="tag">{{Node.js}}</span><span class="tag">{{MySQL}}</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal" data-tilt data-category="前端">
+          <div class="project-card__media">
+            <div class="ph ph--16x10">
+              <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
+              <span class="ph__label">项目截图占位</span>
+              <span class="ph__hint">images/project-2.jpg</span>
+            </div>
+            <span class="badge badge--floating">前端</span>
+            <div class="project-card__hover">
+              <p class="bubble bubble--sm">一句话说清这个项目解决了什么问题。</p>
+            </div>
+          </div>
+          <div class="project-card__body">
+            <h3 class="project-card__title">{{精选项目二}}</h3>
+            <p class="project-card__desc">{{一句话简介：它解决了什么问题、我做了什么}}</p>
+            <div class="tag-row">
+              <span class="tag">{{Vue 3}}</span><span class="tag">{{Vite}}</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal" data-tilt data-category="AI">
+          <div class="project-card__media">
+            <div class="ph ph--16x10">
+              <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
+              <span class="ph__label">项目截图占位</span>
+              <span class="ph__hint">images/project-3.jpg</span>
+            </div>
+            <span class="badge badge--floating">AI</span>
+            <div class="project-card__hover">
+              <p class="bubble bubble--sm">一句话说清这个项目解决了什么问题。</p>
+            </div>
+          </div>
+          <div class="project-card__body">
+            <h3 class="project-card__title">Eden的个人网页</h3>
+            <p class="project-card__desc">我用豆包生成提示词，然后丢给workbuddy生成个人网页</p>
+            <div class="tag-row">
+              <span class="tag">{{WorkBuddy}}</span><span class="tag">{{提示词工程}}</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- ---------- 技能速览 ---------- -->
+    <div class="block">
+      <h2 class="section-title reveal">技能树 <span class="ono-inline">SKILL UP!</span></h2>
+      <p class="section-sub reveal">进度条是我自己的感觉，不是考试分数 :)</p>
+
+      <div class="skill-grid">
+        <!-- ✏️ 改技能名就改 <span class="tag">，改熟练度就改下面 style="--p:80%" 的数字 -->
+        <div class="skill-card reveal rotate--s-l">
+          <h3 class="skill-card__title"><span class="skill-card__dot" data-color="blue"></span>前端</h3>
+          <ul class="skill-list">
+            <li><span class="tag">HTML / CSS</span><span class="bar"><i style="--p:80%"></i></span></li>
+            <li><span class="tag">JavaScript</span><span class="bar"><i style="--p:70%"></i></span></li>
+            <li><span class="tag">Vue / React</span><span class="bar"><i style="--p:55%"></i></span></li>
+            <li><span class="tag">响应式布局</span><span class="bar"><i style="--p:65%"></i></span></li>
+          </ul>
+        </div>
+
+        <div class="skill-card reveal rotate--s-r">
+          <h3 class="skill-card__title"><span class="skill-card__dot" data-color="teal"></span>后端</h3>
+          <ul class="skill-list">
+            <li><span class="tag">Node.js</span><span class="bar"><i style="--p:55%"></i></span></li>
+            <li><span class="tag">Python</span><span class="bar"><i style="--p:50%"></i></span></li>
+            <li><span class="tag">MySQL</span><span class="bar"><i style="--p:45%"></i></span></li>
+            <li><span class="tag">REST API</span><span class="bar"><i style="--p:60%"></i></span></li>
+          </ul>
+        </div>
+
+        <div class="skill-card reveal rotate--s-l">
+          <h3 class="skill-card__title"><span class="skill-card__dot" data-color="orange"></span>AI 工具</h3>
+          <ul class="skill-list">
+            <li><span class="tag">WorkBuddy</span><span class="bar"><i style="--p:85%"></i></span></li>
+            <li><span class="tag">AI 提示词工程</span><span class="bar"><i style="--p:75%"></i></span></li>
+            <li><span class="tag">AI 内容创作</span><span class="bar"><i style="--p:70%"></i></span></li>
+            <li><span class="tag">AI 软件推广运营</span><span class="bar"><i style="--p:65%"></i></span></li>
+          </ul>
+        </div>
+
+        <div class="skill-card reveal rotate--s-r">
+          <h3 class="skill-card__title"><span class="skill-card__dot" data-color="pink"></span>软技能</h3>
+          <ul class="skill-list">
+            <li><span class="tag">先动手再说</span><span class="bar"><i style="--p:95%"></i></span></li>
+            <li><span class="tag">自学能力</span><span class="bar"><i style="--p:80%"></i></span></li>
+            <li><span class="tag">沟通表达</span><span class="bar"><i style="--p:70%"></i></span></li>
+            <li><span class="tag">抗压 · 重启</span><span class="bar"><i style="--p:88%"></i></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     板块 2 · 关于我 #about
+     ========================================================================== -->
+<section id="about" class="section section--alt">
+  <div class="bg-dots" aria-hidden="true"></div>
+  <div class="container">
+    <header class="section-head reveal">
+      <h2 class="section-title">关于我 <span class="ono-inline">ABOUT ME</span></h2>
+      <p class="section-sub">一个曾经摆烂、现在被 AI 点燃的人</p>
+    </header>
+
+    <div class="about-grid">
+      <!-- ---------- 左：照片 + 基本信息 ---------- -->
+      <aside class="about-side">
+        <div class="comic-polaroid rotate--s-r reveal">
+          <img class="ph ph--portrait" src="images/about-me.jpg" alt="Eden 的个人照片">
+          <p class="comic-polaroid__cap">HELLO THERE!</p>
+        </div>
+
+        <div class="info-card reveal">
+          <h3 class="info-card__title">基本信息</h3>
+          <dl class="info-list">
+            <!-- ✏️ 每一行 “<dt>标签</dt><dd>内容</dd>” 都可以直接改 -->
+            <div><dt>姓名</dt><dd>Eden</dd></div>
+            <div><dt>届别</dt><dd>26 届应届生</dd></div>
+            <div><dt>专业</dt><dd>软件工程</dd></div>
+            <div><dt>身份</dt><dd>春秋星链 OPC 社区 OPC</dd></div>
+            <div><dt>状态</dt><dd><span class="pill pill--live">AI 学习中</span></dd></div>
+            <div><dt>证书</dt><dd>WorkBuddy OPC 认证</dd></div>
+            <div><dt>城市</dt><dd>江西南昌</dd></div>
+          </dl>
+        </div>
+      </aside>
+
+      <!-- ---------- 右：三段自述 ---------- -->
+      <div class="about-main">
+        <article class="story-card reveal">
+          <span class="story-card__no">01</span>
+          <h3>我是谁</h3>
+          <p>26 年软件工程专业毕业。说实话，专业知识学得很浅，英语六级是过了，但两年没碰，基本算是个学习摆烂玩家。毕业那会儿，就业情况非常糟糕。</p>
+        </article>
+
+        <article class="story-card reveal">
+          <span class="story-card__no">02</span>
+          <h3>我做什么</h3>
+          <p>低谷期偶然接触到 AI，发现这东西真的很有趣 —— 这是我接触 AI 的契机。现在我是春秋星链 OPC 社区的一名 OPC，一边系统地学 AI 知识，一边实操 AI 软件推广，并且已经考取了 WorkBuddy OPC 认证证书。</p>
+        </article>
+
+        <article class="story-card reveal">
+          <span class="story-card__no">03</span>
+          <h3>我相信什么</h3>
+          <p>我不相信天赋，只相信「先动手再说」。摆烂了几年也能重新开局，AI 是这个时代给普通人最公平的一次机会。<b>我的 AI 之旅，从此开启。</b></p>
+        </article>
+
+        <div class="bubble bubble--tail-tl bubble--big reveal">
+          种一棵树最好的时间是十年前，其次是<b>现在</b>。
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------- 技能栈 ---------- -->
+    <div class="block">
+      <h3 class="sub-title reveal">技能栈 <span class="ono-inline">SKILLS</span></h3>
+      <div class="skill-grid skill-grid--4">
+        <div class="stack-card reveal rotate--s-l">
+          <h4><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg> 前端</h4>
+          <div class="sticker-row">
+            <span class="sticker" data-color="blue">HTML5</span>
+            <span class="sticker" data-color="blue">CSS3</span>
+            <span class="sticker" data-color="blue">JavaScript</span>
+            <span class="sticker" data-color="blue">Vue</span>
+          </div>
+        </div>
+        <div class="stack-card reveal rotate--s-r">
+          <h4><svg class="icon" aria-hidden="true"><use href="#i-db"/></svg> 后端</h4>
+          <div class="sticker-row">
+            <span class="sticker" data-color="teal">Node.js</span>
+            <span class="sticker" data-color="teal">Python</span>
+            <span class="sticker" data-color="teal">MySQL</span>
+            <span class="sticker" data-color="teal">REST API</span>
+          </div>
+        </div>
+        <div class="stack-card reveal rotate--s-l">
+          <h4><svg class="icon" aria-hidden="true"><use href="#i-robot"/></svg> AI 工具</h4>
+          <div class="sticker-row">
+            <span class="sticker" data-color="orange">WorkBuddy</span>
+            <span class="sticker" data-color="orange">AI 提示词工程</span>
+            <span class="sticker" data-color="orange">AI 内容创作</span>
+            <span class="sticker" data-color="orange">AI 软件推广运营</span>
+          </div>
+        </div>
+        <div class="stack-card reveal rotate--s-r">
+          <h4><svg class="icon" aria-hidden="true"><use href="#i-team"/></svg> 软技能</h4>
+          <div class="sticker-row">
+            <span class="sticker" data-color="pink">先动手再说</span>
+            <span class="sticker" data-color="pink">快速自学</span>
+            <span class="sticker" data-color="pink">沟通表达</span>
+            <span class="sticker" data-color="pink">抗压重启</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------- 成长轨迹时间线 ---------- -->
+    <div class="block">
+      <h3 class="sub-title reveal">成长轨迹 <span class="ono-inline">TIMELINE</span></h3>
+      <ol class="timeline">
+        <!-- ✏️ 复制 <li class="timeline__item"> 整段就能加一个节点 -->
+        <li class="timeline__item reveal" data-state="lazy">
+          <span class="timeline__node"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg></span>
+          <div class="timeline__card">
+            <p class="timeline__date">2022 – 2026 · 软件工程专业就读</p>
+            <p class="timeline__text">学过，但学得浅。英语六级过了，然后两年没碰英语。</p>
+            <span class="pill pill--grey">状态：摆烂期</span>
+          </div>
+        </li>
+        <li class="timeline__item reveal" data-state="low">
+          <span class="timeline__node"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg></span>
+          <div class="timeline__card">
+            <p class="timeline__date">2026 年 · 毕业 & 就业低谷</p>
+            <p class="timeline__text">简历投出去石沉大海，专业底子薄，面试处处碰壁。</p>
+            <span class="pill pill--grey">状态：谷底</span>
+          </div>
+        </li>
+        <li class="timeline__item reveal" data-state="turn">
+          <span class="timeline__node"><svg class="icon" aria-hidden="true"><use href="#i-zap"/></svg></span>
+          <div class="timeline__card">
+            <p class="timeline__date">2026 年 · 遇见 AI</p>
+            <p class="timeline__text">偶然接触 AI，第一次觉得「这玩意儿真有意思」。</p>
+            <span class="pill pill--hot">转折点！</span>
+          </div>
+        </li>
+        <li class="timeline__item reveal" data-state="up">
+          <span class="timeline__node"><svg class="icon" aria-hidden="true"><use href="#i-team"/></svg></span>
+          <div class="timeline__card">
+            <p class="timeline__date">2026 年 · 加入春秋星链 OPC 社区</p>
+            <p class="timeline__text">成为 OPC，开始系统学 AI、实操 AI 软件推广。</p>
+            <span class="pill pill--go">上升期</span>
+          </div>
+        </li>
+        <li class="timeline__item reveal" data-state="win">
+          <span class="timeline__node"><svg class="icon" aria-hidden="true"><use href="#i-award"/></svg></span>
+          <div class="timeline__card">
+            <p class="timeline__date">2026 年 · 考取 WorkBuddy OPC 认证</p>
+            <p class="timeline__text">第一个 AI 相关认证到手。</p>
+            <span class="pill pill--win">成就达成</span>
+          </div>
+        </li>
+        <li class="timeline__item reveal" data-state="now">
+          <span class="timeline__node"><svg class="icon" aria-hidden="true"><use href="#i-sparkle"/></svg></span>
+          <div class="timeline__card">
+            <p class="timeline__date">2026 年 · AI 之旅开启</p>
+            <p class="timeline__text">持续创作中，敬请期待……</p>
+            <span class="pill pill--live">进行中</span>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <!-- ---------- 八小时之外 ---------- -->
+    <div class="block">
+      <h3 class="sub-title reveal">八小时之外 <span class="ono-inline">OFF DUTY</span></h3>
+      <div class="hobby-grid">
+        <div class="hobby-card reveal rotate--s-l">
+          <span class="hobby-card__icon" data-color="pink"><svg class="icon" aria-hidden="true"><use href="#i-dumbbell"/></svg></span>
+          <h4>健身</h4><p>一周5练，三分化训练，碳水渐降</p>
+        </div>
+        <div class="hobby-card reveal rotate--s-r">
+          <span class="hobby-card__icon" data-color="blue"><svg class="icon" aria-hidden="true"><use href="#i-gamepad"/></svg></span>
+          <h4>游戏</h4><p>王者荣耀</p>
+        </div>
+        <div class="hobby-card reveal rotate--s-l">
+          <span class="hobby-card__icon" data-color="yellow"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg></span>
+          <h4>阅读学习</h4><p>200个成长思维</p>
+        </div>
+        <div class="hobby-card reveal rotate--s-r">
+          <span class="hobby-card__icon" data-color="teal"><svg class="icon" aria-hidden="true"><use href="#i-compass"/></svg></span>
+          <h4>探索新鲜事物</h4><p>ai基础理论</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------- 隐藏成就（小彩蛋） ---------- -->
+    <div class="block">
+      <h3 class="sub-title reveal">隐藏成就 <span class="ono-inline">SECRET!</span></h3>
+      <div class="achievement-grid">
+        <div class="bubble bubble--achieve reveal rotate--s-l">
+          <b>成就 01</b>
+          英语六级证书在手，但已经两年没开口说过英语。
+        </div>
+        <div class="bubble bubble--achieve reveal rotate--s-r">
+          <b>成就 02</b>
+          曾经是资深摆烂玩家，现在每天研究 AI 到深夜。
+        </div>
+        <div class="bubble bubble--achieve reveal rotate--s-l">
+          <b>成就 03</b>
+          坚信「先动手」比「想明白」更重要 —— 这个网站就是证据。
+        </div>
+        <div class="bubble bubble--achieve reveal rotate--s-r">
+          <b>成就 04</b>
+          投过的简历能铺满一张床，回信能写满一张便利贴。
+        </div>
+        <div class="bubble bubble--achieve reveal rotate--s-l">
+          <b>成就 05</b>
+          把「我不会」换成了「我试试」，然后事情就开始变好了。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     板块 3 · 项目作品集 #projects
+     ========================================================================== -->
+<section id="projects" class="section">
+  <div class="container">
+    <header class="section-head reveal">
+      <h2 class="section-title">项目作品 <span class="ono-inline">PORTFOLIO</span></h2>
+      <p class="section-sub">每一个项目都是一次冒险</p>
+    </header>
+
+    <!-- 筛选栏：JS 会自动绑定点击 -->
+    <div class="filter-bar reveal" id="projectFilters" role="group" aria-label="项目分类筛选">
+      <button class="chip is-active" type="button" data-filter="all">全部</button>
+      <button class="chip" type="button" data-filter="前端">前端</button>
+      <button class="chip" type="button" data-filter="后端">后端</button>
+      <button class="chip" type="button" data-filter="全栈">全栈</button>
+      <button class="chip" type="button" data-filter="工具其他">工具其他</button>
+    </div>
+
+    <!-- ✏️ 加项目：复制一整个 <article class="project-card">，改 data-* 属性和花括号里的文字 -->
+    <div class="card-grid card-grid--3" id="projectGrid">
+
+      <article class="project-card reveal" data-tilt data-category="全栈"
+        data-detail-bg="{{项目背景：为什么要做这个项目，遇到了什么问题}}"
+        data-detail-tech="{{技术架构：前端 XX + 后端 XX + 数据库 XX}}"
+        data-detail-role="{{我的职责：我具体负责了哪些模块}}"
+        data-detail-result="{{项目成果：上线了吗？有多少用户？性能提升了多少？}}"
+        data-link-demo="#" data-link-code="#">
+        <div class="project-card__media">
+          <div class="ph ph--16x10">
+            <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
+            <span class="ph__label">项目截图占位</span>
+            <span class="ph__hint">images/project-a.jpg</span>
+          </div>
+          <span class="badge badge--floating">全栈</span>
+          <div class="project-card__hover">
+            <p class="bubble bubble--sm">{{一句话简介}}</p>
+            <div class="project-card__hover-actions">
+              <span class="mini-btn">查看详情</span>
+              <span class="mini-btn mini-btn--ghost">源代码</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-card__body">
+          <h3 class="project-card__title">{{项目名称}}</h3>
+          <p class="project-card__desc">{{一句话简介：它解决了什么问题、我做了什么}}</p>
+          <div class="tag-row">
+            <span class="tag">{{技术栈 1}}</span><span class="tag">{{技术栈 2}}</span><span class="tag">{{技术栈 3}}</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-tilt data-category="前端"
+        data-detail-bg="{{项目背景：为什么要做这个项目，遇到了什么问题}}"
+        data-detail-tech="{{技术架构：用了什么框架、组件库、构建工具}}"
+        data-detail-role="{{我的职责：我具体负责了哪些模块}}"
+        data-detail-result="{{项目成果：页面性能、交互体验、用户反馈}}"
+        data-link-demo="#" data-link-code="#">
+        <div class="project-card__media">
+          <div class="ph ph--16x10">
+            <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
+            <span class="ph__label">项目截图占位</span>
+            <span class="ph__hint">images/project-b.jpg</span>
+          </div>
+          <span class="badge badge--floating">前端</span>
+          <div class="project-card__hover">
+            <p class="bubble bubble--sm">{{一句话简介}}</p>
+            <div class="project-card__hover-actions">
+              <span class="mini-btn">查看详情</span>
+              <span class="mini-btn mini-btn--ghost">源代码</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-card__body">
+          <h3 class="project-card__title">{{项目名称}}</h3>
+          <p class="project-card__desc">{{一句话简介：它解决了什么问题、我做了什么}}</p>
+          <div class="tag-row">
+            <span class="tag">{{技术栈 1}}</span><span class="tag">{{技术栈 2}}</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-tilt data-category="后端"
+        data-detail-bg="{{项目背景：为什么要做这个项目，遇到了什么问题}}"
+        data-detail-tech="{{技术架构：服务端语言、数据库、缓存、部署方式}}"
+        data-detail-role="{{我的职责：接口设计、数据库设计、性能优化等}}"
+        data-detail-result="{{项目成果：QPS、响应时间、稳定性数据}}"
+        data-link-demo="#" data-link-code="#">
+        <div class="project-card__media">
+          <div class="ph ph--16x10">
+            <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
+            <span class="ph__label">项目截图占位</span>
+            <span class="ph__hint">images/project-c.jpg</span>
+          </div>
+          <span class="badge badge--floating">后端</span>
+          <div class="project-card__hover">
+            <p class="bubble bubble--sm">{{一句话简介}}</p>
+            <div class="project-card__hover-actions">
+              <span class="mini-btn">查看详情</span>
+              <span class="mini-btn mini-btn--ghost">源代码</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-card__body">
+          <h3 class="project-card__title">{{项目名称}}</h3>
+          <p class="project-card__desc">{{一句话简介：它解决了什么问题、我做了什么}}</p>
+          <div class="tag-row">
+            <span class="tag">{{技术栈 1}}</span><span class="tag">{{技术栈 2}}</span><span class="tag">{{技术栈 3}}</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-tilt data-category="工具其他"
+        data-detail-bg="{{项目背景：为什么要做这个项目，遇到了什么问题}}"
+        data-detail-tech="{{技术架构：用了什么语言 / 库 / 脚本}}"
+        data-detail-role="{{我的职责：我具体负责了哪些模块}}"
+        data-detail-result="{{项目成果：节省了多少时间、被多少人使用}}"
+        data-link-demo="#" data-link-code="#">
+        <div class="project-card__media">
+          <div class="ph ph--16x10">
+            <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
+            <span class="ph__label">项目截图占位</span>
+            <span class="ph__hint">images/project-d.jpg</span>
+          </div>
+          <span class="badge badge--floating">工具其他</span>
+          <div class="project-card__hover">
+            <p class="bubble bubble--sm">{{一句话简介}}</p>
+            <div class="project-card__hover-actions">
+              <span class="mini-btn">查看详情</span>
+              <span class="mini-btn mini-btn--ghost">源代码</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-card__body">
+          <h3 class="project-card__title">{{项目名称}}</h3>
+          <p class="project-card__desc">{{一句话简介：它解决了什么问题、我做了什么}}</p>
+          <div class="tag-row">
+            <span class="tag">{{技术栈 1}}</span><span class="tag">{{技术栈 2}}</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="empty-hint" id="projectEmpty" hidden>这个分类下还没有项目哦，去别的分类看看吧～</p>
+
+    <div class="more-box reveal">
+      <p class="more-box__title">更多项目 <span class="ono-inline">COMING SOON</span></p>
+      <p class="more-box__text">持续创作中，敬请期待……</p>
+      <!-- ✏️ 把 href 换成你的 GitHub 主页 -->
+      <a class="btn btn--primary" href="https://github.com/" target="_blank" rel="noopener">
+        <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> 去 GitHub 看看
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     板块 4 · 技术博客 #blog
+     ========================================================================== -->
+<section id="blog" class="section section--alt">
+  <div class="container">
+    <header class="section-head reveal">
+      <h2 class="section-title">技术博客 <span class="ono-inline">BLOG</span></h2>
+      <p class="section-sub">记录学习，分享思考</p>
+    </header>
+
+    <!-- 搜索框 + 分类 -->
+    <div class="blog-toolbar reveal">
+      <div class="search-box">
+        <svg class="icon search-box__icon" aria-hidden="true"><use href="#i-search"/></svg>
+        <!-- ✏️ 这个输入框自带搜索功能，不用改代码 -->
+        <input type="search" id="blogSearch" placeholder="搜索文章标题…" aria-label="搜索文章">
+      </div>
+      <div class="filter-bar filter-bar--inline" id="blogFilters" role="group" aria-label="文章分类筛选">
+        <button class="chip is-active" type="button" data-filter="all">全部</button>
+        <button class="chip" type="button" data-filter="前端">前端</button>
+        <button class="chip" type="button" data-filter="后端">后端</button>
+        <button class="chip" type="button" data-filter="AI">AI</button>
+        <button class="chip" type="button" data-filter="生活随笔">生活随笔</button>
+      </div>
+    </div>
+
+    <!-- ✏️ 加文章：复制一整个 <article class="post-card">，改 data-* 和花括号里的文字 -->
+    <div class="post-list" id="postList">
+
+      <article class="post-card reveal" data-category="AI"
+        data-content="{{这里写文章正文第一段。可以写很多段，每一行都会正常换行显示。}}
+
+{{第二段：讲讲你遇到的问题、踩过的坑。}}
+
+{{第三段：最后写你学到的东西，或者留给读者的一句话。}}">
+        <div class="post-card__cover">
+          <div class="ph ph--4x3">
+            <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
+            <span class="ph__label">封面占位</span>
+            <span class="ph__hint">images/blog-1.jpg</span>
+          </div>
+        </div>
+        <div class="post-card__body">
+          <div class="post-card__meta">
+            <span class="badge">AI</span>
+            <span class="meta-text"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> {{2026-01-01}}</span>
+            <span class="meta-text">{{8}} 分钟阅读</span>
+          </div>
+          <h3 class="post-card__title">{{文章标题}}</h3>
+          <p class="post-card__excerpt">{{文章摘要：一两句话说清这篇写了什么，让人想点进去看。}}</p>
+          <button class="btn btn--sm btn--primary" type="button" data-read>阅读全文 →</button>
+        </div>
+      </article>
+
+      <article class="post-card reveal" data-category="前端"
+        data-content="{{文章正文第一段……}}
+
+{{第二段……}}">
+        <div class="post-card__cover">
+          <div class="ph ph--4x3">
+            <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
+            <span class="ph__label">封面占位</span>
+            <span class="ph__hint">images/blog-2.jpg</span>
+          </div>
+        </div>
+        <div class="post-card__body">
+          <div class="post-card__meta">
+            <span class="badge">前端</span>
+            <span class="meta-text"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> {{2026-01-05}}</span>
+            <span class="meta-text">{{6}} 分钟阅读</span>
+          </div>
+          <h3 class="post-card__title">{{文章标题}}</h3>
+          <p class="post-card__excerpt">{{文章摘要：一两句话说清这篇写了什么。}}</p>
+          <button class="btn btn--sm btn--primary" type="button" data-read>阅读全文 →</button>
+        </div>
+      </article>
+
+      <article class="post-card reveal" data-category="后端"
+        data-content="{{文章正文第一段……}}
+
+{{第二段……}}">
+        <div class="post-card__cover">
+          <div class="ph ph--4x3">
+            <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
+            <span class="ph__label">封面占位</span>
+            <span class="ph__hint">images/blog-3.jpg</span>
+          </div>
+        </div>
+        <div class="post-card__body">
+          <div class="post-card__meta">
+            <span class="badge">后端</span>
+            <span class="meta-text"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> {{2026-01-12}}</span>
+            <span class="meta-text">{{10}} 分钟阅读</span>
+          </div>
+          <h3 class="post-card__title">{{文章标题}}</h3>
+          <p class="post-card__excerpt">{{文章摘要：一两句话说清这篇写了什么。}}</p>
+          <button class="btn btn--sm btn--primary" type="button" data-read>阅读全文 →</button>
+        </div>
+      </article>
+
+      <article class="post-card reveal" data-category="AI"
+        data-content="{{文章正文第一段……}}
+
+{{第二段……}}">
+        <div class="post-card__cover">
+          <div class="ph ph--4x3">
+            <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
+            <span class="ph__label">封面占位</span>
+            <span class="ph__hint">images/blog-4.jpg</span>
+          </div>
+        </div>
+        <div class="post-card__body">
+          <div class="post-card__meta">
+            <span class="badge">AI</span>
+            <span class="meta-text"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> {{2026-01-20}}</span>
+            <span class="meta-text">{{5}} 分钟阅读</span>
+          </div>
+          <h3 class="post-card__title">{{文章标题}}</h3>
+          <p class="post-card__excerpt">{{文章摘要：一两句话说清这篇写了什么。}}</p>
+          <button class="btn btn--sm btn--primary" type="button" data-read>阅读全文 →</button>
+        </div>
+      </article>
+
+      <article class="post-card reveal" data-category="生活随笔"
+        data-content="{{文章正文第一段……}}
+
+{{第二段……}}">
+        <div class="post-card__cover">
+          <div class="ph ph--4x3">
+            <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
+            <span class="ph__label">封面占位</span>
+            <span class="ph__hint">images/blog-5.jpg</span>
+          </div>
+        </div>
+        <div class="post-card__body">
+          <div class="post-card__meta">
+            <span class="badge">生活随笔</span>
+            <span class="meta-text"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> {{2026-01-28}}</span>
+            <span class="meta-text">{{4}} 分钟阅读</span>
+          </div>
+          <h3 class="post-card__title">{{文章标题}}</h3>
+          <p class="post-card__excerpt">{{文章摘要：一两句话说清这篇写了什么。}}</p>
+          <button class="btn btn--sm btn--primary" type="button" data-read>阅读全文 →</button>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="empty-hint" id="blogEmpty" hidden>没有匹配的文章，换个关键词试试～</p>
+
+    <!-- 分页：JS 自动生成页码（每页 6 篇；文章不足 6 篇时只显示第 1 页） -->
+    <nav class="pagination" id="blogPagination" aria-label="文章分页"></nav>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     板块 5 · 健身记录 #fitness
+     ========================================================================== -->
+<section id="fitness" class="section">
+  <div class="container">
+    <header class="section-head reveal">
+      <h2 class="section-title">健身记录 <span class="ono-inline">FITNESS</span></h2>
+      <p class="section-sub">每一次训练都是对自己的投资</p>
+    </header>
+
+    <!-- ---------- 4 个数据卡片（✏️ 把 {{XX}} 换成你的真实数字） ---------- -->
+    <div class="stat-grid">
+      <div class="stat-card reveal rotate--s-l">
+        <p class="stat-card__label">当前体重</p>
+        <p class="stat-card__value">70<small>kg</small></p>
+        <p class="stat-card__note">较上月 -71 kg</p>
+      </div>
+      <div class="stat-card reveal rotate--s-r">
+        <p class="stat-card__label">体脂率</p>
+        <p class="stat-card__value">16<small>%</small></p>
+        <p class="stat-card__note">较上月 - 17%</p>
+      </div>
+      <div class="stat-card reveal rotate--s-l">
+        <p class="stat-card__label">累计训练</p>
+        <p class="stat-card__value">873<small>天</small></p>
+        <p class="stat-card__note">起始 2024-04-13</p>
+      </div>
+      <div class="stat-card reveal rotate--s-r">
+        <p class="stat-card__label">本周训练</p>
+        <p class="stat-card__value">2<small>次</small></p>
+        <p class="stat-card__note">5次</p>
+      </div>
+    </div>
+
+    <!-- ---------- 身体数据折线图（纯 SVG + JS 绘制，不依赖任何图表库） ---------- -->
+    <div class="block">
+      <h3 class="sub-title reveal">身体数据变化 <span class="ono-inline">PROGRESS</span></h3>
+      <div class="chart-card reveal">
+        <div class="chart-legend">
+          <span class="legend-item"><i class="legend-swatch" data-color="orange"></i>体重（kg）</span>
+          <span class="legend-item"><i class="legend-swatch" data-color="pink"></i>体脂率（%）</span>
+          <span class="legend-item legend-item--hint">✏️ 数据改在 js/main.js 顶部的「身体数据」数组里</span>
+        </div>
+        <svg id="fitnessChart" class="chart" viewBox="0 0 760 340" preserveAspectRatio="xMidYMid meet"
+             role="img" aria-label="近三个月体重与体脂率趋势折线图"></svg>
+      </div>
+    </div>
+
+    <!-- ---------- 训练计划周历 ---------- -->
+    <div class="block">
+      <h3 class="sub-title reveal">训练计划 <span class="ono-inline">WEEKLY</span></h3>
+      <!-- ✏️ 每一天的训练部位和动作都可以直接改文字 -->
+      <div class="week-grid">
+        <div class="day-card reveal rotate--s-l"><p class="day-card__day">周一</p><p class="day-card__part">胸 + 三头</p><ul><li>平板卧推 4×8</li><li>上斜哑铃卧推 3×10</li><li>绳索夹胸 3×12</li><li>臂屈伸 3×12</li></ul></div>
+        <div class="day-card reveal rotate--s-r"><p class="day-card__day">周二</p><p class="day-card__part">背 + 二头</p><ul><li>引体向上 4×力竭</li><li>高位下拉 4×10</li><li>坐姿划船 3×12</li><li>哑铃弯举 3×12</li></ul></div>
+        <div class="day-card reveal rotate--s-l"><p class="day-card__day">周三</p><p class="day-card__part">腿 + 核心</p><ul><li>杠铃深蹲 5×8</li><li>罗马尼亚硬拉 4×10</li><li>腿举 3×12</li><li>平板支撑 3×60s</li></ul></div>
+        <div class="day-card reveal rotate--s-r"><p class="day-card__day">周四</p><p class="day-card__part">肩 + 有氧</p><ul><li>哑铃推举 4×10</li><li>侧平举 4×15</li><li>面拉 3×15</li><li>慢跑 30 分钟</li></ul></div>
+        <div class="day-card reveal rotate--s-l"><p class="day-card__day">周五</p><p class="day-card__part">手臂 + 核心</p><ul><li>窄距卧推 4×10</li><li>锤式弯举 3×12</li><li>悬垂举腿 3×15</li><li>卷腹 3×20</li></ul></div>
+        <div class="day-card reveal rotate--s-r"><p class="day-card__day">周六</p><p class="day-card__part">全身 / 弱项补强</p><ul><li>硬拉 4×6</li><li>卧推 4×8</li><li>深蹲 4×8</li><li>拉伸放松 15 分钟</li></ul></div>
+        <div class="day-card day-card--rest reveal rotate--s-l"><p class="day-card__day">周日</p><p class="day-card__part">休息 · 恢复</p><ul><li>睡够 8 小时</li><li>泡沫轴放松</li><li>散步 30 分钟</li><li>准备下周训练</li></ul></div>
+      </div>
+    </div>
+
+    <!-- ---------- 个人最佳 PRs ---------- -->
+    <div class="block">
+      <h3 class="sub-title reveal">个人最佳 <span class="ono-inline">PR!</span></h3>
+      <!-- ✏️ 把数值换成你自己的最好成绩 -->
+      <div class="pr-grid">
+        <div class="pr-card reveal"><span class="pr-card__medal" data-color="orange"><svg class="icon" aria-hidden="true"><use href="#i-award"/></svg></span><p class="pr-card__name">卧推</p><p class="pr-card__value">80<small>kg</small></p></div>
+        <div class="pr-card reveal"><span class="pr-card__medal" data-color="pink"><svg class="icon" aria-hidden="true"><use href="#i-award"/></svg></span><p class="pr-card__name">深蹲</p><p class="pr-card__value">80<small>kg</small></p></div>
+        <div class="pr-card reveal"><span class="pr-card__medal" data-color="teal"><svg class="icon" aria-hidden="true"><use href="#i-award"/></svg></span><p class="pr-card__name">硬拉</p><p class="pr-card__value">80<small>kg</small></p></div>
+        <div class="pr-card reveal"><span class="pr-card__medal" data-color="blue"><svg class="icon" aria-hidden="true"><use href="#i-award"/></svg></span><p class="pr-card__name">引体向上</p><p class="pr-card__value">18<small>次</small></p></div>
+        <div class="pr-card reveal"><span class="pr-card__medal" data-color="yellow"><svg class="icon" aria-hidden="true"><use href="#i-award"/></svg></span><p class="pr-card__name">平板支撑</p><p class="pr-card__value">4<small>分钟</small></p></div>
+      </div>
+    </div>
+
+    <!-- ---------- 健身心得 ---------- -->
+    <div class="block">
+      <h3 class="sub-title reveal">健身心得 <span class="ono-inline">NOTES</span></h3>
+      <div class="note-grid">
+        <!-- ✏️ 复制 <article class="note-card"> 就能加一篇 -->
+        <article class="note-card reveal rotate--s-l">
+          <h4>减肥不用着急，慢就是快</h4>
+          <p>健身前两年一直焦虑体脂率太高了，前几个月身体线条突然变得明显许多，</p>
+          <span class="note-card__date">{{2026-01-01}}</span>
+        </article>
+        <article class="note-card reveal rotate--s-r">
+          <h4>跟着感觉吃</h4>
+          <p>家常菜，七八分饱，碳蛋脂吃到位，身体状态不行多吃干净碳水，睡够8小时，一周一顿放纵餐</p>
+          <span class="note-card__date">{{2026-01-10}}</span>
+        </article>
+        <article class="note-card reveal rotate--s-l">
+          <h4>中蛋白碳水渐降</h4>
+          <p>蛋白质通常伴随着脂肪，没吃好的话除了消化不良就是增肥</p>
+          <span class="note-card__date">{{2026-01-20}}</span>
+        </article>
+        <article class="note-card reveal rotate--s-r">
+          <h4>稳住心态</h4>
+          <p>蛋白质吃够，控制好碳水脂肪，每周保持至少4练</p>
+          <span class="note-card__date">{{2026-01-30}}</span>
+        </article>
+      </div>
+    </div>
+
+    <!-- ---------- 饮食日记（可选模块） ---------- -->
+    <div class="block">
+      <h3 class="sub-title reveal">饮食日记 <span class="ono-inline">CARB CYCLE</span></h3>
+      <div class="diet-grid">
+        <div class="diet-card reveal">
+          <h4><svg class="icon" aria-hidden="true"><use href="#i-utensils"/></svg> 碳水渐降饮食法</h4>
+          <p>简单来说：把一周分成<b>高碳日</b>、<b>中碳日</b>、<b>低碳日</b>，配合训练强度调整碳水摄入。</p>
+          <ul class="diet-list">
+            <li><b>高碳日</b>（练腿 / 大肌群）：碳水充足，体力满格</li>
+            <li><b>中碳日</b>（常规训练日）：碳水适中，维持状态</li>
+            <li><b>低碳日</b>（休息 / 有氧日）：减少碳水，多蛋白质和蔬菜</li>
+          </ul>
+          <p class="diet-card__tip">💡 蛋白质每天都要吃够，脂肪用在低碳日补足饱腹感。</p>
+        </div>
+        <div class="diet-card reveal">
+          <h4><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> 每日饮食模板</h4>
+          <div class="table-wrap">
+            <table class="diet-table">
+              <thead><tr><th>餐次</th><th>食物</th><th>分量</th><th>热量</th></tr></thead>
+              <tbody>
+                <tr><td>早餐</td><td>{{鸡蛋 / 燕麦 / 牛奶}}</td><td>{{XX g}}</td><td>{{XXX}} kcal</td></tr>
+                <tr><td>加餐</td><td>{{水果 / 坚果}}</td><td>{{XX g}}</td><td>{{XXX}} kcal</td></tr>
+                <tr><td>午餐</td><td>{{米饭 / 鸡胸 / 蔬菜}}</td><td>{{XX g}}</td><td>{{XXX}} kcal</td></tr>
+                <tr><td>练前</td><td>{{香蕉 / 黑咖啡}}</td><td>{{XX g}}</td><td>{{XXX}} kcal</td></tr>
+                <tr><td>晚餐</td><td>{{牛肉 / 红薯 / 沙拉}}</td><td>{{XX g}}</td><td>{{XXX}} kcal</td></tr>
+                <tr><td colspan="3"><b>合计</b></td><td><b>{{XXXX}} kcal</b></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <p class="motivation reveal">每一次训练都是对自己的投资 💪</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     板块 6 · 我们的故事 #story
+     ========================================================================== -->
+<section id="story" class="section section--alt">
+  <div class="container">
+    <header class="section-head reveal">
+      <h2 class="section-title">我们的故事 <span class="ono-inline">OUR STORY</span></h2>
+      <!-- ✏️ 改成你们俩的名字 -->
+      <p class="section-sub story-sub">涂宇航 <span class="heart-beat">♡</span> 刘艳</p>
+      <div class="heart-deco" aria-hidden="true">
+        <svg class="icon" viewBox="0 0 24 24"><use href="#i-heart"/></svg>
+        <svg class="icon icon--sm" viewBox="0 0 24 24"><use href="#i-heart"/></svg>
+        <svg class="icon" viewBox="0 0 24 24"><use href="#i-heart"/></svg>
+      </div>
+    </header>
+
+    <!-- ---------- 大合照（心形边框） ---------- -->
+    <div class="story-hero reveal">
+      <div class="heart-frame">
+        <img class="ph ph--heart" src="images/story-main.jpg" alt="我们的合照">
+        <svg class="heart-frame__outline" viewBox="0 0 100 100" aria-hidden="true">
+          <path d="M50 95C20 78 4 59 4 37C4 21 15 10 30 10C40 10 47 15 50 23C53 15 60 10 70 10C85 10 96 21 96 37C96 59 80 78 50 95Z"/>
+        </svg>
+      </div>
+      <p class="story-hero__caption">我们 ❤️ 我们的故事</p>
+    </div>
+
+    <!-- ---------- 恋爱时间线 ---------- -->
+    <div class="block">
+      <h3 class="sub-title reveal">我们的时间线 <span class="ono-inline">LOVE LINE</span></h3>
+      <ol class="timeline timeline--love">
+        <!-- ✏️ 复制 <li> 整段就能加一个节点 -->
+        <li class="timeline__item reveal" data-state="love">
+          <span class="timeline__node"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg></span>
+          <div class="timeline__card">
+            <p class="timeline__date">2024-03-21 · 初次相遇</p>
+            <p class="timeline__text">朋友介绍，第一次在腾讯会议认识，第一印象觉得很青春很可爱</p>
+          </div>
+        </li>
+        <li class="timeline__item reveal" data-state="love">
+          <span class="timeline__node"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg></span>
+          <div class="timeline__card">
+            <p class="timeline__date">2024-04-13 · 第一次约会</p>
+            <p class="timeline__text">去了她的学校'赣南科技学院'，出远门心情又激动又陌生</p>
+          </div>
+        </li>
+        <li class="timeline__item reveal" data-state="love">
+          <span class="timeline__node"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg></span>
+          <div class="timeline__card">
+            <p class="timeline__date">2024-04-13 · 确定关系</p>
+            <p class="timeline__text">我先开的口，我们去逛了宋城，第一次签她的手，献出了我的初吻</p>
+          </div>
+        </li>
+        <li class="timeline__item reveal" data-state="love">
+          <span class="timeline__node"><svg class="icon" aria-hidden="true"><use href="#i-plane"/></svg></span>
+          <div class="timeline__card">
+            <p class="timeline__date">{{202X-XX-XX}} · 第一次旅行</p>
+            <p class="timeline__text">{{去了哪个城市，最难忘的一件事}}</p>
+          </div>
+        </li>
+        <li class="timeline__item reveal" data-state="love">
+          <span class="timeline__node"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg></span>
+          <div class="timeline__card">
+            <p class="timeline__date">2024-09-16 · 第一个节日</p>
+            <p class="timeline__text">陪我过的第一个生日，收到了耳机，挎包（都是牌子货，我都舍不得买呜呜呜~），还有戒指，鲜花，手工小相册（背面都写了情话哦~）</p>
+          </div>
+        </li>
+        <li class="timeline__item reveal" data-state="love">
+          <span class="timeline__node"><svg class="icon" aria-hidden="true"><use href="#i-sparkle"/></svg></span>
+          <div class="timeline__card">
+            <p class="timeline__date">{{202X-XX-XX}} · 最近的美好时刻</p>
+            <p class="timeline__text">{{最近发生的一件让你觉得「有你真好」的小事}}</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <!-- ---------- 照片墙 ---------- -->
+    <div class="block">
+      <h3 class="sub-title reveal">照片墙 <span class="ono-inline">MEMORIES</span></h3>
+      <!-- ✏️ 加照片：复制一个 <figure class="photo-tile">，改图片路径和 hover 时气泡里的文字 -->
+      <div class="photo-wall">
+        <figure class="photo-tile reveal rotate--s-l" data-note="七夕节出门吃小火锅啦！这是我们工作后第一次约会！">
+          <img class="ph ph--square" src="images/story-01.jpg" alt="七夕节小火锅">
+          <span class="sticker-deco" data-deco="heart">♡</span>
+        </figure>
+        <figure class="photo-tile reveal rotate--s-r" data-note="我们的故事 · 照片二">
+          <img class="ph ph--square" src="images/story-02.jpg" alt="我们的故事 照片2">
+        </figure>
+        <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}">
+          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-03.jpg</span></div><span class="sticker-deco" data-deco="star">★</span>
+        </figure>
+        <figure class="photo-tile reveal rotate--s-r" data-note="{{这张照片背后的小故事}}">
+          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-04.jpg</span></div>
+        </figure>
+        <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}">
+          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-05.jpg</span></div><span class="sticker-deco" data-deco="heart">♡</span>
+        </figure>
+        <figure class="photo-tile reveal rotate--s-r" data-note="{{这张照片背后的小故事}}">
+          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-06.jpg</span></div>
+        </figure>
+        <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}">
+          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-07.jpg</span></div><span class="sticker-deco" data-deco="star">★</span>
+        </figure>
+        <figure class="photo-tile reveal rotate--s-r" data-note="{{这张照片背后的小故事}}">
+          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-08.jpg</span></div>
+        </figure>
+        <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}">
+          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-09.jpg</span></div><span class="sticker-deco" data-deco="heart">♡</span>
+        </figure>
+        <figure class="photo-tile reveal rotate--s-r" data-note="{{这张照片背后的小故事}}">
+          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-10.jpg</span></div>
+        </figure>
+        <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}">
+          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-11.jpg</span></div><span class="sticker-deco" data-deco="star">★</span>
+        </figure>
+        <figure class="photo-tile reveal rotate--s-r" data-note="{{这张照片背后的小故事}}">
+          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-12.jpg</span></div>
+        </figure>
+        <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}">
+          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-13.jpg</span></div><span class="sticker-deco" data-deco="heart">♡</span>
+        </figure>
+        <figure class="photo-tile reveal rotate--s-r" data-note="{{这张照片背后的小故事}}">
+          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-14.jpg</span></div>
+        </figure>
+        <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}">
+          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-15.jpg</span></div>
+        </figure>
+      </div>
+    </div>
+
+    <!-- ---------- 共同爱好 ---------- -->
+    <div class="block">
+      <h3 class="sub-title reveal">共同爱好 <span class="ono-inline">TOGETHER</span></h3>
+      <div class="hobby-grid">
+        <div class="hobby-card reveal rotate--s-l"><span class="hobby-card__icon" data-color="blue"><svg class="icon" aria-hidden="true"><use href="#i-gamepad"/></svg></span><h4>一起打游戏</h4><p>王者荣耀 <span class="hobby-emoji" aria-label="王者荣耀">👑</span></p></div>
+        <div class="hobby-card reveal rotate--s-r"><span class="hobby-card__icon" data-color="pink"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg></span><h4>看电影</h4><p>八仙</p></div>
+        <div class="hobby-card reveal rotate--s-l"><span class="hobby-card__icon" data-color="teal"><svg class="icon" aria-hidden="true"><use href="#i-plane"/></svg></span><h4>旅行</h4><p>想一起去海边，一起去爬山</p></div>
+        <div class="hobby-card reveal rotate--s-r"><span class="hobby-card__icon" data-color="orange"><svg class="icon" aria-hidden="true"><use href="#i-utensils"/></svg></span><h4>吃美食</h4><p>串串香</p></div>
+        <div class="hobby-card reveal rotate--s-l"><span class="hobby-card__icon" data-color="pink"><svg class="icon" aria-hidden="true"><use href="#i-dumbbell"/></svg></span><h4>健身</h4><p>我健身，她跳舞</p></div>
+        <div class="hobby-card reveal rotate--s-r"><span class="hobby-card__icon" data-color="yellow"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg></span><h4>日常</h4><p>每晚下班她都会在地铁口接我~</p></div>
+      </div>
+    </div>
+
+    <!-- ---------- 想去的地方 ---------- -->
+    <div class="block">
+      <h3 class="sub-title reveal">想去的地方 <span class="ono-inline">WISHLIST</span></h3>
+      <div class="wish-grid">
+        <div class="wish-card reveal rotate--s-l">
+          <span class="wish-card__stamp">已打卡</span>
+          <h4>{{目的地}}</h4><p>{{为什么想去：一句话理由}}</p><span class="pill pill--win">已完成</span>
+        </div>
+        <div class="wish-card reveal rotate--s-r">
+          <h4>{{目的地}}</h4><p>{{为什么想去：一句话理由}}</p><span class="pill pill--go">计划中</span>
+        </div>
+        <div class="wish-card reveal rotate--s-l">
+          <h4>{{目的地}}</h4><p>{{为什么想去：一句话理由}}</p><span class="pill pill--go">计划中</span>
+        </div>
+        <div class="wish-card reveal rotate--s-r">
+          <h4>{{目的地}}</h4><p>{{为什么想去：一句话理由}}</p><span class="pill pill--grey">许愿中</span>
+        </div>
+      </div>
+      <p class="story-end reveal">
+        故事还在继续，未来请多指教 ♡
+        <span class="story-end__date">最近更新：{{2026-01-01}}</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     板块 7 · 联系方式 #contact
+     ========================================================================== -->
+<section id="contact" class="section">
+  <div class="container">
+    <header class="section-head reveal">
+      <h2 class="section-title">联系我 <span class="ono-inline">CONTACT</span></h2>
+      <p class="section-sub">有想法？来聊聊吧！</p>
+      <p class="bubble bubble--center reveal">不管是合作、交流还是单纯想吐槽，都欢迎找我～</p>
+    </header>
+
+    <!-- ---------- 4 个联系卡片 ---------- -->
+    <div class="contact-grid">
+      <!-- ✏️ 把 {{}} 换成你自己的邮箱，JS 会自动帮你做成「点击复制」 -->
+      <div class="contact-card reveal rotate--s-l">
+        <span class="contact-card__icon" data-color="orange"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></span>
+        <p class="contact-card__label">邮箱</p>
+        <button class="contact-card__value" type="button" data-copy="771361581@qq.com">771361581@qq.com</button>
+        <p class="contact-card__hint">点击即可复制</p>
+      </div>
+
+      <!-- ✏️ 换成你的 GitHub 地址 -->
+      <div class="contact-card reveal rotate--s-r">
+        <span class="contact-card__icon" data-color="blue"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg></span>
+        <p class="contact-card__label">GitHub</p>
+        <button class="contact-card__value" type="button" data-copy="github.com/Eden-tu">github.com/Eden-tu</button>
+        <p class="contact-card__hint">点击即可复制</p>
+      </div>
+
+      <!-- ✏️ 换成你的微信号；把 images/wechat-qr.jpg 换成你的微信二维码 -->
+      <div class="contact-card reveal rotate--s-l">
+        <span class="contact-card__icon" data-color="teal"><svg class="icon" aria-hidden="true"><use href="#i-wechat"/></svg></span>
+        <p class="contact-card__label">微信</p>
+        <button class="contact-card__value" type="button" data-copy="wo261an3191">wo261an3191</button>
+        <div class="qr-box">
+          <div class="ph ph--qr">
+            <span class="ph__hint">✏️ 点这里上传微信二维码</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✏️ 换成你所在的城市 -->
+      <div class="contact-card reveal rotate--s-r">
+        <span class="contact-card__icon" data-color="pink"><svg class="icon" aria-hidden="true"><use href="#i-location"/></svg></span>
+        <p class="contact-card__label">所在地</p>
+        <p class="contact-card__value contact-card__value--static">江西南昌</p>
+        <p class="contact-card__hint">远程 / 线下都 OK</p>
+      </div>
+    </div>
+
+    <!-- ---------- 联系表单 ---------- -->
+    <div class="contact-form-wrap">
+      <form class="contact-form reveal" id="contactForm" novalidate>
+        <h3 class="contact-form__title">给我留言 <span class="ono-inline">SAY HI!</span></h3>
+
+        <div class="field">
+          <label for="cf-name">姓名 <span class="req">*</span></label>
+          <input type="text" id="cf-name" name="name" placeholder="怎么称呼你？" autocomplete="name">
+          <p class="field__error" data-error-for="name"></p>
+        </div>
+
+        <div class="field">
+          <label for="cf-email">邮箱 <span class="req">*</span></label>
+          <input type="email" id="cf-email" name="email" placeholder="your-email@example.com" autocomplete="email">
+          <p class="field__error" data-error-for="email"></p>
+        </div>
+
+        <div class="field">
+          <label for="cf-subject">主题</label>
+          <select id="cf-subject" name="subject">
+            <option value="合作机会">合作机会</option>
+            <option value="技术交流">技术交流</option>
+            <option value="项目咨询">项目咨询</option>
+            <option value="其他">其他</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="cf-message">留言 <span class="req">*</span></label>
+          <textarea id="cf-message" name="message" rows="5" placeholder="想说点什么？尽管写～"></textarea>
+          <p class="field__error" data-error-for="message"></p>
+        </div>
+
+        <button class="btn btn--primary btn--block" type="submit">
+          <svg class="icon" aria-hidden="true"><use href="#i-zap"/></svg> 发送消息 POW!
+        </button>
+
+        <!-- 提交成功后的提示（默认隐藏，JS 提交成功后显示） -->
+        <div class="form-success" id="formSuccess" hidden>
+          <p class="bubble bubble--big">消息已发送！我会尽快回复~</p>
+        </div>
+        <p class="form-note">💡 这是纯静态网站，提交会打开你的邮件客户端。想让它直接发到邮箱，看「使用说明.md」。</p>
+      </form>
+
+      <!-- ---------- 简历下载 ---------- -->
+      <aside class="resume-card reveal rotate--s-r">
+        <span class="resume-card__icon"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg></span>
+        <h3>我的简历</h3>
+        <p class="resume-card__meta">PDF 格式，{{X}} 页</p>
+        <p class="resume-card__meta">最后更新：{{2026-01-01}}</p>
+        <p class="resume-card__desc">{{一句话介绍简历内容，比如：完整的项目经历 + 技能清单}}</p>
+        <!-- ✏️ 把你的简历 PDF 命名为 resume.pdf，放在网站根目录即可 -->
+        <a class="btn btn--primary btn--block" href="resume.pdf" download>
+          <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg> 下载简历
+        </a>
+        <div class="resume-card__preview">
+          <div class="ph ph--paper">
+            <svg class="ph__icon" aria-hidden="true"><use href="#i-file"/></svg>
+            <span class="ph__hint">简历封面预览占位</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- ---------- 社交链接 ---------- -->
+    <div class="block">
+      <h3 class="sub-title reveal">找到我 <span class="ono-inline">FOLLOW</span></h3>
+      <!-- ✏️ 把 href 换成你自己的主页链接；暂时没有的可以直接删掉整段 <a> -->
+      <div class="social-row">
+        <a class="social-btn" href="https://github.com/" target="_blank" rel="noopener" title="GitHub">
+          <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg><span>GitHub</span>
+        </a>
+        <a class="social-btn" href="https://juejin.cn/" target="_blank" rel="noopener" title="掘金">
+          <svg class="icon" aria-hidden="true"><use href="#i-juejin"/></svg><span>掘金</span>
+        </a>
+        <a class="social-btn" href="https://www.zhihu.com/" target="_blank" rel="noopener" title="知乎">
+          <svg class="icon" aria-hidden="true"><use href="#i-zhihu"/></svg><span>知乎</span>
+        </a>
+        <a class="social-btn" href="https://www.bilibili.com/" target="_blank" rel="noopener" title="B站">
+          <svg class="icon" aria-hidden="true"><use href="#i-bilibili"/></svg><span>B站</span>
+        </a>
+        <a class="social-btn" href="https://www.xiaohongshu.com/" target="_blank" rel="noopener" title="小红书">
+          <svg class="icon" aria-hidden="true"><use href="#i-xhs"/></svg><span>小红书</span>
+        </a>
+        <a class="social-btn" href="mailto:771361581@qq.com" title="邮箱">
+          <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><span>邮箱</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- ---------- FAQ 手风琴（点击标题展开/收起） ---------- -->
+    <div class="block">
+      <h3 class="sub-title reveal">常见问题 <span class="ono-inline">FAQ</span></h3>
+      <div class="faq-list">
+        <!-- ✏️ 改问题和答案：直接改 <summary> 和下面 <p> 里的文字 -->
+        <details class="faq-card reveal">
+          <summary>你现在在找工作吗？</summary>
+          <div class="faq-card__body"><p>{{答案占位：比如「在的，26 届应届，主要看 AI 应用 / 前端 / 社区运营方向的机会，欢迎联系我～」}}</p></div>
+        </details>
+        <details class="faq-card reveal">
+          <summary>可以合作吗？</summary>
+          <div class="faq-card__body"><p>{{答案占位：比如「可以。AI 工具推广、内容创作、小项目开发都可以聊，先说说你的想法吧。」}}</p></div>
+        </details>
+        <details class="faq-card reveal">
+          <summary>这个网站是用什么做的？</summary>
+          <div class="faq-card__body"><p>纯手工 HTML + CSS + 原生 JavaScript，没有任何框架和构建工具。双击 index.html 就能打开，改起来也很简单。</p></div>
+        </details>
+        <details class="faq-card reveal">
+          <summary>可以加你微信吗？</summary>
+          <div class="faq-card__body"><p>{{答案占位：比如「当然可以，扫上面那个二维码就行，加的时候备注一下来意吧～」}}</p></div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     板块 8 · 内容管理 #studio（✏️ 用户可在页面上直接增删改查文字与图片）
+     ========================================================================== -->
+<section id="studio" class="section section--studio">
+  <div class="bg-halftone" aria-hidden="true"></div>
+  <div class="container">
+    <div class="section-head reveal">
+      <h2 class="section-title">内容管理 <span class="studio__burst">POW!</span></h2>
+      <p class="section-sub">在这里直接增删改查你的文字和图片，数据存在浏览器本地，刷新不丢。✏️ 想加内容点右边「新增内容」按钮就行。</p>
+    </div>
+
+    <div class="studio__toolbar">
+      <div class="studio__hint">共 <span id="studioCount">0</span> 条内容</div>
+      <div class="studio__actions">
+        <button class="btn btn--primary" id="studioAdd" type="button">
+          <svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg> 新增内容
+        </button>
+        <button class="btn btn--danger" id="studioDeleteSel" type="button" disabled>
+          删除选中 (<span id="studioSelCount">0</span>)
+        </button>
+      </div>
+    </div>
+
+    <div class="studio__grid" id="studioGrid"></div>
+
+    <div class="studio__empty" id="studioEmpty">
+      <div class="ph ph--empty">
+        <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
+        <span class="ph__label">还没有内容</span>
+        <span class="ph__hint">点「新增内容」添加第一条吧～</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ==========================================================================
+     页脚
+     ========================================================================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <span class="logo__mark">E</span>
+        <div>
+          <p class="footer__name">EDEN<span class="logo__bang">!</span></p>
+          <p class="footer__tagline">AI 应用探索者 · 26 届软件工程应届生</p>
+        </div>
+      </div>
+      <div class="social-row social-row--footer">
+        <a class="social-btn social-btn--sm" href="https://github.com/" target="_blank" rel="noopener" title="GitHub"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg></a>
+        <a class="social-btn social-btn--sm" href="https://juejin.cn/" target="_blank" rel="noopener" title="掘金"><svg class="icon" aria-hidden="true"><use href="#i-juejin"/></svg></a>
+        <a class="social-btn social-btn--sm" href="https://www.zhihu.com/" target="_blank" rel="noopener" title="知乎"><svg class="icon" aria-hidden="true"><use href="#i-zhihu"/></svg></a>
+        <a class="social-btn social-btn--sm" href="https://www.bilibili.com/" target="_blank" rel="noopener" title="B站"><svg class="icon" aria-hidden="true"><use href="#i-bilibili"/></svg></a>
+        <a class="social-btn social-btn--sm" href="https://www.xiaohongshu.com/" target="_blank" rel="noopener" title="小红书"><svg class="icon" aria-hidden="true"><use href="#i-xhs"/></svg></a>
+        <a class="social-btn social-btn--sm" href="mailto:771361581@qq.com" title="邮箱"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></a>
+      </div>
+    </div>
+
+    <p class="footer__signature">
+      <svg class="icon" aria-hidden="true"><use href="#i-sparkle"/></svg>
+      摆烂了四年，然后用 AI 重新开局 —— 种一棵树最好的时间是现在。
+    </p>
+
+    <p class="footer__copy">
+      © <span id="year">2026</span> Eden. 用 HTML / CSS / JavaScript 手工打造 ·
+      <button class="link-btn" type="button" id="backToTopInline">回到顶部 ↑</button>
+    </p>
+  </div>
+</footer>
+
+<!-- ==========================================================================
+     通用组件：回到顶部按钮 / 弹出层 / 轻提示
+     ========================================================================== -->
+<button class="to-top" id="toTop" type="button" aria-label="回到顶部">
+  <svg class="icon" aria-hidden="true"><use href="#i-up"/></svg>
+  <span class="to-top__text">UP!</span>
+</button>
+
+<div class="modal" id="modal" hidden>
+  <div class="modal__backdrop" data-close></div>
+  <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal__close" type="button" data-close aria-label="关闭">
+      <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+    </button>
+    <div class="modal__body" id="modalBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="js/admin-edit.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
