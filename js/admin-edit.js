@@ -203,15 +203,13 @@
     return null;
   }
 
-  /* 项目截图区：点到占位框本身或其内部(图标/提示文字) -> 换图；
-     点到悬浮说明文字(现在是可编辑的底部说明条) -> 不拦截，让 editTarget 当文字编辑处理 */
-  function mediaImageEl(target) {
+  /* 项目作品卡媒体区：点占位框、已传图片、说明条、角标任意处 -> 整块视为编辑目标，
+     统一弹框处理（换图 + 改悬浮说明），不再内联编辑，杜绝图片/悬浮层互相遮挡 */
+  function projectMediaEl(target) {
     if (!target || !target.closest) return null;
     if (target.closest('.admin-modal')) return null;
-    if (target.closest('.project-card__hover')) return null;
-    var ph = target.closest('.ph');
-    if (ph && ph.closest('.project-card__media')) return ph;
-    return null;
+    var media = target.closest('.project-card__media');
+    return media || null;
   }
 
   /* ============ 保存条（💾 保存 / 取消）============ */
@@ -260,6 +258,9 @@
       var top = r.bottom + 8;
       // 太靠近屏幕底部就翻到元素上方
       if (top > window.innerHeight - 60) top = Math.max(8, r.top - 48);
+      // 兜底：无论元素在哪，按钮条绝不允许跑出屏幕
+      if (top > window.innerHeight - 50) top = Math.max(8, window.innerHeight - 50);
+      if (top < 8) top = 8;
       bar.style.left = left + 'px';
       bar.style.top = top + 'px';
     } catch (e) {}
@@ -403,13 +404,21 @@
     var body = document.createElement('div');
     body.className = 'admin-modal__body';
 
-    if (cfg.imageSrc) {
+    var showImgSection = !!cfg.imageSrc || !!cfg.onReplace;
+    if (showImgSection) {
       var imgWrap = document.createElement('div');
       imgWrap.className = 'admin-modal__img-wrap';
-      var img = document.createElement('img');
-      img.className = 'admin-modal__img';
-      img.src = cfg.imageSrc;
-      imgWrap.appendChild(img);
+      if (cfg.imageSrc) {
+        var img = document.createElement('img');
+        img.className = 'admin-modal__img';
+        img.src = cfg.imageSrc;
+        imgWrap.appendChild(img);
+      } else {
+        var empty = document.createElement('div');
+        empty.className = 'admin-modal__img admin-modal__img--empty';
+        empty.textContent = '还没有图片';
+        imgWrap.appendChild(empty);
+      }
       var repBtn = document.createElement('button');
       repBtn.type = 'button';
       repBtn.className = 'admin-modal__btn';
@@ -491,6 +500,36 @@
       textValue: cur,
       multiline: true,
       onSave: function (val) { storeAttr(post, 'data-content', val); }
+    });
+  }
+
+  /* 直接把纯文字写入覆盖（不经过内联 contenteditable），供弹框保存用 */
+  function storeText(el, val) {
+    var key = keyOf(el);
+    overrides[key] = { t: 'text', v: val };
+    el.setAttribute('data-ovr-sel', key);
+    if (persist()) { applyOne(key, overrides[key]); updateCount(); toast('已保存 ✓'); }
+  }
+
+  /* 作品卡编辑弹框：替换图片 + 修改悬浮说明，一处搞定；
+     弹框居中、z-index 最高，按钮永远不会被图片或卡片遮挡 */
+  function openProjectEditor(card) {
+    var media = card.querySelector('.project-card__media');
+    var bubble = card.querySelector('.project-card__hover .bubble');
+    var imgEl = media ? (media.querySelector('img') || media.querySelector('.ph')) : null;
+    var titleEl = card.querySelector('.project-card__title') || card.querySelector('h3, h4');
+    var name = titleEl ? (titleEl.textContent || '').trim().slice(0, 18) : '';
+    openAttrModal({
+      title: '编辑作品卡' + (name ? '：' + name : ''),
+      textLabel: '悬浮说明（鼠标放到图片上时显示的一句话）',
+      textValue: bubble ? (bubble.textContent || '') : '',
+      multiline: false,
+      imageSrc: (imgEl && imgEl.tagName === 'IMG') ? imgEl.src : null,
+      onReplace: function () { if (imgEl) pickImage(imgEl); },
+      onSave: function (val) {
+        if (!bubble) { toast('这张卡片没有说明位'); return; }
+        storeText(bubble, val);
+      }
     });
   }
 
@@ -607,7 +646,7 @@
     document.addEventListener('mouseover', function (e) {
       if (!editOn) return;
       if (adminModal && adminModal.contains(e.target)) { clearHover(); return; }
-      var t = mediaImageEl(e.target) || editTarget(e.target);
+      var t = projectMediaEl(e.target) || editTarget(e.target);
       if (t === lastHover) return;
       clearHover();
       if (t) { t.classList.add('admin-hover'); lastHover = t; }
@@ -649,9 +688,13 @@
         e.preventDefault(); e.stopPropagation(); openArticleEditor(post); return;
       }
 
-      // 项目截图占位区：无论点到媒体框、提示文字还是悬浮气泡，都走"换图"
-      var ph = mediaImageEl(e.target);
-      if (ph) { e.preventDefault(); e.stopPropagation(); pickImage(ph); return; }
+      // 项目作品卡媒体区：点占位框/图片/说明条/角标任意处 -> 弹框（换图 + 改悬浮说明）
+      var pm = projectMediaEl(e.target);
+      if (pm) {
+        var pcard = pm.closest('.project-card');
+        if (pcard) { e.preventDefault(); e.stopPropagation(); openProjectEditor(pcard); return; }
+      }
+
       var t = editTarget(e.target);
       if (!t) return;
       e.preventDefault();

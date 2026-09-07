@@ -1729,6 +1729,11 @@ body.admin-editing .project-card__hover {
   gap: .25rem;
 }
 body.admin-editing .project-card__hover .bubble { color: #fff; max-width: 100%; }
+/* 说明被清空时给出可点提示，避免出现一个"空白输入框"让人困惑 */
+body.admin-editing .project-card__hover .bubble:empty::before {
+  content: '（还没有说明 · 点图片区弹窗填写）';
+  color: #fff; opacity: .75; font-size: .8rem;
+}
 body.admin-editing .project-card__media { cursor: pointer; }
 .admin-hover { outline: 3px dashed var(--c-primary) !important; outline-offset: 3px !important; }
 body.admin-editing [contenteditable="true"] {
@@ -1754,6 +1759,11 @@ body.admin-editing [contenteditable="true"] {
 .admin-modal__title { font-family: var(--font-display); font-size: 1.35rem; letter-spacing: .04em; margin: 0; }
 .admin-modal__img-wrap { display: flex; flex-direction: column; gap: .5rem; align-items: flex-start; margin-bottom: 1rem; }
 .admin-modal__img { width: 100%; max-height: 220px; object-fit: cover; border-radius: var(--r-sm); border: var(--border); }
+.admin-modal__img--empty {
+  display: grid; place-items: center; height: 90px; max-height: none;
+  background: repeating-linear-gradient(45deg, var(--ph-a) 0 12px, var(--ph-b) 12px 24px);
+  color: var(--c-text-soft); font-family: var(--font-mono); font-size: .8rem;
+}
 .admin-modal__field { display: flex; flex-direction: column; gap: .4rem; margin-bottom: 1rem; }
 .admin-modal__label { font-family: var(--font-mono); font-size: .78rem; font-weight: 700; opacity: .8; }
 .admin-modal__textarea {
