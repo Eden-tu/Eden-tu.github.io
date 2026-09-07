@@ -3,8 +3,13 @@
    ------------------------------------------------------------
    怎么用（给站长的三句话说明）：
    1. 点右下角「✏️ 编辑」进入编辑模式
-   2. 点页面上的任何文字 → 直接改，改完点别处自动保存
+   2. 点页面上的任何文字 → 弹出「💾 保存 / 取消」按钮条，改完点保存
    3. 点任何图片 / 灰色占位框 → 选一张图替换它
+
+   保存机制（三重保险，任一触发即写入）：
+   ① 点「💾 保存」按钮（最可靠，推荐）
+   ② 停止输入 0.9 秒后自动保存
+   ③ 点到别处失焦时兜底保存
 
    修改存在浏览器 localStorage（键名 eden_site_overrides），
    刷新后依然在。换电脑或清了缓存会丢，所以改完记得点
@@ -28,6 +33,9 @@
   var toastEl = null;
   var toastTimer = null;
   var hintEl = null;
+  var saveBar = null;      // 编辑时贴在元素下方的「保存 / 取消」条
+  var autoTimer = null;    // 自动保存防抖计时器
+  var btnSavePanel = null; // 面板上的保存按钮（显示已保存条数）
 
   /* ============ 存储 ============ */
   function load() {
@@ -130,6 +138,7 @@
     Object.keys(overrides).forEach(function (sel) {
       applyOne(sel, overrides[sel]);
     });
+    updateCount();
   }
 
   /* ============ 小提示 / Toast ============ */
@@ -160,6 +169,7 @@
   function editTarget(el) {
     if (!el || el.nodeType !== 1) return null;
     if (panel && panel.contains(el)) return null;
+    if (saveBar && saveBar.contains(el)) return null;
     var tag = el.tagName;
 
     // 图片 / 占位框 -> 换图
@@ -182,6 +192,78 @@
     return null;
   }
 
+  /* ============ 保存条（💾 保存 / 取消）============ */
+  function ensureSaveBar() {
+    if (saveBar) return saveBar;
+    saveBar = document.createElement('div');
+    saveBar.className = 'admin-savebar';
+
+    var btnSave = document.createElement('button');
+    btnSave.type = 'button';
+    btnSave.className = 'admin-savebar__btn admin-savebar__btn--save';
+    btnSave.textContent = '💾 保存';
+
+    var btnCancel = document.createElement('button');
+    btnCancel.type = 'button';
+    btnCancel.className = 'admin-savebar__btn';
+    btnCancel.textContent = '取消';
+
+    // 关键：mousedown 阻止默认行为，避免点按钮时编辑元素提前失焦
+    btnSave.addEventListener('mousedown', function (e) { e.preventDefault(); });
+    btnCancel.addEventListener('mousedown', function (e) { e.preventDefault(); });
+
+    btnSave.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (finishTextEdit(true)) toast('已保存 ✓');
+    });
+    btnCancel.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      finishTextEdit(false);
+      toast('已取消修改');
+    });
+
+    saveBar.appendChild(btnSave);
+    saveBar.appendChild(btnCancel);
+    document.body.appendChild(saveBar);
+    return saveBar;
+  }
+
+  function showSaveBar(el) {
+    var bar = ensureSaveBar();
+    try {
+      var r = el.getBoundingClientRect();
+      var left = Math.max(8, Math.min(window.innerWidth - 200, r.left));
+      var top = r.bottom + 8;
+      // 太靠近屏幕底部就翻到元素上方
+      if (top > window.innerHeight - 60) top = Math.max(8, r.top - 48);
+      bar.style.left = left + 'px';
+      bar.style.top = top + 'px';
+    } catch (e) {}
+    bar.classList.add('is-show');
+  }
+
+  function hideSaveBar() { if (saveBar) saveBar.classList.remove('is-show'); }
+
+  /* ============ 写入并持久化（不结束编辑，供自动保存复用）============ */
+  function commitText(el) {
+    var hasChild = el.children.length > 0;
+    var val = hasChild ? el.innerHTML : (el.textContent || '');
+    var key = keyOf(el);
+    overrides[key] = { t: hasChild ? 'html' : 'text', v: val };
+    el.setAttribute('data-ovr-sel', key);
+    var ok = persist();
+    if (ok) updateCount();
+    return ok;
+  }
+
+  function updateCount() {
+    if (!btnSavePanel) return;
+    var n = Object.keys(overrides).length;
+    btnSavePanel.textContent = n ? ('💾 保存 (' + n + ')') : '💾 保存';
+  }
+
   /* ============ 文字编辑 ============ */
   function startTextEdit(el) {
     if (el.getAttribute('contenteditable') === 'true') return;
@@ -190,8 +272,18 @@
     el.setAttribute('contenteditable', 'true');
     el.setAttribute('spellcheck', 'false');
     try { el.focus(); } catch (e) {}
-    showHint('正在编辑：改完点页面别处即保存 · 按 Esc 取消本次修改');
+    showHint('改完点下方「💾 保存」按钮；停笔 0.9 秒也会自动保存 · Esc 取消');
+    showSaveBar(el);
 
+    // 保险②：停止输入 0.9 秒自动保存
+    el.addEventListener('input', function onInput() {
+      clearTimeout(autoTimer);
+      autoTimer = setTimeout(function () {
+        if (editingEl === el && commitText(el)) toast('已自动保存');
+      }, 900);
+    });
+
+    // 保险③：失焦兜底保存
     el.addEventListener('blur', function onBlur() {
       el.removeEventListener('blur', onBlur);
       finishTextEdit(true);
@@ -199,20 +291,16 @@
   }
 
   function finishTextEdit(doSave) {
-    if (!editingEl) return;
+    if (!editingEl) return false;
     var el = editingEl;
     editingEl = null;
+    clearTimeout(autoTimer);
     el.removeAttribute('contenteditable');
+    hideSaveBar();
     hideHint();
 
-    if (!doSave) { el.innerHTML = originalHTML; return; }
-
-    var hasChild = el.children.length > 0;
-    var val = hasChild ? el.innerHTML : (el.textContent || '');
-    var key = keyOf(el);
-    overrides[key] = { t: hasChild ? 'html' : 'text', v: val };
-    el.setAttribute('data-ovr-sel', key);
-    if (persist()) toast('已保存');
+    if (!doSave) { el.innerHTML = originalHTML; return false; }
+    return commitText(el);
   }
 
   /* ============ 图片替换 ============ */
@@ -261,7 +349,8 @@
         overrides[key] = { t: 'img', v: dataUrl };
         if (!persist()) return;
         applyOne(key, overrides[key]);
-        toast('图片已替换');
+        updateCount();
+        toast('图片已替换并保存 ✓');
       });
     });
 
@@ -338,6 +427,7 @@
     } else {
       finishTextEdit(true);
       hideHint();
+      hideSaveBar();
       clearHover();
     }
     if (panel) {
@@ -353,11 +443,23 @@
     panel.appendChild(mkBtn('✏️ 编辑', '进入/退出可视化编辑模式', function () {
       setEditMode(!editOn);
     }));
+
+    btnSavePanel = mkBtn('💾 保存', '保存当前正在编辑的内容（括号里是已保存的修改条数）', function () {
+      if (editingEl) {
+        if (finishTextEdit(true)) toast('已保存 ✓');
+      } else {
+        var n = Object.keys(overrides).length;
+        toast(n ? ('当前没有正在编辑的内容，已保存 ' + n + ' 项修改') : '当前没有正在编辑的内容');
+      }
+    });
+    panel.appendChild(btnSavePanel);
+
     panel.appendChild(mkBtn('导出备份', '把已改内容存成 JSON 文件', exportJSON));
     panel.appendChild(mkBtn('导入', '从备份 JSON 恢复修改', importJSON));
     panel.appendChild(mkBtn('重置全部', '清空所有自定义修改', resetAll));
 
     document.body.appendChild(panel);
+    updateCount();
   }
 
   /* ============ 悬停高亮 ============ */
@@ -401,6 +503,17 @@
         finishTextEdit(false);
         toast('已取消');
       }
+      // Ctrl/Cmd + S 也能保存
+      if (editingEl && (e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (finishTextEdit(true)) toast('已保存 ✓');
+      }
+    }, true);
+
+    // 滚动时保存条跟随，避免跑偏
+    window.addEventListener('scroll', function () {
+      if (editingEl) showSaveBar(editingEl);
     }, true);
 
     bindHover();

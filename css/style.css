@@ -1730,6 +1730,23 @@ body.admin-editing [contenteditable="true"] {
 [data-theme="dark"] .admin-hint,
 [data-theme="dark"] .admin-toast { background: #0A0810; color: #F6F1E7; }
 
+/* 编辑时贴在元素下方的「💾 保存 / 取消」条 */
+.admin-savebar {
+  position: fixed; z-index: 10001; display: none; gap: 6px;
+  padding: 6px; border: var(--border); background: var(--c-surface);
+  border-radius: var(--r-sm); box-shadow: var(--shadow-hard-sm);
+}
+.admin-savebar.is-show { display: flex; }
+.admin-savebar__btn {
+  border: var(--border-thin); background: var(--c-surface-2); color: var(--c-text);
+  border-radius: 6px; padding: 7px 12px; font-family: var(--font-mono);
+  font-size: .78rem; font-weight: 700; line-height: 1; cursor: pointer;
+}
+.admin-savebar__btn--save { background: var(--c-primary); color: #fff; }
+.admin-savebar__btn:hover { filter: brightness(1.08); }
+[data-theme="dark"] .admin-savebar { background: #211d2b; }
+[data-theme="dark"] .admin-savebar__btn { background: #2c2738; color: #F6F1E7; }
+
 @media print {
-  .admin-panel, .admin-hint, .admin-toast { display: none !important; }
+  .admin-panel, .admin-hint, .admin-toast, .admin-savebar { display: none !important; }
 }
