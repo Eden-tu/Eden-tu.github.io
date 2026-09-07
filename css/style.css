@@ -1720,8 +1720,15 @@ body.admin-editing .admin-panel { opacity: 1; }
 .admin-toast.is-show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
 body.admin-editing { cursor: crosshair; }
-/* 编辑模式下：项目截图悬浮气泡让位给占位框，避免抢点击 / 被误当成可编辑文字 */
-body.admin-editing .project-card__hover { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+/* 编辑模式下：项目悬浮气泡变成可点击的底部说明条（不挡截图占位框），既能编辑文案，也能直接点占位框换图 */
+body.admin-editing .project-card__hover {
+  position: absolute; inset: auto 0 0 0;
+  background: rgba(0, 0, 0, .6);
+  opacity: 1 !important; visibility: visible !important;
+  padding: .55rem .8rem;
+  gap: .25rem;
+}
+body.admin-editing .project-card__hover .bubble { color: #fff; max-width: 100%; }
 body.admin-editing .project-card__media { cursor: pointer; }
 .admin-hover { outline: 3px dashed var(--c-primary) !important; outline-offset: 3px !important; }
 body.admin-editing [contenteditable="true"] {

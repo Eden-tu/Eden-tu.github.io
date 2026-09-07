@@ -192,13 +192,14 @@
     return null;
   }
 
-  /* 项目截图区：媒体容器内任意点击/悬停都定位到占位框，走"换图"而非文字编辑
-     （.project-card__hover 悬浮气泡覆盖在媒体上方且自带文字，会被 editTarget 误判成可编辑文字） */
+  /* 项目截图区：点到占位框本身或其内部(图标/提示文字) -> 换图；
+     点到悬浮说明文字(现在是可编辑的底部说明条) -> 不拦截，让 editTarget 当文字编辑处理 */
   function mediaImageEl(target) {
     if (!target || !target.closest) return null;
-    var media = target.closest('.project-card__media');
-    if (!media) return null;
-    return media.querySelector('.ph') || null;
+    if (target.closest('.project-card__hover')) return null;
+    var ph = target.closest('.ph');
+    if (ph && ph.closest('.project-card__media')) return ph;
+    return null;
   }
 
   /* ============ 保存条（💾 保存 / 取消）============ */
