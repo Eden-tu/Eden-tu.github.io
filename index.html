@@ -148,7 +148,7 @@
       <div class="hero__visual">
         <!-- ✏️ 换头像：直接替换 images/me.jpg 这个文件即可（想换图，把新照片命名成 me.jpg 覆盖它） -->
         <div class="comic-polaroid rotate--l">
-          <img class="ph ph--avatar" src="images/me.jpg" alt="Eden 的个人照片">
+          <img class="ph ph--avatar" src="images/me.jpg" alt="Eden 的个人照片" data-key="img-1">
           <p class="comic-polaroid__cap">EDEN · 2026</p>
         </div>
 
@@ -207,7 +207,7 @@
         <!-- ✏️ 复制这一段就能加第 4 个精选项目，改文字和图片即可 -->
         <article class="project-card reveal" data-tilt data-category="全栈">
           <div class="project-card__media">
-            <div class="ph ph--16x10">
+            <div class="ph ph--16x10" data-key="ph-1">
               <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
               <span class="ph__label">项目截图占位</span>
               <span class="ph__hint">images/project-1.jpg</span>
@@ -218,17 +218,17 @@
             </div>
           </div>
           <div class="project-card__body">
-            <h3 class="project-card__title">{{精选项目一}}</h3>
-            <p class="project-card__desc">{{一句话简介：它解决了什么问题、我做了什么}}</p>
+            <h3 class="project-card__title" data-key="txt-1">{{精选项目一}}</h3>
+            <p class="project-card__desc" data-key="txt-2">{{一句话简介：它解决了什么问题、我做了什么}}</p>
             <div class="tag-row">
-              <span class="tag">{{React}}</span><span class="tag">{{Node.js}}</span><span class="tag">{{MySQL}}</span>
+              <span class="tag" data-key="txt-3">{{React}}</span><span class="tag" data-key="txt-4">{{Node.js}}</span><span class="tag" data-key="txt-5">{{MySQL}}</span>
             </div>
           </div>
         </article>
 
         <article class="project-card reveal" data-tilt data-category="前端">
           <div class="project-card__media">
-            <div class="ph ph--16x10">
+            <div class="ph ph--16x10" data-key="ph-2">
               <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
               <span class="ph__label">项目截图占位</span>
               <span class="ph__hint">images/project-2.jpg</span>
@@ -239,17 +239,17 @@
             </div>
           </div>
           <div class="project-card__body">
-            <h3 class="project-card__title">{{精选项目二}}</h3>
-            <p class="project-card__desc">{{一句话简介：它解决了什么问题、我做了什么}}</p>
+            <h3 class="project-card__title" data-key="txt-6">{{精选项目二}}</h3>
+            <p class="project-card__desc" data-key="txt-7">{{一句话简介：它解决了什么问题、我做了什么}}</p>
             <div class="tag-row">
-              <span class="tag">{{Vue 3}}</span><span class="tag">{{Vite}}</span>
+              <span class="tag" data-key="txt-8">{{Vue 3}}</span><span class="tag" data-key="txt-9">{{Vite}}</span>
             </div>
           </div>
         </article>
 
         <article class="project-card reveal" data-tilt data-category="AI">
           <div class="project-card__media">
-            <div class="ph ph--16x10">
+            <div class="ph ph--16x10" data-key="ph-3">
               <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
               <span class="ph__label">项目截图占位</span>
               <span class="ph__hint">images/project-3.jpg</span>
@@ -263,7 +263,7 @@
             <h3 class="project-card__title">Eden的个人网页</h3>
             <p class="project-card__desc">我用豆包生成提示词，然后丢给workbuddy生成个人网页</p>
             <div class="tag-row">
-              <span class="tag">{{WorkBuddy}}</span><span class="tag">{{提示词工程}}</span>
+              <span class="tag" data-key="txt-10">{{WorkBuddy}}</span><span class="tag" data-key="txt-11">{{提示词工程}}</span>
             </div>
           </div>
         </article>
@@ -336,7 +336,7 @@
       <!-- ---------- 左：照片 + 基本信息 ---------- -->
       <aside class="about-side">
         <div class="comic-polaroid rotate--s-r reveal">
-          <img class="ph ph--portrait" src="images/about-me.jpg" alt="Eden 的个人照片">
+          <img class="ph ph--portrait" src="images/about-me.jpg" alt="Eden 的个人照片" data-key="img-2">
           <p class="comic-polaroid__cap">HELLO THERE!</p>
         </div>
 
@@ -559,16 +559,16 @@
         data-detail-tech="{{技术架构：前端 XX + 后端 XX + 数据库 XX}}"
         data-detail-role="{{我的职责：我具体负责了哪些模块}}"
         data-detail-result="{{项目成果：上线了吗？有多少用户？性能提升了多少？}}"
-        data-link-demo="#" data-link-code="#">
+        data-link-demo="#" data-link-code="#" data-key="txt-12">
         <div class="project-card__media">
-          <div class="ph ph--16x10">
+          <div class="ph ph--16x10" data-key="ph-4">
             <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
             <span class="ph__label">项目截图占位</span>
             <span class="ph__hint">images/project-a.jpg</span>
           </div>
           <span class="badge badge--floating">全栈</span>
           <div class="project-card__hover">
-            <p class="bubble bubble--sm">{{一句话简介}}</p>
+            <p class="bubble bubble--sm" data-key="txt-13">{{一句话简介}}</p>
             <div class="project-card__hover-actions">
               <span class="mini-btn">查看详情</span>
               <span class="mini-btn mini-btn--ghost">源代码</span>
@@ -576,10 +576,10 @@
           </div>
         </div>
         <div class="project-card__body">
-          <h3 class="project-card__title">{{项目名称}}</h3>
-          <p class="project-card__desc">{{一句话简介：它解决了什么问题、我做了什么}}</p>
+          <h3 class="project-card__title" data-key="txt-14">{{项目名称}}</h3>
+          <p class="project-card__desc" data-key="txt-15">{{一句话简介：它解决了什么问题、我做了什么}}</p>
           <div class="tag-row">
-            <span class="tag">{{技术栈 1}}</span><span class="tag">{{技术栈 2}}</span><span class="tag">{{技术栈 3}}</span>
+            <span class="tag" data-key="txt-16">{{技术栈 1}}</span><span class="tag" data-key="txt-17">{{技术栈 2}}</span><span class="tag" data-key="txt-18">{{技术栈 3}}</span>
           </div>
         </div>
       </article>
@@ -589,16 +589,16 @@
         data-detail-tech="{{技术架构：用了什么框架、组件库、构建工具}}"
         data-detail-role="{{我的职责：我具体负责了哪些模块}}"
         data-detail-result="{{项目成果：页面性能、交互体验、用户反馈}}"
-        data-link-demo="#" data-link-code="#">
+        data-link-demo="#" data-link-code="#" data-key="txt-19">
         <div class="project-card__media">
-          <div class="ph ph--16x10">
+          <div class="ph ph--16x10" data-key="ph-5">
             <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
             <span class="ph__label">项目截图占位</span>
             <span class="ph__hint">images/project-b.jpg</span>
           </div>
           <span class="badge badge--floating">前端</span>
           <div class="project-card__hover">
-            <p class="bubble bubble--sm">{{一句话简介}}</p>
+            <p class="bubble bubble--sm" data-key="txt-20">{{一句话简介}}</p>
             <div class="project-card__hover-actions">
               <span class="mini-btn">查看详情</span>
               <span class="mini-btn mini-btn--ghost">源代码</span>
@@ -606,10 +606,10 @@
           </div>
         </div>
         <div class="project-card__body">
-          <h3 class="project-card__title">{{项目名称}}</h3>
-          <p class="project-card__desc">{{一句话简介：它解决了什么问题、我做了什么}}</p>
+          <h3 class="project-card__title" data-key="txt-21">{{项目名称}}</h3>
+          <p class="project-card__desc" data-key="txt-22">{{一句话简介：它解决了什么问题、我做了什么}}</p>
           <div class="tag-row">
-            <span class="tag">{{技术栈 1}}</span><span class="tag">{{技术栈 2}}</span>
+            <span class="tag" data-key="txt-23">{{技术栈 1}}</span><span class="tag" data-key="txt-24">{{技术栈 2}}</span>
           </div>
         </div>
       </article>
@@ -619,16 +619,16 @@
         data-detail-tech="{{技术架构：服务端语言、数据库、缓存、部署方式}}"
         data-detail-role="{{我的职责：接口设计、数据库设计、性能优化等}}"
         data-detail-result="{{项目成果：QPS、响应时间、稳定性数据}}"
-        data-link-demo="#" data-link-code="#">
+        data-link-demo="#" data-link-code="#" data-key="txt-25">
         <div class="project-card__media">
-          <div class="ph ph--16x10">
+          <div class="ph ph--16x10" data-key="ph-6">
             <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
             <span class="ph__label">项目截图占位</span>
             <span class="ph__hint">images/project-c.jpg</span>
           </div>
           <span class="badge badge--floating">后端</span>
           <div class="project-card__hover">
-            <p class="bubble bubble--sm">{{一句话简介}}</p>
+            <p class="bubble bubble--sm" data-key="txt-26">{{一句话简介}}</p>
             <div class="project-card__hover-actions">
               <span class="mini-btn">查看详情</span>
               <span class="mini-btn mini-btn--ghost">源代码</span>
@@ -636,10 +636,10 @@
           </div>
         </div>
         <div class="project-card__body">
-          <h3 class="project-card__title">{{项目名称}}</h3>
-          <p class="project-card__desc">{{一句话简介：它解决了什么问题、我做了什么}}</p>
+          <h3 class="project-card__title" data-key="txt-27">{{项目名称}}</h3>
+          <p class="project-card__desc" data-key="txt-28">{{一句话简介：它解决了什么问题、我做了什么}}</p>
           <div class="tag-row">
-            <span class="tag">{{技术栈 1}}</span><span class="tag">{{技术栈 2}}</span><span class="tag">{{技术栈 3}}</span>
+            <span class="tag" data-key="txt-29">{{技术栈 1}}</span><span class="tag" data-key="txt-30">{{技术栈 2}}</span><span class="tag" data-key="txt-31">{{技术栈 3}}</span>
           </div>
         </div>
       </article>
@@ -649,16 +649,16 @@
         data-detail-tech="{{技术架构：用了什么语言 / 库 / 脚本}}"
         data-detail-role="{{我的职责：我具体负责了哪些模块}}"
         data-detail-result="{{项目成果：节省了多少时间、被多少人使用}}"
-        data-link-demo="#" data-link-code="#">
+        data-link-demo="#" data-link-code="#" data-key="txt-32">
         <div class="project-card__media">
-          <div class="ph ph--16x10">
+          <div class="ph ph--16x10" data-key="ph-7">
             <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
             <span class="ph__label">项目截图占位</span>
             <span class="ph__hint">images/project-d.jpg</span>
           </div>
           <span class="badge badge--floating">工具其他</span>
           <div class="project-card__hover">
-            <p class="bubble bubble--sm">{{一句话简介}}</p>
+            <p class="bubble bubble--sm" data-key="txt-33">{{一句话简介}}</p>
             <div class="project-card__hover-actions">
               <span class="mini-btn">查看详情</span>
               <span class="mini-btn mini-btn--ghost">源代码</span>
@@ -666,10 +666,10 @@
           </div>
         </div>
         <div class="project-card__body">
-          <h3 class="project-card__title">{{项目名称}}</h3>
-          <p class="project-card__desc">{{一句话简介：它解决了什么问题、我做了什么}}</p>
+          <h3 class="project-card__title" data-key="txt-34">{{项目名称}}</h3>
+          <p class="project-card__desc" data-key="txt-35">{{一句话简介：它解决了什么问题、我做了什么}}</p>
           <div class="tag-row">
-            <span class="tag">{{技术栈 1}}</span><span class="tag">{{技术栈 2}}</span>
+            <span class="tag" data-key="txt-36">{{技术栈 1}}</span><span class="tag" data-key="txt-37">{{技术栈 2}}</span>
           </div>
         </div>
       </article>
@@ -723,9 +723,9 @@
 
 {{第二段：讲讲你遇到的问题、踩过的坑。}}
 
-{{第三段：最后写你学到的东西，或者留给读者的一句话。}}">
+{{第三段：最后写你学到的东西，或者留给读者的一句话。}}" data-key="txt-38">
         <div class="post-card__cover">
-          <div class="ph ph--4x3">
+          <div class="ph ph--4x3" data-key="ph-8">
             <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
             <span class="ph__label">封面占位</span>
             <span class="ph__hint">images/blog-1.jpg</span>
@@ -734,11 +734,11 @@
         <div class="post-card__body">
           <div class="post-card__meta">
             <span class="badge">AI</span>
-            <span class="meta-text"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> {{2026-01-01}}</span>
-            <span class="meta-text">{{8}} 分钟阅读</span>
+            <span class="meta-text" data-key="txt-39"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> {{2026-01-01}}</span>
+            <span class="meta-text" data-key="txt-40">{{8}} 分钟阅读</span>
           </div>
-          <h3 class="post-card__title">{{文章标题}}</h3>
-          <p class="post-card__excerpt">{{文章摘要：一两句话说清这篇写了什么，让人想点进去看。}}</p>
+          <h3 class="post-card__title" data-key="txt-41">{{文章标题}}</h3>
+          <p class="post-card__excerpt" data-key="txt-42">{{文章摘要：一两句话说清这篇写了什么，让人想点进去看。}}</p>
           <button class="btn btn--sm btn--primary" type="button" data-read>阅读全文 →</button>
         </div>
       </article>
@@ -746,9 +746,9 @@
       <article class="post-card reveal" data-category="前端"
         data-content="{{文章正文第一段……}}
 
-{{第二段……}}">
+{{第二段……}}" data-key="txt-43">
         <div class="post-card__cover">
-          <div class="ph ph--4x3">
+          <div class="ph ph--4x3" data-key="ph-9">
             <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
             <span class="ph__label">封面占位</span>
             <span class="ph__hint">images/blog-2.jpg</span>
@@ -757,11 +757,11 @@
         <div class="post-card__body">
           <div class="post-card__meta">
             <span class="badge">前端</span>
-            <span class="meta-text"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> {{2026-01-05}}</span>
-            <span class="meta-text">{{6}} 分钟阅读</span>
+            <span class="meta-text" data-key="txt-44"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> {{2026-01-05}}</span>
+            <span class="meta-text" data-key="txt-45">{{6}} 分钟阅读</span>
           </div>
-          <h3 class="post-card__title">{{文章标题}}</h3>
-          <p class="post-card__excerpt">{{文章摘要：一两句话说清这篇写了什么。}}</p>
+          <h3 class="post-card__title" data-key="txt-46">{{文章标题}}</h3>
+          <p class="post-card__excerpt" data-key="txt-47">{{文章摘要：一两句话说清这篇写了什么。}}</p>
           <button class="btn btn--sm btn--primary" type="button" data-read>阅读全文 →</button>
         </div>
       </article>
@@ -769,9 +769,9 @@
       <article class="post-card reveal" data-category="后端"
         data-content="{{文章正文第一段……}}
 
-{{第二段……}}">
+{{第二段……}}" data-key="txt-48">
         <div class="post-card__cover">
-          <div class="ph ph--4x3">
+          <div class="ph ph--4x3" data-key="ph-10">
             <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
             <span class="ph__label">封面占位</span>
             <span class="ph__hint">images/blog-3.jpg</span>
@@ -780,11 +780,11 @@
         <div class="post-card__body">
           <div class="post-card__meta">
             <span class="badge">后端</span>
-            <span class="meta-text"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> {{2026-01-12}}</span>
-            <span class="meta-text">{{10}} 分钟阅读</span>
+            <span class="meta-text" data-key="txt-49"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> {{2026-01-12}}</span>
+            <span class="meta-text" data-key="txt-50">{{10}} 分钟阅读</span>
           </div>
-          <h3 class="post-card__title">{{文章标题}}</h3>
-          <p class="post-card__excerpt">{{文章摘要：一两句话说清这篇写了什么。}}</p>
+          <h3 class="post-card__title" data-key="txt-51">{{文章标题}}</h3>
+          <p class="post-card__excerpt" data-key="txt-52">{{文章摘要：一两句话说清这篇写了什么。}}</p>
           <button class="btn btn--sm btn--primary" type="button" data-read>阅读全文 →</button>
         </div>
       </article>
@@ -792,9 +792,9 @@
       <article class="post-card reveal" data-category="AI"
         data-content="{{文章正文第一段……}}
 
-{{第二段……}}">
+{{第二段……}}" data-key="txt-53">
         <div class="post-card__cover">
-          <div class="ph ph--4x3">
+          <div class="ph ph--4x3" data-key="ph-11">
             <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
             <span class="ph__label">封面占位</span>
             <span class="ph__hint">images/blog-4.jpg</span>
@@ -803,11 +803,11 @@
         <div class="post-card__body">
           <div class="post-card__meta">
             <span class="badge">AI</span>
-            <span class="meta-text"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> {{2026-01-20}}</span>
-            <span class="meta-text">{{5}} 分钟阅读</span>
+            <span class="meta-text" data-key="txt-54"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> {{2026-01-20}}</span>
+            <span class="meta-text" data-key="txt-55">{{5}} 分钟阅读</span>
           </div>
-          <h3 class="post-card__title">{{文章标题}}</h3>
-          <p class="post-card__excerpt">{{文章摘要：一两句话说清这篇写了什么。}}</p>
+          <h3 class="post-card__title" data-key="txt-56">{{文章标题}}</h3>
+          <p class="post-card__excerpt" data-key="txt-57">{{文章摘要：一两句话说清这篇写了什么。}}</p>
           <button class="btn btn--sm btn--primary" type="button" data-read>阅读全文 →</button>
         </div>
       </article>
@@ -815,9 +815,9 @@
       <article class="post-card reveal" data-category="生活随笔"
         data-content="{{文章正文第一段……}}
 
-{{第二段……}}">
+{{第二段……}}" data-key="txt-58">
         <div class="post-card__cover">
-          <div class="ph ph--4x3">
+          <div class="ph ph--4x3" data-key="ph-12">
             <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
             <span class="ph__label">封面占位</span>
             <span class="ph__hint">images/blog-5.jpg</span>
@@ -826,11 +826,11 @@
         <div class="post-card__body">
           <div class="post-card__meta">
             <span class="badge">生活随笔</span>
-            <span class="meta-text"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> {{2026-01-28}}</span>
-            <span class="meta-text">{{4}} 分钟阅读</span>
+            <span class="meta-text" data-key="txt-59"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> {{2026-01-28}}</span>
+            <span class="meta-text" data-key="txt-60">{{4}} 分钟阅读</span>
           </div>
-          <h3 class="post-card__title">{{文章标题}}</h3>
-          <p class="post-card__excerpt">{{文章摘要：一两句话说清这篇写了什么。}}</p>
+          <h3 class="post-card__title" data-key="txt-61">{{文章标题}}</h3>
+          <p class="post-card__excerpt" data-key="txt-62">{{文章摘要：一两句话说清这篇写了什么。}}</p>
           <button class="btn btn--sm btn--primary" type="button" data-read>阅读全文 →</button>
         </div>
       </article>
@@ -928,22 +928,22 @@
         <article class="note-card reveal rotate--s-l">
           <h4>减肥不用着急，慢就是快</h4>
           <p>健身前两年一直焦虑体脂率太高了，前几个月身体线条突然变得明显许多，</p>
-          <span class="note-card__date">{{2026-01-01}}</span>
+          <span class="note-card__date" data-key="txt-63">{{2026-01-01}}</span>
         </article>
         <article class="note-card reveal rotate--s-r">
           <h4>跟着感觉吃</h4>
           <p>家常菜，七八分饱，碳蛋脂吃到位，身体状态不行多吃干净碳水，睡够8小时，一周一顿放纵餐</p>
-          <span class="note-card__date">{{2026-01-10}}</span>
+          <span class="note-card__date" data-key="txt-64">{{2026-01-10}}</span>
         </article>
         <article class="note-card reveal rotate--s-l">
           <h4>中蛋白碳水渐降</h4>
           <p>蛋白质通常伴随着脂肪，没吃好的话除了消化不良就是增肥</p>
-          <span class="note-card__date">{{2026-01-20}}</span>
+          <span class="note-card__date" data-key="txt-65">{{2026-01-20}}</span>
         </article>
         <article class="note-card reveal rotate--s-r">
           <h4>稳住心态</h4>
           <p>蛋白质吃够，控制好碳水脂肪，每周保持至少4练</p>
-          <span class="note-card__date">{{2026-01-30}}</span>
+          <span class="note-card__date" data-key="txt-66">{{2026-01-30}}</span>
         </article>
       </div>
     </div>
@@ -968,12 +968,12 @@
             <table class="diet-table">
               <thead><tr><th>餐次</th><th>食物</th><th>分量</th><th>热量</th></tr></thead>
               <tbody>
-                <tr><td>早餐</td><td>{{鸡蛋 / 燕麦 / 牛奶}}</td><td>{{XX g}}</td><td>{{XXX}} kcal</td></tr>
-                <tr><td>加餐</td><td>{{水果 / 坚果}}</td><td>{{XX g}}</td><td>{{XXX}} kcal</td></tr>
-                <tr><td>午餐</td><td>{{米饭 / 鸡胸 / 蔬菜}}</td><td>{{XX g}}</td><td>{{XXX}} kcal</td></tr>
-                <tr><td>练前</td><td>{{香蕉 / 黑咖啡}}</td><td>{{XX g}}</td><td>{{XXX}} kcal</td></tr>
-                <tr><td>晚餐</td><td>{{牛肉 / 红薯 / 沙拉}}</td><td>{{XX g}}</td><td>{{XXX}} kcal</td></tr>
-                <tr><td colspan="3"><b>合计</b></td><td><b>{{XXXX}} kcal</b></td></tr>
+                <tr><td>早餐</td><td data-key="txt-67">{{鸡蛋 / 燕麦 / 牛奶}}</td><td data-key="txt-68">{{XX g}}</td><td data-key="txt-69">{{XXX}} kcal</td></tr>
+                <tr><td>加餐</td><td data-key="txt-70">{{水果 / 坚果}}</td><td data-key="txt-71">{{XX g}}</td><td data-key="txt-72">{{XXX}} kcal</td></tr>
+                <tr><td>午餐</td><td data-key="txt-73">{{米饭 / 鸡胸 / 蔬菜}}</td><td data-key="txt-74">{{XX g}}</td><td data-key="txt-75">{{XXX}} kcal</td></tr>
+                <tr><td>练前</td><td data-key="txt-76">{{香蕉 / 黑咖啡}}</td><td data-key="txt-77">{{XX g}}</td><td data-key="txt-78">{{XXX}} kcal</td></tr>
+                <tr><td>晚餐</td><td data-key="txt-79">{{牛肉 / 红薯 / 沙拉}}</td><td data-key="txt-80">{{XX g}}</td><td data-key="txt-81">{{XXX}} kcal</td></tr>
+                <tr><td colspan="3"><b>合计</b></td><td><b data-key="txt-82">{{XXXX}} kcal</b></td></tr>
               </tbody>
             </table>
           </div>
@@ -1003,7 +1003,7 @@
     <!-- ---------- 大合照（心形边框） ---------- -->
     <div class="story-hero reveal">
       <div class="heart-frame">
-        <img class="ph ph--heart" src="images/story-main.jpg" alt="我们的合照">
+        <img class="ph ph--heart" src="images/story-main.jpg" alt="我们的合照" data-key="img-3">
         <svg class="heart-frame__outline" viewBox="0 0 100 100" aria-hidden="true">
           <path d="M50 95C20 78 4 59 4 37C4 21 15 10 30 10C40 10 47 15 50 23C53 15 60 10 70 10C85 10 96 21 96 37C96 59 80 78 50 95Z"/>
         </svg>
@@ -1040,8 +1040,8 @@
         <li class="timeline__item reveal" data-state="love">
           <span class="timeline__node"><svg class="icon" aria-hidden="true"><use href="#i-plane"/></svg></span>
           <div class="timeline__card">
-            <p class="timeline__date">{{202X-XX-XX}} · 第一次旅行</p>
-            <p class="timeline__text">{{去了哪个城市，最难忘的一件事}}</p>
+            <p class="timeline__date" data-key="txt-83">{{202X-XX-XX}} · 第一次旅行</p>
+            <p class="timeline__text" data-key="txt-84">{{去了哪个城市，最难忘的一件事}}</p>
           </div>
         </li>
         <li class="timeline__item reveal" data-state="love">
@@ -1054,8 +1054,8 @@
         <li class="timeline__item reveal" data-state="love">
           <span class="timeline__node"><svg class="icon" aria-hidden="true"><use href="#i-sparkle"/></svg></span>
           <div class="timeline__card">
-            <p class="timeline__date">{{202X-XX-XX}} · 最近的美好时刻</p>
-            <p class="timeline__text">{{最近发生的一件让你觉得「有你真好」的小事}}</p>
+            <p class="timeline__date" data-key="txt-85">{{202X-XX-XX}} · 最近的美好时刻</p>
+            <p class="timeline__text" data-key="txt-86">{{最近发生的一件让你觉得「有你真好」的小事}}</p>
           </div>
         </li>
       </ol>
@@ -1067,50 +1067,50 @@
       <!-- ✏️ 加照片：复制一个 <figure class="photo-tile">，改图片路径和 hover 时气泡里的文字 -->
       <div class="photo-wall">
         <figure class="photo-tile reveal rotate--s-l" data-note="七夕节出门吃小火锅啦！这是我们工作后第一次约会！">
-          <img class="ph ph--square" src="images/story-01.jpg" alt="七夕节小火锅">
+          <img class="ph ph--square" src="images/story-01.jpg" alt="七夕节小火锅" data-key="img-4">
           <span class="sticker-deco" data-deco="heart">♡</span>
         </figure>
         <figure class="photo-tile reveal rotate--s-r" data-note="我们的故事 · 照片二">
-          <img class="ph ph--square" src="images/story-02.jpg" alt="我们的故事 照片2">
+          <img class="ph ph--square" src="images/story-02.jpg" alt="我们的故事 照片2" data-key="img-5">
         </figure>
-        <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}">
-          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-03.jpg</span></div><span class="sticker-deco" data-deco="star">★</span>
+        <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}" data-key="txt-87">
+          <div class="ph ph--square" data-key="ph-13"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-03.jpg</span></div><span class="sticker-deco" data-deco="star">★</span>
         </figure>
-        <figure class="photo-tile reveal rotate--s-r" data-note="{{这张照片背后的小故事}}">
-          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-04.jpg</span></div>
+        <figure class="photo-tile reveal rotate--s-r" data-note="{{这张照片背后的小故事}}" data-key="txt-88">
+          <div class="ph ph--square" data-key="ph-14"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-04.jpg</span></div>
         </figure>
-        <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}">
-          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-05.jpg</span></div><span class="sticker-deco" data-deco="heart">♡</span>
+        <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}" data-key="txt-89">
+          <div class="ph ph--square" data-key="ph-15"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-05.jpg</span></div><span class="sticker-deco" data-deco="heart">♡</span>
         </figure>
-        <figure class="photo-tile reveal rotate--s-r" data-note="{{这张照片背后的小故事}}">
-          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-06.jpg</span></div>
+        <figure class="photo-tile reveal rotate--s-r" data-note="{{这张照片背后的小故事}}" data-key="txt-90">
+          <div class="ph ph--square" data-key="ph-16"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-06.jpg</span></div>
         </figure>
-        <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}">
-          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-07.jpg</span></div><span class="sticker-deco" data-deco="star">★</span>
+        <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}" data-key="txt-91">
+          <div class="ph ph--square" data-key="ph-17"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-07.jpg</span></div><span class="sticker-deco" data-deco="star">★</span>
         </figure>
-        <figure class="photo-tile reveal rotate--s-r" data-note="{{这张照片背后的小故事}}">
-          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-08.jpg</span></div>
+        <figure class="photo-tile reveal rotate--s-r" data-note="{{这张照片背后的小故事}}" data-key="txt-92">
+          <div class="ph ph--square" data-key="ph-18"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-08.jpg</span></div>
         </figure>
-        <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}">
-          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-09.jpg</span></div><span class="sticker-deco" data-deco="heart">♡</span>
+        <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}" data-key="txt-93">
+          <div class="ph ph--square" data-key="ph-19"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-09.jpg</span></div><span class="sticker-deco" data-deco="heart">♡</span>
         </figure>
-        <figure class="photo-tile reveal rotate--s-r" data-note="{{这张照片背后的小故事}}">
-          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-10.jpg</span></div>
+        <figure class="photo-tile reveal rotate--s-r" data-note="{{这张照片背后的小故事}}" data-key="txt-94">
+          <div class="ph ph--square" data-key="ph-20"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-10.jpg</span></div>
         </figure>
-        <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}">
-          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-11.jpg</span></div><span class="sticker-deco" data-deco="star">★</span>
+        <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}" data-key="txt-95">
+          <div class="ph ph--square" data-key="ph-21"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-11.jpg</span></div><span class="sticker-deco" data-deco="star">★</span>
         </figure>
-        <figure class="photo-tile reveal rotate--s-r" data-note="{{这张照片背后的小故事}}">
-          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-12.jpg</span></div>
+        <figure class="photo-tile reveal rotate--s-r" data-note="{{这张照片背后的小故事}}" data-key="txt-96">
+          <div class="ph ph--square" data-key="ph-22"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-12.jpg</span></div>
         </figure>
-        <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}">
-          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-13.jpg</span></div><span class="sticker-deco" data-deco="heart">♡</span>
+        <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}" data-key="txt-97">
+          <div class="ph ph--square" data-key="ph-23"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-13.jpg</span></div><span class="sticker-deco" data-deco="heart">♡</span>
         </figure>
-        <figure class="photo-tile reveal rotate--s-r" data-note="{{这张照片背后的小故事}}">
-          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-14.jpg</span></div>
+        <figure class="photo-tile reveal rotate--s-r" data-note="{{这张照片背后的小故事}}" data-key="txt-98">
+          <div class="ph ph--square" data-key="ph-24"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-14.jpg</span></div>
         </figure>
-        <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}">
-          <div class="ph ph--square"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-15.jpg</span></div>
+        <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}" data-key="txt-99">
+          <div class="ph ph--square" data-key="ph-25"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-15.jpg</span></div>
         </figure>
       </div>
     </div>
@@ -1134,21 +1134,21 @@
       <div class="wish-grid">
         <div class="wish-card reveal rotate--s-l">
           <span class="wish-card__stamp">已打卡</span>
-          <h4>{{目的地}}</h4><p>{{为什么想去：一句话理由}}</p><span class="pill pill--win">已完成</span>
+          <h4 data-key="txt-100">{{目的地}}</h4><p data-key="txt-101">{{为什么想去：一句话理由}}</p><span class="pill pill--win">已完成</span>
         </div>
         <div class="wish-card reveal rotate--s-r">
-          <h4>{{目的地}}</h4><p>{{为什么想去：一句话理由}}</p><span class="pill pill--go">计划中</span>
+          <h4 data-key="txt-102">{{目的地}}</h4><p data-key="txt-103">{{为什么想去：一句话理由}}</p><span class="pill pill--go">计划中</span>
         </div>
         <div class="wish-card reveal rotate--s-l">
-          <h4>{{目的地}}</h4><p>{{为什么想去：一句话理由}}</p><span class="pill pill--go">计划中</span>
+          <h4 data-key="txt-104">{{目的地}}</h4><p data-key="txt-105">{{为什么想去：一句话理由}}</p><span class="pill pill--go">计划中</span>
         </div>
         <div class="wish-card reveal rotate--s-r">
-          <h4>{{目的地}}</h4><p>{{为什么想去：一句话理由}}</p><span class="pill pill--grey">许愿中</span>
+          <h4 data-key="txt-106">{{目的地}}</h4><p data-key="txt-107">{{为什么想去：一句话理由}}</p><span class="pill pill--grey">许愿中</span>
         </div>
       </div>
       <p class="story-end reveal">
         故事还在继续，未来请多指教 ♡
-        <span class="story-end__date">最近更新：{{2026-01-01}}</span>
+        <span class="story-end__date" data-key="txt-108">最近更新：{{2026-01-01}}</span>
       </p>
     </div>
   </div>
@@ -1189,7 +1189,7 @@
         <p class="contact-card__label">微信</p>
         <button class="contact-card__value" type="button" data-copy="wo261an3191">wo261an3191</button>
         <div class="qr-box">
-          <div class="ph ph--qr">
+          <div class="ph ph--qr" data-key="ph-26">
             <span class="ph__hint">✏️ 点这里上传微信二维码</span>
           </div>
         </div>
@@ -1252,15 +1252,15 @@
       <aside class="resume-card reveal rotate--s-r">
         <span class="resume-card__icon"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg></span>
         <h3>我的简历</h3>
-        <p class="resume-card__meta">PDF 格式，{{X}} 页</p>
-        <p class="resume-card__meta">最后更新：{{2026-01-01}}</p>
-        <p class="resume-card__desc">{{一句话介绍简历内容，比如：完整的项目经历 + 技能清单}}</p>
+        <p class="resume-card__meta" data-key="txt-109">PDF 格式，{{X}} 页</p>
+        <p class="resume-card__meta" data-key="txt-110">最后更新：{{2026-01-01}}</p>
+        <p class="resume-card__desc" data-key="txt-111">{{一句话介绍简历内容，比如：完整的项目经历 + 技能清单}}</p>
         <!-- ✏️ 把你的简历 PDF 命名为 resume.pdf，放在网站根目录即可 -->
         <a class="btn btn--primary btn--block" href="resume.pdf" download>
           <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg> 下载简历
         </a>
         <div class="resume-card__preview">
-          <div class="ph ph--paper">
+          <div class="ph ph--paper" data-key="ph-27">
             <svg class="ph__icon" aria-hidden="true"><use href="#i-file"/></svg>
             <span class="ph__hint">简历封面预览占位</span>
           </div>
@@ -1301,11 +1301,11 @@
         <!-- ✏️ 改问题和答案：直接改 <summary> 和下面 <p> 里的文字 -->
         <details class="faq-card reveal">
           <summary>你现在在找工作吗？</summary>
-          <div class="faq-card__body"><p>{{答案占位：比如「在的，26 届应届，主要看 AI 应用 / 前端 / 社区运营方向的机会，欢迎联系我～」}}</p></div>
+          <div class="faq-card__body"><p data-key="txt-112">{{答案占位：比如「在的，26 届应届，主要看 AI 应用 / 前端 / 社区运营方向的机会，欢迎联系我～」}}</p></div>
         </details>
         <details class="faq-card reveal">
           <summary>可以合作吗？</summary>
-          <div class="faq-card__body"><p>{{答案占位：比如「可以。AI 工具推广、内容创作、小项目开发都可以聊，先说说你的想法吧。」}}</p></div>
+          <div class="faq-card__body"><p data-key="txt-113">{{答案占位：比如「可以。AI 工具推广、内容创作、小项目开发都可以聊，先说说你的想法吧。」}}</p></div>
         </details>
         <details class="faq-card reveal">
           <summary>这个网站是用什么做的？</summary>
@@ -1313,7 +1313,7 @@
         </details>
         <details class="faq-card reveal">
           <summary>可以加你微信吗？</summary>
-          <div class="faq-card__body"><p>{{答案占位：比如「当然可以，扫上面那个二维码就行，加的时候备注一下来意吧～」}}</p></div>
+          <div class="faq-card__body"><p data-key="txt-114">{{答案占位：比如「当然可以，扫上面那个二维码就行，加的时候备注一下来意吧～」}}</p></div>
         </details>
       </div>
     </div>
@@ -1346,7 +1346,7 @@
     <div class="studio__grid" id="studioGrid"></div>
 
     <div class="studio__empty" id="studioEmpty">
-      <div class="ph ph--empty">
+      <div class="ph ph--empty" data-key="ph-28">
         <svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg>
         <span class="ph__label">还没有内容</span>
         <span class="ph__hint">点「新增内容」添加第一条吧～</span>

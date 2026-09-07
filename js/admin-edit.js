@@ -96,7 +96,9 @@
 
   // 已经打过标记的元素用标记，保证改结构后 key 依然稳定
   function keyOf(el) {
-    return el.getAttribute('data-ovr-sel') || uniqueSelector(el);
+    if (el.getAttribute('data-ovr-sel')) return el.getAttribute('data-ovr-sel');
+    if (el.getAttribute('data-key')) return '[data-key="' + el.getAttribute('data-key') + '"]';
+    return uniqueSelector(el);
   }
 
   /* ============ 应用已保存的修改 ============ */
@@ -113,13 +115,14 @@
             el.src = o.v;
             el.setAttribute('data-ovr-sel', sel);
           } else {
-            // 灰色占位框 -> 换成真实图片（保留原有 class 与 data-note 小故事）
+            // 灰色占位框 -> 换成真实图片（保留原有 class、data-note、data-key）
             var img = document.createElement('img');
             img.src = o.v;
             img.alt = el.getAttribute('data-alt') || el.getAttribute('alt') || '';
             img.className = el.className || '';
             var note = el.getAttribute('data-note');
             if (note) img.setAttribute('data-note', note);
+            if (el.getAttribute('data-key')) img.setAttribute('data-key', el.getAttribute('data-key'));
             img.setAttribute('data-ovr-sel', sel);
             el.parentNode.replaceChild(img, el);
           }
