@@ -36,6 +36,8 @@
   var saveBar = null;      // 编辑时贴在元素下方的「保存 / 取消」条
   var autoTimer = null;    // 自动保存防抖计时器
   var btnSavePanel = null; // 面板上的保存按钮（显示已保存条数）
+  var adminModal = null;   // 属性编辑弹框（故事配文 / 博客正文）
+  var modalSaveFn = null;  // 弹框内的保存回调（Ctrl/Cmd+S 用）
 
   /* ============ 存储 ============ */
   function load() {
@@ -129,6 +131,9 @@
         } else if (o.t === 'html') {
           el.innerHTML = o.v;
           el.setAttribute('data-ovr-sel', sel);
+        } else if (o.t === 'attr') {
+          el.setAttribute(o.k, o.v);
+          el.setAttribute('data-ovr-sel', sel);
         } else {
           el.textContent = o.v;
           el.setAttribute('data-ovr-sel', sel);
@@ -171,6 +176,7 @@
   /* ============ 判断"可编辑目标" ============ */
   function editTarget(el) {
     if (!el || el.nodeType !== 1) return null;
+    if (el.closest && el.closest('.admin-modal')) return null;
     if (panel && panel.contains(el)) return null;
     if (saveBar && saveBar.contains(el)) return null;
     var tag = el.tagName;
@@ -370,6 +376,121 @@
     input.click();
   }
 
+  /* ============ 属性编辑弹框（故事配文 / 博客正文）============ */
+  function closeAdminModal() {
+    if (adminModal) { adminModal.remove(); adminModal = null; modalSaveFn = null; hideHint(); }
+  }
+
+  function openAttrModal(cfg) {
+    closeAdminModal();
+    var root = document.createElement('div');
+    root.className = 'admin-modal';
+
+    var panelEl = document.createElement('div');
+    panelEl.className = 'admin-modal__panel';
+
+    var head = document.createElement('div');
+    head.className = 'admin-modal__head';
+    var title = document.createElement('h3');
+    title.className = 'admin-modal__title';
+    title.textContent = cfg.title || '编辑';
+    head.appendChild(title);
+    panelEl.appendChild(head);
+
+    var body = document.createElement('div');
+    body.className = 'admin-modal__body';
+
+    if (cfg.imageSrc) {
+      var imgWrap = document.createElement('div');
+      imgWrap.className = 'admin-modal__img-wrap';
+      var img = document.createElement('img');
+      img.className = 'admin-modal__img';
+      img.src = cfg.imageSrc;
+      imgWrap.appendChild(img);
+      var repBtn = document.createElement('button');
+      repBtn.type = 'button';
+      repBtn.className = 'admin-modal__btn';
+      repBtn.textContent = '📷 替换图片';
+      repBtn.addEventListener('click', function () { if (cfg.onReplace) cfg.onReplace(); });
+      imgWrap.appendChild(repBtn);
+      body.appendChild(imgWrap);
+    }
+
+    var field = document.createElement('div');
+    field.className = 'admin-modal__field';
+    var label = document.createElement('label');
+    label.className = 'admin-modal__label';
+    label.textContent = cfg.textLabel || '内容';
+    field.appendChild(label);
+    var ta = document.createElement('textarea');
+    ta.className = 'admin-modal__textarea' + (cfg.multiline ? ' admin-modal__textarea--lg' : '');
+    ta.value = cfg.textValue || '';
+    field.appendChild(ta);
+    body.appendChild(field);
+    panelEl.appendChild(body);
+
+    var actions = document.createElement('div');
+    actions.className = 'admin-modal__actions';
+    var save = document.createElement('button');
+    save.type = 'button';
+    save.className = 'admin-modal__btn admin-modal__btn--primary';
+    save.textContent = '💾 保存';
+    var doSave = function () {
+      if (cfg.onSave) cfg.onSave(ta.value);
+      closeAdminModal();
+    };
+    modalSaveFn = doSave;
+    save.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); doSave(); });
+    var cancel = document.createElement('button');
+    cancel.type = 'button';
+    cancel.className = 'admin-modal__btn';
+    cancel.textContent = '取消';
+    cancel.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); closeAdminModal(); });
+    actions.appendChild(save);
+    actions.appendChild(cancel);
+    panelEl.appendChild(actions);
+
+    root.appendChild(panelEl);
+    root.addEventListener('click', function (e) { if (e.target === root) closeAdminModal(); });
+    document.body.appendChild(root);
+    adminModal = root;
+    showHint('改完点「💾 保存」· Esc 关闭 · Ctrl/Cmd+S 也能保存');
+    try { ta.focus(); } catch (e2) {}
+    if (cfg.multiline) { try { ta.setSelectionRange(0, 0); } catch (e2) {} }
+  }
+
+  function storeAttr(el, attr, val) {
+    var key = keyOf(el);
+    overrides[key] = { t: 'attr', k: attr, v: val };
+    el.setAttribute('data-ovr-sel', key);
+    if (persist()) { applyOne(key, overrides[key]); updateCount(); toast('已保存 ✓'); }
+  }
+
+  function openCaptionEditor(fig) {
+    var cur = fig.getAttribute('data-note') || '';
+    var imgEl = fig.querySelector('img') || fig.querySelector('.ph');
+    openAttrModal({
+      title: '编辑照片',
+      textLabel: '这张照片背后的小故事（hover 时显示）',
+      textValue: cur,
+      multiline: false,
+      imageSrc: (imgEl && imgEl.tagName === 'IMG') ? imgEl.src : null,
+      onReplace: function () { if (imgEl) pickImage(imgEl); },
+      onSave: function (val) { storeAttr(fig, 'data-note', val); }
+    });
+  }
+
+  function openArticleEditor(post) {
+    var cur = post.getAttribute('data-content') || '';
+    openAttrModal({
+      title: '编辑文章正文',
+      textLabel: '文章正文（每段一行，会按换行正常显示）',
+      textValue: cur,
+      multiline: true,
+      onSave: function (val) { storeAttr(post, 'data-content', val); }
+    });
+  }
+
   /* ============ 导入 / 导出 / 重置 ============ */
   function exportJSON() {
     if (!Object.keys(overrides).length) { toast('还没有任何修改，无需导出'); return; }
@@ -501,6 +622,29 @@
     // 捕获阶段 + stopPropagation，避免被页面原有交互（弹窗、占位块等）抢走点击
     document.addEventListener('click', function (e) {
       if (!editOn) return;
+      // 点在后台弹框内部 -> 交给弹框自己的按钮，不要拦截
+      if (adminModal && adminModal.contains(e.target)) return;
+
+      // 故事照片墙：点照片 -> 弹框改配文（也能换图）
+      var fig = e.target.closest && e.target.closest('.photo-tile');
+      if (fig) { e.preventDefault(); e.stopPropagation(); openCaptionEditor(fig); return; }
+
+      // 博客文章卡
+      var post = e.target.closest && e.target.closest('.post-card');
+      if (post) {
+        var sub = editTarget(e.target);
+        // 封面占位框 / 封面图 -> 换图
+        if (sub && (sub.tagName === 'IMG' || (sub.classList && sub.classList.contains('ph')))) {
+          e.preventDefault(); e.stopPropagation(); pickImage(sub); return;
+        }
+        // 标题 / 摘要 / 日期等可见文字 -> 内联编辑
+        if (sub && sub !== post && post.contains(sub)) {
+          e.preventDefault(); e.stopPropagation(); startTextEdit(sub); return;
+        }
+        // 卡片空白处 -> 弹框改整篇文章正文
+        e.preventDefault(); e.stopPropagation(); openArticleEditor(post); return;
+      }
+
       // 项目截图占位区：无论点到媒体框、提示文字还是悬浮气泡，都走"换图"
       var ph = mediaImageEl(e.target);
       if (ph) { e.preventDefault(); e.stopPropagation(); pickImage(ph); return; }
@@ -513,6 +657,11 @@
     }, true);
 
     document.addEventListener('keydown', function (e) {
+      if (adminModal) {
+        if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); closeAdminModal(); }
+        else if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) { e.preventDefault(); e.stopPropagation(); if (modalSaveFn) modalSaveFn(); }
+        return;
+      }
       if (editingEl && e.key === 'Escape') {
         e.preventDefault();
         e.stopPropagation();
