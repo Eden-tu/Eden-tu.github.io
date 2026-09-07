@@ -192,6 +192,15 @@
     return null;
   }
 
+  /* 项目截图区：媒体容器内任意点击/悬停都定位到占位框，走"换图"而非文字编辑
+     （.project-card__hover 悬浮气泡覆盖在媒体上方且自带文字，会被 editTarget 误判成可编辑文字） */
+  function mediaImageEl(target) {
+    if (!target || !target.closest) return null;
+    var media = target.closest('.project-card__media');
+    if (!media) return null;
+    return media.querySelector('.ph') || null;
+  }
+
   /* ============ 保存条（💾 保存 / 取消）============ */
   function ensureSaveBar() {
     if (saveBar) return saveBar;
@@ -469,7 +478,7 @@
   function bindHover() {
     document.addEventListener('mouseover', function (e) {
       if (!editOn) return;
-      var t = editTarget(e.target);
+      var t = mediaImageEl(e.target) || editTarget(e.target);
       if (t === lastHover) return;
       clearHover();
       if (t) { t.classList.add('admin-hover'); lastHover = t; }
@@ -488,6 +497,9 @@
     // 捕获阶段 + stopPropagation，避免被页面原有交互（弹窗、占位块等）抢走点击
     document.addEventListener('click', function (e) {
       if (!editOn) return;
+      // 项目截图占位区：无论点到媒体框、提示文字还是悬浮气泡，都走"换图"
+      var ph = mediaImageEl(e.target);
+      if (ph) { e.preventDefault(); e.stopPropagation(); pickImage(ph); return; }
       var t = editTarget(e.target);
       if (!t) return;
       e.preventDefault();
