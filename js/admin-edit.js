@@ -5,6 +5,8 @@
    1. 点右下角「✏️ 编辑」进入编辑模式
    2. 点页面上的任何文字 → 弹出「💾 保存 / 取消」按钮条，改完点保存
    3. 点任何图片 / 灰色占位框 → 选一张图替换它
+   4. 点故事照片 → 弹框改「照片背后的小故事」配文（也能换图）
+   5. 点博客卡片 → 弹框改整篇文章正文
 
    保存机制（三重保险，任一触发即写入）：
    ① 点「💾 保存」按钮（最可靠，推荐）
@@ -205,6 +207,7 @@
      点到悬浮说明文字(现在是可编辑的底部说明条) -> 不拦截，让 editTarget 当文字编辑处理 */
   function mediaImageEl(target) {
     if (!target || !target.closest) return null;
+    if (target.closest('.admin-modal')) return null;
     if (target.closest('.project-card__hover')) return null;
     var ph = target.closest('.ph');
     if (ph && ph.closest('.project-card__media')) return ph;
@@ -557,7 +560,7 @@
     editOn = on;
     document.body.classList.toggle('admin-editing', on);
     if (on) {
-      showHint('编辑模式：点文字改文字，点图片/灰色占位框换图。再点「✏️ 编辑」退出');
+      showHint('编辑模式：点文字改文字、点图片/占位框换图；点故事照片改配文、点博客卡片改正文。再点「✏️ 编辑」退出');
     } else {
       finishTextEdit(true);
       hideHint();
@@ -603,6 +606,7 @@
   function bindHover() {
     document.addEventListener('mouseover', function (e) {
       if (!editOn) return;
+      if (adminModal && adminModal.contains(e.target)) { clearHover(); return; }
       var t = mediaImageEl(e.target) || editTarget(e.target);
       if (t === lastHover) return;
       clearHover();
