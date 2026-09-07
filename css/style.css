@@ -1701,7 +1701,7 @@ body.admin-editing .admin-panel { opacity: 1; }
 .admin-btn--on  { background: var(--c-primary); color: #fff; }
 
 .admin-hint {
-  position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 9999;
+  position: fixed; left: 50%; bottom: 82px; transform: translateX(-50%); z-index: 9999;
   background: var(--ink); color: #fff; border-radius: var(--r-sm);
   padding: 9px 16px; font-family: var(--font-mono); font-size: .78rem;
   box-shadow: var(--shadow-hard-sm); display: none;
@@ -1720,20 +1720,30 @@ body.admin-editing .admin-panel { opacity: 1; }
 .admin-toast.is-show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
 body.admin-editing { cursor: crosshair; }
-/* 编辑模式下：项目悬浮气泡变成可点击的底部说明条（不挡截图占位框），既能编辑文案，也能直接点占位框换图 */
+/* 编辑模式：项目悬浮说明变成底部渐变条上的深色胶囊（白字清晰可读），点击任意处弹窗编辑 */
 body.admin-editing .project-card__hover {
   position: absolute; inset: auto 0 0 0;
-  background: rgba(0, 0, 0, .6);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, .58));
   opacity: 1 !important; visibility: visible !important;
-  padding: .55rem .8rem;
+  padding: 1.5rem .8rem .65rem;
   gap: .25rem;
+  justify-content: flex-end;
 }
-body.admin-editing .project-card__hover .bubble { color: #fff; max-width: 100%; }
-/* 说明被清空时给出可点提示，避免出现一个"空白输入框"让人困惑 */
+body.admin-editing .project-card__hover .bubble {
+  background: rgba(20, 16, 28, .85); color: #fff;
+  border: 2px solid rgba(255, 255, 255, .35);
+  box-shadow: none; border-radius: 999px;
+  padding: .42rem .9rem; font-size: .8rem;
+  max-width: 100%; align-self: center; text-align: center;
+}
+body.admin-editing .project-card__hover .bubble::after { display: none; }
+/* 说明被清空时给出可点提示，避免出现一个"空白胶囊"让人困惑 */
 body.admin-editing .project-card__hover .bubble:empty::before {
-  content: '（还没有说明 · 点图片区弹窗填写）';
-  color: #fff; opacity: .75; font-size: .8rem;
+  content: '（还没有说明 · 点这里或点图片弹窗填写）';
+  color: #fff; opacity: .72; font-size: .78rem;
 }
+/* 编辑时隐藏卡内多余的「查看详情」小按钮，避免重复功能与遮挡 */
+body.admin-editing .project-card__hover-actions { display: none; }
 body.admin-editing .project-card__media { cursor: pointer; }
 .admin-hover { outline: 3px dashed var(--c-primary) !important; outline-offset: 3px !important; }
 body.admin-editing [contenteditable="true"] {
