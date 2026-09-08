@@ -183,21 +183,42 @@
     var items = $$('.reveal');
     if (!items.length) return;
 
-    if (!('IntersectionObserver' in window)) {
+    function revealAll() {
       items.forEach(function (el) { el.classList.add('is-visible'); });
+    }
+    // 兜底：load 后仍在视口里的 reveal 若仍未触发，确保显示
+    function revealAboveFold() {
+      items.forEach(function (el) {
+        if (!el.classList.contains('is-visible') &&
+            el.getBoundingClientRect().top < window.innerHeight + 100) {
+          el.classList.add('is-visible');
+        }
+      });
+    }
+
+    if (!('IntersectionObserver' in window)) { revealAll(); return; }
+
+    try {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      items.forEach(function (el) { io.observe(el); });
+    } catch (err) {
+      // 观察器初始化失败 → 直接全显，避免白屏
+      revealAll();
       return;
     }
 
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-    items.forEach(function (el) { io.observe(el); });
+    // 兜底：若 main.js 初始化在加完 js-on 之后才挂掉、或首屏 reveal 因时机未触发，
+    // load 后强制把视口内未显示的元素显示出来，杜绝“JS 一报错就整页空白”
+    window.addEventListener('load', function () {
+      setTimeout(revealAboveFold, 250);
+    });
   }
 
   /* ========================================================================

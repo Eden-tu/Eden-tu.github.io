@@ -1477,6 +1477,12 @@ img.ph--heart {
   .to-top { width: 52px; height: 52px; margin-top: -26px; }
 }
 
+/* 手机端：事实标签居中堆叠，避免三个 pill 在同一行溢出 */
+@media (max-width: 480px) {
+  .hero__facts { flex-direction: column; align-items: center; gap: .5rem; }
+  .hero__facts li { width: 100%; max-width: 260px; justify-content: center; }
+}
+
 /* 超小屏 */
 @media (max-width: 400px) {
   .pr-grid, .week-grid { grid-template-columns: 1fr; }
@@ -1743,6 +1749,7 @@ body.admin-editing [contenteditable="true"] {
   position: fixed; inset: 0; z-index: 10001;
   display: grid; place-items: center; padding: 1.1rem;
   background: rgba(20, 16, 28, .55);
+  -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
 }
 .admin-modal__panel {
