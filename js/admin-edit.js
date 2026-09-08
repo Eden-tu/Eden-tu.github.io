@@ -599,7 +599,7 @@
     editOn = on;
     document.body.classList.toggle('admin-editing', on);
     if (on) {
-      showHint('编辑模式：点文字直接改 · 点图片 / 卡片弹窗编辑 · 再点「✏️ 编辑」退出');
+      showHint('✏️ 编辑模式已开启 · 点文字改字 · 点图片/占位框/故事照片弹窗编辑 · 改完点「✏️ 编辑」退出');
     } else {
       finishTextEdit(true);
       hideHint();
