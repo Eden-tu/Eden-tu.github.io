@@ -38,6 +38,7 @@
   var saveBar = null;      // 编辑时贴在元素下方的「保存 / 取消」条
   var autoTimer = null;    // 自动保存防抖计时器
   var btnSavePanel = null; // 面板上的保存按钮（显示已保存条数）
+  var btnClean = null;     // 面板上的「清理失效」按钮（仅在检测到死数据时出现）
   var adminModal = null;   // 属性编辑弹框（故事配文 / 博客正文）
   var modalSaveFn = null;  // 弹框内的保存回调（Ctrl/Cmd+S 用）
 
@@ -314,6 +315,13 @@
     if (!btnSavePanel) return;
     var n = Object.keys(overrides).length;
     btnSavePanel.textContent = n ? ('💾 保存 (' + n + ')') : '💾 保存';
+
+    // 有失效记录时才亮出「清理失效」按钮，并把条数标出来
+    if (btnClean) {
+      var dead = findDeadOverrides();
+      btnClean.style.display = dead.length ? '' : 'none';
+      btnClean.textContent = '🧹 清理失效 (' + dead.length + ')';
+    }
   }
 
   /* ============ 文字编辑 ============ */
@@ -600,6 +608,37 @@
     });
   }
 
+  /* ===== 失效数据检测 / 清理 =====
+     旧的修改记录用的是"位置选择器"，页面结构一变（如导入照片）就再也匹配不到元素，
+     成了死数据：既显示不出来，又占着空间、导出备份时还会带着走。 */
+  function findDeadOverrides() {
+    var dead = [];
+    Object.keys(overrides).forEach(function (k) {
+      try {
+        if (!document.querySelectorAll(k).length) dead.push(k);
+      } catch (e) { dead.push(k); }   // 选择器本身非法也算失效
+    });
+    return dead;
+  }
+
+  function cleanDead() {
+    var dead = findDeadOverrides();
+    if (!dead.length) { toast('没有失效记录，数据很干净 ✓'); return; }
+    var ok = window.confirm(
+      '检测到 ' + dead.length + ' 条失效的旧记录\n' +
+      '（页面里已经找不到它们对应的元素了）。\n\n' +
+      '这些记录永远显示不出来，清掉可以让页面恢复默认内容，\n' +
+      '之后重新编辑就能正常保存和显示。\n\n' +
+      '建议先点「导出备份」留个底。确定清理吗？'
+    );
+    if (!ok) return;
+    dead.forEach(function (k) { delete overrides[k]; });
+    if (persist()) {
+      toast('已清理 ' + dead.length + ' 条失效记录，正在刷新…');
+      setTimeout(function () { location.reload(); }, 700);
+    }
+  }
+
   /* ============ 导入 / 导出 / 重置 ============ */
   function exportJSON() {
     if (!Object.keys(overrides).length) { toast('还没有任何修改，无需导出'); return; }
@@ -700,6 +739,11 @@
     panel.appendChild(mkBtn('导出备份', '把已改内容存成 JSON 文件', exportJSON));
     panel.appendChild(mkBtn('导入', '从备份 JSON 恢复修改', importJSON));
     panel.appendChild(mkBtn('重置全部', '清空所有自定义修改', resetAll));
+
+    // 「清理失效」只在真的检测到死数据时才出现，平时不占地方
+    btnClean = mkBtn('🧹 清理失效', '删除页面里已找不到对应元素的旧记录', cleanDead);
+    btnClean.style.display = 'none';
+    panel.appendChild(btnClean);
 
     document.body.appendChild(panel);
     updateCount();
