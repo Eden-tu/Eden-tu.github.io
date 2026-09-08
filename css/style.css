@@ -1271,7 +1271,7 @@ img.ph--heart {
    回到顶部
    ========================================================================== */
 .to-top {
-  position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 50;
+  position: fixed; right: 1.25rem; top: 50%; margin-top: -30px; z-index: 50;
   display: flex; flex-direction: column; align-items: center; gap: .1rem;
   width: 60px; height: 60px; cursor: pointer;
   background: var(--c-accent); color: var(--c-on-accent);
@@ -1488,7 +1488,7 @@ img.ph--heart {
   .bubble--big { font-size: .96rem; }
 
   .footer__top { flex-direction: column; text-align: center; }
-  .to-top { width: 52px; height: 52px; }
+  .to-top { width: 52px; height: 52px; margin-top: -26px; }
 }
 
 /* 超小屏 */
