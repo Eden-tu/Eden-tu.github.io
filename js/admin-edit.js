@@ -233,15 +233,6 @@
     return null;
   }
 
-  /* 项目作品卡媒体区：点占位框、已传图片、说明条、角标任意处 -> 整块视为编辑目标，
-     统一弹框处理（换图 + 改悬浮说明），不再内联编辑，杜绝图片/悬浮层互相遮挡 */
-  function projectMediaEl(target) {
-    if (!target || !target.closest) return null;
-    if (target.closest('.admin-modal')) return null;
-    var media = target.closest('.project-card__media');
-    return media || null;
-  }
-
   /* ============ 保存条（💾 保存 / 取消）============ */
   function ensureSaveBar() {
     if (saveBar) return saveBar;
@@ -548,66 +539,6 @@
     if (persist()) { applyOne(key, overrides[key]); updateCount(); toast('已保存 ✓'); }
   }
 
-  /* 取（必要时重建）作品卡的悬浮说明气泡。
-     历史遗留：旧版没有 data-key，位置选择器在导入照片后可能失配并命中 hover 容器，
-     textContent 覆盖会把 .bubble 冲掉。这里兜底重建，保证用户永远有地方可写。 */
-  function ensureBubble(card) {
-    var media = card.querySelector('.project-card__media');
-    if (!media) return null;
-
-    var hover = media.querySelector('.project-card__hover');
-    if (!hover) {
-      hover = document.createElement('div');
-      hover.className = 'project-card__hover';
-      media.appendChild(hover);
-    }
-
-    var b = hover.querySelector('.bubble');
-    if (b) return b;
-
-    // 补建时必须复用「这张卡原本那个气泡」的 data-key（写在 hover 容器的 data-bubble-key 上）。
-    // 否则新气泡会拿到一个新 key，而刷新后页面回到原始 HTML、新 key 根本不存在，
-    // 存进去的内容就永远套不回来 —— 表现为"保存成功但页面上不显示"。
-    var key = hover.getAttribute('data-bubble-key');
-    if (!key) {
-      // 兜底：从媒体区图片的 data-key 派生（如 ph-1-bubble）
-      var holder = media.querySelector('[data-key]');
-      key = holder ? (holder.getAttribute('data-key') + '-bubble') : null;
-    }
-    if (!key) {
-      var all = Array.prototype.slice.call(document.querySelectorAll('.project-card'));
-      key = 'bubble-auto-' + (all.indexOf(card) + 1);
-    }
-
-    b = document.createElement('p');
-    b.className = 'bubble bubble--sm';
-    b.setAttribute('data-key', key);
-    hover.appendChild(b);
-    return b;
-  }
-
-  /* 作品卡编辑弹框：替换图片 + 修改悬浮说明，一处搞定；
-     弹框居中、z-index 最高，按钮永远不会被图片或卡片遮挡 */
-  function openProjectEditor(card) {
-    var media = card.querySelector('.project-card__media');
-    var bubble = ensureBubble(card);
-    var imgEl = media ? (media.querySelector('img') || media.querySelector('.ph')) : null;
-    var titleEl = card.querySelector('.project-card__title') || card.querySelector('h3, h4');
-    var name = titleEl ? (titleEl.textContent || '').trim().slice(0, 18) : '';
-    openAttrModal({
-      title: '编辑作品卡' + (name ? '：' + name : ''),
-      textLabel: '悬浮说明（鼠标放到图片上时显示的一句话）',
-      textValue: bubble ? (bubble.textContent || '') : '',
-      multiline: false,
-      imageSrc: (imgEl && imgEl.tagName === 'IMG') ? imgEl.src : null,
-      onReplace: function () { if (imgEl) pickImage(imgEl); },
-      onSave: function (val) {
-        if (!bubble) { toast('这张卡片没有说明位'); return; }
-        storeText(bubble, val);
-      }
-    });
-  }
-
   /* ===== 失效数据检测 / 清理 =====
      旧的修改记录用的是"位置选择器"，页面结构一变（如导入照片）就再也匹配不到元素，
      成了死数据：既显示不出来，又占着空间、导出备份时还会带着走。 */
@@ -757,7 +688,7 @@
     document.addEventListener('mouseover', function (e) {
       if (!editOn) return;
       if (adminModal && adminModal.contains(e.target)) { clearHover(); return; }
-      var t = projectMediaEl(e.target) || editTarget(e.target);
+      var t = editTarget(e.target);
       if (t === lastHover) return;
       clearHover();
       if (t) { t.classList.add('admin-hover'); lastHover = t; }
@@ -797,13 +728,6 @@
         }
         // 卡片空白处 -> 弹框改整篇文章正文
         e.preventDefault(); e.stopPropagation(); openArticleEditor(post); return;
-      }
-
-      // 项目作品卡媒体区：点占位框/图片/说明条/角标任意处 -> 弹框（换图 + 改悬浮说明）
-      var pm = projectMediaEl(e.target);
-      if (pm) {
-        var pcard = pm.closest('.project-card');
-        if (pcard) { e.preventDefault(); e.stopPropagation(); openProjectEditor(pcard); return; }
       }
 
       var t = editTarget(e.target);
