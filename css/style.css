@@ -528,6 +528,13 @@ img.ph--heart {
 [data-color="teal"]   { background: var(--c-secondary); color: var(--c-on-accent); }
 [data-theme="dark"] [data-color] { color: #232027; }
 
+/* 深色模式：技能 sticker 改为「深色底 + 浅色字」，浅字才可读，且与暗色主题统一（仅作用于 .sticker，不影响图标/圆点/奖牌） */
+[data-theme="dark"] .sticker[data-color="orange"] { background: #5A2F1F; color: #F6E9E0; }
+[data-theme="dark"] .sticker[data-color="blue"]   { background: #1F4A47; color: #D6F3F0; }
+[data-theme="dark"] .sticker[data-color="yellow"] { background: #5A4F1F; color: #F6F0D6; }
+[data-theme="dark"] .sticker[data-color="pink"]   { background: #5A2F43; color: #F6E0EA; }
+[data-theme="dark"] .sticker[data-color="teal"]   { background: #1F4A47; color: #D6F3F0; }
+
 /* ---- 项目卡片 ---- */
 .card-grid { display: grid; gap: var(--sp-3); }
 .card-grid--3 { grid-template-columns: repeat(3, 1fr); }
