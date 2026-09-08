@@ -156,10 +156,27 @@
     }
   }
 
+  /* 清理历史遗留的废弃记录：早期补建气泡用 "-bubble" 派生 key（如 ph-1-bubble），
+     刷新回到原始 HTML 后这些元素并不存在，内容永远套不回来，属于死数据。 */
+  function purgeDeadKeys() {
+    var dead = [];
+    Object.keys(overrides).forEach(function (k) {
+      var o = overrides[k];
+      if (o && o.t === 'text' && /-bubble/.test(k)) dead.push(k);
+    });
+    if (!dead.length) return;
+    dead.forEach(function (k) { delete overrides[k]; });
+    try { localStorage.setItem(LS_KEY, JSON.stringify(overrides)); } catch (e) {}
+    if (window.console && console.warn) {
+      console.warn('[admin-edit] 已清理 ' + dead.length + ' 条失效的旧气泡记录（刷新后无对应元素）：', dead);
+    }
+  }
+
   function applyAll() {
     Object.keys(overrides).forEach(function (sel) {
       applyOne(sel, overrides[sel]);
     });
+    purgeDeadKeys();
     updateCount();
   }
 
@@ -540,9 +557,15 @@
     var b = hover.querySelector('.bubble');
     if (b) return b;
 
-    // 优先从媒体区图片的 data-key 派生，保证 key 稳定唯一
-    var holder = media.querySelector('[data-key]');
-    var key = holder ? (holder.getAttribute('data-key') + '-bubble') : null;
+    // 补建时必须复用「这张卡原本那个气泡」的 data-key（写在 hover 容器的 data-bubble-key 上）。
+    // 否则新气泡会拿到一个新 key，而刷新后页面回到原始 HTML、新 key 根本不存在，
+    // 存进去的内容就永远套不回来 —— 表现为"保存成功但页面上不显示"。
+    var key = hover.getAttribute('data-bubble-key');
+    if (!key) {
+      // 兜底：从媒体区图片的 data-key 派生（如 ph-1-bubble）
+      var holder = media.querySelector('[data-key]');
+      key = holder ? (holder.getAttribute('data-key') + '-bubble') : null;
+    }
     if (!key) {
       var all = Array.prototype.slice.call(document.querySelectorAll('.project-card'));
       key = 'bubble-auto-' + (all.indexOf(card) + 1);
