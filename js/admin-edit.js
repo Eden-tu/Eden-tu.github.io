@@ -137,6 +137,18 @@
           el.setAttribute(o.k, o.v);
           el.setAttribute('data-ovr-sel', sel);
         } else {
+          // 防御：只跳过"内含已注册编辑位的容器"。
+          // 旧版没有 data-key，位置选择器在 DOM 变动后可能失配（例如导入照片后
+          // .ph 变成 <img>，层级移位，命中 .project-card__hover）。此时 textContent
+          // 会把里面的悬浮说明气泡 .bubble 整个冲掉，之后永远提示「没有说明位」。
+          // 注意：不能简单地"有子元素就跳过"——普通文字里常有 <span>♡</span> 这类
+          // 内联装饰，那种情况必须照常覆盖，否则用户改的文字保存不进去。
+          if (el.querySelector('[data-key], .bubble')) {
+            if (window.console && console.warn) {
+              console.warn('[admin-edit] 跳过可疑的文字覆盖（目标内含编辑位，疑似选择器失配）：', sel);
+            }
+            continue;
+          }
           el.textContent = o.v;
           el.setAttribute('data-ovr-sel', sel);
         }
@@ -511,11 +523,43 @@
     if (persist()) { applyOne(key, overrides[key]); updateCount(); toast('已保存 ✓'); }
   }
 
+  /* 取（必要时重建）作品卡的悬浮说明气泡。
+     历史遗留：旧版没有 data-key，位置选择器在导入照片后可能失配并命中 hover 容器，
+     textContent 覆盖会把 .bubble 冲掉。这里兜底重建，保证用户永远有地方可写。 */
+  function ensureBubble(card) {
+    var media = card.querySelector('.project-card__media');
+    if (!media) return null;
+
+    var hover = media.querySelector('.project-card__hover');
+    if (!hover) {
+      hover = document.createElement('div');
+      hover.className = 'project-card__hover';
+      media.appendChild(hover);
+    }
+
+    var b = hover.querySelector('.bubble');
+    if (b) return b;
+
+    // 优先从媒体区图片的 data-key 派生，保证 key 稳定唯一
+    var holder = media.querySelector('[data-key]');
+    var key = holder ? (holder.getAttribute('data-key') + '-bubble') : null;
+    if (!key) {
+      var all = Array.prototype.slice.call(document.querySelectorAll('.project-card'));
+      key = 'bubble-auto-' + (all.indexOf(card) + 1);
+    }
+
+    b = document.createElement('p');
+    b.className = 'bubble bubble--sm';
+    b.setAttribute('data-key', key);
+    hover.appendChild(b);
+    return b;
+  }
+
   /* 作品卡编辑弹框：替换图片 + 修改悬浮说明，一处搞定；
      弹框居中、z-index 最高，按钮永远不会被图片或卡片遮挡 */
   function openProjectEditor(card) {
     var media = card.querySelector('.project-card__media');
-    var bubble = card.querySelector('.project-card__hover .bubble');
+    var bubble = ensureBubble(card);
     var imgEl = media ? (media.querySelector('img') || media.querySelector('.ph')) : null;
     var titleEl = card.querySelector('.project-card__title') || card.querySelector('h3, h4');
     var name = titleEl ? (titleEl.textContent || '').trim().slice(0, 18) : '';
