@@ -726,8 +726,8 @@ img.ph--heart {
 
 /* ---- 技能栈「花蕊开花」交互 ---- */
 .skill-flower {
-  --petal-dist: 120px;
-  --pop-dist: 172px;
+  --petal-dist: 128px;
+  --pop-dist: 184px;
   position: relative;
   width: min(540px, 92vw);
   height: min(540px, 92vw);
@@ -762,7 +762,7 @@ img.ph--heart {
 .flower-core.is-open { transform: translate(-50%, -50%) scale(.93); }
 .flower-petal {
   z-index: 4;
-  width: 84px; height: 84px;
+  width: 100px; height: 100px;
   /* 向日葵花瓣：上宽下尖的水滴/花瓣形 */
   border-radius: 50% 50% 48% 48% / 62% 62% 38% 38%;
   border: var(--border-thin);
@@ -810,13 +810,13 @@ img.ph--heart {
   transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(-1 * var(--pop-dist))) rotate(calc(-1 * var(--angle))) scale(1);
 }
 @media (max-width: 720px) {
-  .skill-flower { --petal-dist: 104px; --pop-dist: 130px; width: min(440px, 92vw); height: min(440px, 92vw); }
+  .skill-flower { --petal-dist: 112px; --pop-dist: 142px; width: min(460px, 92vw); height: min(460px, 92vw); }
 }
 @media (max-width: 520px) {
-  .skill-flower { --petal-dist: 88px; --pop-dist: 0px; width: min(320px, 92vw); height: min(320px, 92vw); }
+  .skill-flower { --petal-dist: 96px; --pop-dist: 0px; width: min(340px, 92vw); height: min(340px, 92vw); }
   .flower-core { width: 92px; height: 92px; }
   .flower-core__zh { font-size: 1.3rem; }
-  .flower-petal { width: 70px; height: 70px; font-size: .9rem; }
+  .flower-petal { width: 84px; height: 84px; font-size: .95rem; }
   .flower-skills.is-pop { transform: translate(-50%, calc(-50% + 116px)) scale(1); max-width: 86vw; }
 }
 
