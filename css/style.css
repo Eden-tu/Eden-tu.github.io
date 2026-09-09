@@ -811,13 +811,73 @@ img.ph--heart {
 }
 @media (max-width: 720px) {
   .skill-flower { --petal-dist: 112px; --pop-dist: 142px; width: min(460px, 92vw); height: min(460px, 92vw); }
+  .flower-hat { width: 88px; height: 53px; }
 }
 @media (max-width: 520px) {
   .skill-flower { --petal-dist: 100px; --pop-dist: 0px; width: min(360px, 92vw); height: min(360px, 92vw); }
+  .flower-hat { width: 76px; height: 46px; top: 2%; }
   .flower-core { width: 92px; height: 92px; }
   .flower-core__zh { font-size: 1.3rem; }
   .flower-petal { width: 120px; height: 120px; font-size: 1rem; }
   .flower-skills.is-pop { transform: translate(-50%, calc(-50% + 116px)) scale(1); max-width: 86vw; }
+}
+
+/* ---- 海贼王元素（预览，待确认） ---- */
+.pirate-tag {
+  display: inline-block;
+  margin-left: .5rem;
+  padding: .15em .6em;
+  font-family: var(--font-display);
+  font-size: .72rem; letter-spacing: .06em;
+  color: #FFE66D;
+  background: #1b1530;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 2px 2px 0 var(--ink);
+  vertical-align: middle;
+}
+.flower-hat {
+  position: absolute;
+  top: 4%; left: 50%;
+  transform: translateX(-50%);
+  width: 96px; height: 58px;
+  z-index: 7;
+  pointer-events: none;
+  filter: drop-shadow(3px 3px 0 rgba(45, 52, 54, .35));
+}
+
+/* ---- 海贼王 · 全站点缀（预览，待确认）----
+   统一的小骷髅（Jolly Roger）放在每个板块 / 子板块标题前，
+   用内联 SVG data URI，零 HTML 改动即可覆盖整站所有标题。 */
+.section-title::before,
+.sub-title::before {
+  content: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20fill='%232D3436'%20d='M12%203C7%203%204%206.5%204%2011c0%202.8%201.5%204.5%203%205.5V19a1.5%201.5%200%200%200%201.5%201.5h7A1.5%201.5%200%200%200%2017%2019v-2.5c1.5-1%203-2.7%203-5.5C20%206.5%2017%203%2012%203z'/%3E%3Cellipse%20cx='9'%20cy='10.5'%20rx='2'%20ry='2.4'%20fill='%23FFFDF7'/%3E%3Cellipse%20cx='15'%20cy='10.5'%20rx='2'%20ry='2.4'%20fill='%23FFFDF7'/%3E%3Cpath%20fill='%23FFFDF7'%20d='M12%2013l-1.6%203h3.2z'/%3E%3C/svg%3E");
+  display: inline-block;
+  width: .78em; height: .78em;
+  margin-right: .5rem;
+  vertical-align: -.06em;
+}
+/* 深色模式：骷髅改为浅色，保证在深色背景上可见 */
+[data-theme="dark"] .section-title::before,
+[data-theme="dark"] .sub-title::before {
+  content: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20fill='%23EAE4F2'%20d='M12%203C7%203%204%206.5%204%2011c0%202.8%201.5%204.5%203%205.5V19a1.5%201.5%200%200%200%201.5%201.5h7A1.5%201.5%200%200%200%2017%2019v-2.5c1.5-1%203-2.7%203-5.5C20%206.5%2017%203%2012%203z'/%3E%3Cellipse%20cx='9'%20cy='10.5'%20rx='2'%20ry='2.4'%20fill='%23100E15'/%3E%3Cellipse%20cx='15'%20cy='10.5'%20rx='2'%20ry='2.4'%20fill='%23100E15'/%3E%3Cpath%20fill='%23100E15'%20d='M12%2013l-1.6%203h3.2z'/%3E%3C/svg%3E");
+}
+/* 顶部 logo 加一顶草帽（路飞同款），呼应海贼王主题 */
+.logo::before {
+  content: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cellipse%20cx='12'%20cy='17'%20rx='11'%20ry='3.2'%20fill='%23E8C36B'%20stroke='%237A5A2B'%20stroke-width='1.4'/%3E%3Cpath%20d='M5%2016%20Q5%207%2012%207%20Q19%207%2019%2016%20Z'%20fill='%23EAC96F'%20stroke='%237A5A2B'%20stroke-width='1.4'/%3E%3Cpath%20d='M5.5%2014%20Q12%2017%2018.5%2014%20L18.5%2016%20Q12%2019%205.5%2016%20Z'%20fill='%23D33B2C'/%3E%3C/svg%3E");
+  display: inline-block;
+  width: 1.05em; height: 1.05em;
+  margin-right: .3rem;
+  align-self: center;
+}
+/* 页脚品牌名后也来个小骷髅，全站首尾呼应 */
+.footer__name { position: relative; }
+.footer__name::after {
+  content: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20fill='%232D3436'%20d='M12%203C7%203%204%206.5%204%2011c0%202.8%201.5%204.5%203%205.5V19a1.5%201.5%200%200%200%201.5%201.5h7A1.5%201.5%200%200%200%2017%2019v-2.5c1.5-1%203-2.7%203-5.5C20%206.5%2017%203%2012%203z'/%3E%3Cellipse%20cx='9'%20cy='10.5'%20rx='2'%20ry='2.4'%20fill='%23FFFDF7'/%3E%3Cellipse%20cx='15'%20cy='10.5'%20rx='2'%20ry='2.4'%20fill='%23FFFDF7'/%3E%3Cpath%20fill='%23FFFDF7'%20d='M12%2013l-1.6%203h3.2z'/%3E%3C/svg%3E");
+  display: inline-block;
+  width: .7em; height: .7em;
+  margin-left: .4rem;
+  vertical-align: -.04em;
 }
 
 /* ---- 时间线 ---- */
