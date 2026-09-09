@@ -9,9 +9,10 @@
 <!-- ✏️ 想改浏览器标签页标题 / 网站描述，就改上面两行 -->
 
 <!-- 漫画风字体（从 Google Fonts 加载；加载失败会自动用系统字体兜底，不影响排版） -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap">
+<link rel="preconnect" href="https://fonts.loli.net">
+<link rel="preconnect" href="https://gstatic.loli.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.loli.net/css2?family=Bangers&family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Bangers&family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap"></noscript>
 
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -966,7 +967,7 @@
     <!-- ---------- 大合照（心形边框） ---------- -->
     <div class="story-hero reveal">
       <div class="heart-frame">
-        <img class="ph ph--heart" src="images/story-main.jpg" alt="我们的合照" data-key="img-3">
+        <img class="ph ph--heart" src="images/story-main.jpg" alt="我们的合照" data-key="img-3" loading="lazy" decoding="async">
         <svg class="heart-frame__outline" viewBox="0 0 100 100" aria-hidden="true">
           <path d="M50 95C20 78 4 59 4 37C4 21 15 10 30 10C40 10 47 15 50 23C53 15 60 10 70 10C85 10 96 21 96 37C96 59 80 78 50 95Z"/>
         </svg>
@@ -1030,41 +1031,41 @@
       <!-- ✏️ 加照片：复制一个 <figure class="photo-tile">，改图片路径和小故事文字 -->
       <div class="photo-wall">
         <figure class="photo-tile reveal rotate--s-l" data-note="七夕节出门吃小火锅啦！这是我们工作后第一次约会！" data-key="txt-115">
-          <img class="ph ph--square" src="images/story-01.jpg" alt="七夕节小火锅" data-key="img-4">
+          <img class="ph ph--square" src="images/story-01.jpg" alt="七夕节小火锅" data-key="img-4" loading="lazy" decoding="async">
           <span class="sticker-deco" data-deco="heart">♡</span>
         </figure>
         <figure class="photo-tile reveal rotate--s-r" data-note="我们的故事 · 照片二" data-key="txt-116">
-          <img class="ph ph--square" src="images/story-02.jpg" alt="我们的故事 照片2" data-key="img-5">
+          <img class="ph ph--square" src="images/story-02.jpg" alt="我们的故事 照片2" data-key="img-5" loading="lazy" decoding="async">
         </figure>
         <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}" data-key="txt-87">
-          <img class="ph ph--square" src="images/story-03.jpg" alt="我们的回忆 03" data-key="ph-13"><span class="sticker-deco" data-deco="star">★</span>
+          <img class="ph ph--square" src="images/story-03.jpg" alt="我们的回忆 03" data-key="ph-13" loading="lazy" decoding="async"><span class="sticker-deco" data-deco="star">★</span>
         </figure>
         <figure class="photo-tile reveal rotate--s-r" data-note="{{这张照片背后的小故事}}" data-key="txt-88">
-          <img class="ph ph--square" src="images/story-04.jpg" alt="我们的回忆 04" data-key="ph-14">
+          <img class="ph ph--square" src="images/story-04.jpg" alt="我们的回忆 04" data-key="ph-14" loading="lazy" decoding="async">
         </figure>
         <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}" data-key="txt-89">
-          <img class="ph ph--square" src="images/story-05.jpg" alt="我们的回忆 05" data-key="ph-15"><span class="sticker-deco" data-deco="heart">♡</span>
+          <img class="ph ph--square" src="images/story-05.jpg" alt="我们的回忆 05" data-key="ph-15" loading="lazy" decoding="async"><span class="sticker-deco" data-deco="heart">♡</span>
         </figure>
         <figure class="photo-tile reveal rotate--s-r" data-note="{{这张照片背后的小故事}}" data-key="txt-90">
-          <img class="ph ph--square" src="images/story-06.jpg" alt="我们的回忆 06" data-key="ph-16">
+          <img class="ph ph--square" src="images/story-06.jpg" alt="我们的回忆 06" data-key="ph-16" loading="lazy" decoding="async">
         </figure>
         <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}" data-key="txt-91">
-          <img class="ph ph--square" src="images/story-07.jpg" alt="我们的回忆 07" data-key="ph-17"><span class="sticker-deco" data-deco="star">★</span>
+          <img class="ph ph--square" src="images/story-07.jpg" alt="我们的回忆 07" data-key="ph-17" loading="lazy" decoding="async"><span class="sticker-deco" data-deco="star">★</span>
         </figure>
         <figure class="photo-tile reveal rotate--s-r" data-note="{{这张照片背后的小故事}}" data-key="txt-92">
-          <img class="ph ph--square" src="images/story-08.jpg" alt="我们的回忆 08" data-key="ph-18">
+          <img class="ph ph--square" src="images/story-08.jpg" alt="我们的回忆 08" data-key="ph-18" loading="lazy" decoding="async">
         </figure>
         <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}" data-key="txt-93">
-          <img class="ph ph--square" src="images/story-09.jpg" alt="我们的回忆 09" data-key="ph-19"><span class="sticker-deco" data-deco="heart">♡</span>
+          <img class="ph ph--square" src="images/story-09.jpg" alt="我们的回忆 09" data-key="ph-19" loading="lazy" decoding="async"><span class="sticker-deco" data-deco="heart">♡</span>
         </figure>
         <figure class="photo-tile reveal rotate--s-r" data-note="{{这张照片背后的小故事}}" data-key="txt-94">
-          <img class="ph ph--square" src="images/story-10.jpg" alt="我们的回忆 10" data-key="ph-20">
+          <img class="ph ph--square" src="images/story-10.jpg" alt="我们的回忆 10" data-key="ph-20" loading="lazy" decoding="async">
         </figure>
         <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}" data-key="txt-95">
-          <img class="ph ph--square" src="images/story-11.jpg" alt="我们的回忆 11" data-key="ph-21"><span class="sticker-deco" data-deco="star">★</span>
+          <img class="ph ph--square" src="images/story-11.jpg" alt="我们的回忆 11" data-key="ph-21" loading="lazy" decoding="async"><span class="sticker-deco" data-deco="star">★</span>
         </figure>
         <figure class="photo-tile reveal rotate--s-r" data-note="{{这张照片背后的小故事}}" data-key="txt-96">
-          <img class="ph ph--square" src="images/story-12.jpg" alt="我们的回忆 12" data-key="ph-22">
+          <img class="ph ph--square" src="images/story-12.jpg" alt="我们的回忆 12" data-key="ph-22" loading="lazy" decoding="async">
         </figure>
         <figure class="photo-tile reveal rotate--s-l" data-note="{{这张照片背后的小故事}}" data-key="txt-97">
           <div class="ph ph--square" data-key="ph-23"><svg class="ph__icon" aria-hidden="true"><use href="#i-camera"/></svg><span class="ph__hint">story-13.jpg</span></div><span class="sticker-deco" data-deco="heart">♡</span>
