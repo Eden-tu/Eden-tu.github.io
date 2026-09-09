@@ -568,7 +568,6 @@ img.ph--heart {
 }
 [data-theme="dark"] .badge--floating { color: #232027; }
 
-
 /* 精选作品卡：右上角贴一张漫画胶带 sticker，呼应"POW!" 标题 */
 .project-card--featured::before {
   content: '★ FEATURED'; position: absolute; right: -32px; top: 18px;
@@ -580,10 +579,8 @@ img.ph--heart {
   box-shadow: 0 2px 0 var(--ink);
   z-index: 4; pointer-events: none;
   border: 1.5px solid var(--ink);
-}
-@media (max-width: 720px) {
-  .project-card--featured::before { right: -38px; top: 14px; width: 130px; font-size: .58rem; }
-}
+}@media (max-width: 720px) {
+  .project-card--featured::before { right: -38px; top: 14px; width: 130px; font-size: .58rem; }}
 /* 标题加一条彩色下划线，呼应漫画分镜 */
 .project-card__title {
   display: inline-block;
@@ -808,77 +805,13 @@ img.ph--heart {
 .flower-skills.is-pop {
   opacity: 1; visibility: visible; pointer-events: auto;
   transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(-1 * var(--pop-dist))) rotate(calc(-1 * var(--angle))) scale(1);
-}
-@media (max-width: 720px) {
-  .skill-flower { --petal-dist: 112px; --pop-dist: 142px; width: min(460px, 92vw); height: min(460px, 92vw); }
-  .flower-hat { width: 88px; height: 53px; }
-}
-@media (max-width: 520px) {
+}@media (max-width: 720px) {
+  .skill-flower { --petal-dist: 112px; --pop-dist: 142px; width: min(460px, 92vw); height: min(460px, 92vw); }}@media (max-width: 520px) {
   .skill-flower { --petal-dist: 100px; --pop-dist: 0px; width: min(360px, 92vw); height: min(360px, 92vw); }
-  .flower-hat { width: 76px; height: 46px; top: 2%; }
   .flower-core { width: 92px; height: 92px; }
   .flower-core__zh { font-size: 1.3rem; }
   .flower-petal { width: 120px; height: 120px; font-size: 1rem; }
-  .flower-skills.is-pop { transform: translate(-50%, calc(-50% + 116px)) scale(1); max-width: 86vw; }
-}
-
-/* ---- 海贼王元素（预览，待确认） ---- */
-.pirate-tag {
-  display: inline-block;
-  margin-left: .5rem;
-  padding: .15em .6em;
-  font-family: var(--font-display);
-  font-size: .72rem; letter-spacing: .06em;
-  color: #FFE66D;
-  background: #1b1530;
-  border: 2px solid var(--ink);
-  border-radius: 999px;
-  box-shadow: 2px 2px 0 var(--ink);
-  vertical-align: middle;
-}
-.flower-hat {
-  position: absolute;
-  top: 4%; left: 50%;
-  transform: translateX(-50%);
-  width: 96px; height: 58px;
-  z-index: 7;
-  pointer-events: none;
-  filter: drop-shadow(3px 3px 0 rgba(45, 52, 54, .35));
-}
-
-/* ---- 海贼王 · 全站点缀（预览，待确认）----
-   统一的小骷髅（Jolly Roger）放在每个板块 / 子板块标题前，
-   用内联 SVG data URI，零 HTML 改动即可覆盖整站所有标题。 */
-.section-title::before,
-.sub-title::before {
-  content: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20fill='%232D3436'%20d='M12%203C7%203%204%206.5%204%2011c0%202.8%201.5%204.5%203%205.5V19a1.5%201.5%200%200%200%201.5%201.5h7A1.5%201.5%200%200%200%2017%2019v-2.5c1.5-1%203-2.7%203-5.5C20%206.5%2017%203%2012%203z'/%3E%3Cellipse%20cx='9'%20cy='10.5'%20rx='2'%20ry='2.4'%20fill='%23FFFDF7'/%3E%3Cellipse%20cx='15'%20cy='10.5'%20rx='2'%20ry='2.4'%20fill='%23FFFDF7'/%3E%3Cpath%20fill='%23FFFDF7'%20d='M12%2013l-1.6%203h3.2z'/%3E%3C/svg%3E");
-  display: inline-block;
-  width: .78em; height: .78em;
-  margin-right: .5rem;
-  vertical-align: -.06em;
-}
-/* 深色模式：骷髅改为浅色，保证在深色背景上可见 */
-[data-theme="dark"] .section-title::before,
-[data-theme="dark"] .sub-title::before {
-  content: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20fill='%23EAE4F2'%20d='M12%203C7%203%204%206.5%204%2011c0%202.8%201.5%204.5%203%205.5V19a1.5%201.5%200%200%200%201.5%201.5h7A1.5%201.5%200%200%200%2017%2019v-2.5c1.5-1%203-2.7%203-5.5C20%206.5%2017%203%2012%203z'/%3E%3Cellipse%20cx='9'%20cy='10.5'%20rx='2'%20ry='2.4'%20fill='%23100E15'/%3E%3Cellipse%20cx='15'%20cy='10.5'%20rx='2'%20ry='2.4'%20fill='%23100E15'/%3E%3Cpath%20fill='%23100E15'%20d='M12%2013l-1.6%203h3.2z'/%3E%3C/svg%3E");
-}
-/* 顶部 logo 加一顶草帽（路飞同款），呼应海贼王主题 */
-.logo::before {
-  content: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cellipse%20cx='12'%20cy='17'%20rx='11'%20ry='3.2'%20fill='%23E8C36B'%20stroke='%237A5A2B'%20stroke-width='1.4'/%3E%3Cpath%20d='M5%2016%20Q5%207%2012%207%20Q19%207%2019%2016%20Z'%20fill='%23EAC96F'%20stroke='%237A5A2B'%20stroke-width='1.4'/%3E%3Cpath%20d='M5.5%2014%20Q12%2017%2018.5%2014%20L18.5%2016%20Q12%2019%205.5%2016%20Z'%20fill='%23D33B2C'/%3E%3C/svg%3E");
-  display: inline-block;
-  width: 1.05em; height: 1.05em;
-  margin-right: .3rem;
-  align-self: center;
-}
-/* 页脚品牌名后也来个小骷髅，全站首尾呼应 */
-.footer__name { position: relative; }
-.footer__name::after {
-  content: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20fill='%232D3436'%20d='M12%203C7%203%204%206.5%204%2011c0%202.8%201.5%204.5%203%205.5V19a1.5%201.5%200%200%200%201.5%201.5h7A1.5%201.5%200%200%200%2017%2019v-2.5c1.5-1%203-2.7%203-5.5C20%206.5%2017%203%2012%203z'/%3E%3Cellipse%20cx='9'%20cy='10.5'%20rx='2'%20ry='2.4'%20fill='%23FFFDF7'/%3E%3Cellipse%20cx='15'%20cy='10.5'%20rx='2'%20ry='2.4'%20fill='%23FFFDF7'/%3E%3Cpath%20fill='%23FFFDF7'%20d='M12%2013l-1.6%203h3.2z'/%3E%3C/svg%3E");
-  display: inline-block;
-  width: .7em; height: .7em;
-  margin-left: .4rem;
-  vertical-align: -.04em;
-}
+  .flower-skills.is-pop { transform: translate(-50%, calc(-50% + 116px)) scale(1); max-width: 86vw; }}
 
 /* ---- 时间线 ---- */
 .timeline { position: relative; display: grid; gap: var(--sp-3); padding-left: 3.2rem; }
@@ -1402,7 +1335,6 @@ img.ph--heart {
   border-bottom: 2px dotted var(--c-border-soft);
 }
 .footer__brand { display: flex; align-items: center; gap: .8rem; }
-.footer__name { font-family: var(--font-display); font-size: 1.5rem; letter-spacing: .06em; margin: 0; }
 .footer__tagline { font-size: .85rem; color: var(--c-text-soft); margin: 0; }
 .footer__signature {
   display: flex; align-items: center; justify-content: center; gap: .5rem; flex-wrap: wrap;
@@ -1555,8 +1487,7 @@ img.ph--heart {
 
 /* ==========================================================================
    响应式：平板
-   ========================================================================== */
-@media (max-width: 1024px) {
+   ========================================================================== */@media (max-width: 1024px) {
   :root { --sp-6: 3.5rem; --sp-5: 2.5rem; }
   .hero { grid-template-columns: 1fr; gap: var(--sp-4); }
   .hero__visual { order: -1; }
@@ -1580,13 +1511,11 @@ img.ph--heart {
   .photo-wall { grid-template-columns: repeat(4, 1fr); }
   .wish-grid { grid-template-columns: repeat(2, 1fr); }
   .contact-grid { grid-template-columns: repeat(2, 1fr); }
-  .contact-form-wrap { grid-template-columns: 1fr; }
-}
+  .contact-form-wrap { grid-template-columns: 1fr; }}
 
 /* ==========================================================================
    响应式：手机
-   ========================================================================== */
-@media (max-width: 720px) {
+   ========================================================================== */@media (max-width: 720px) {
   :root { --sp-6: 3rem; --sp-5: 2rem; --nav-h: 62px; --shadow-hard: 5px 5px 0 var(--ink); }
 
   /* 汉堡菜单 */
@@ -1637,25 +1566,19 @@ img.ph--heart {
   .bubble--big { font-size: .96rem; }
 
   .footer__top { flex-direction: column; text-align: center; }
-  .to-top { width: 52px; height: 52px; margin-top: -26px; }
-}
+  .to-top { width: 52px; height: 52px; margin-top: -26px; }}
 
-/* 手机端：事实标签居中堆叠，避免三个 pill 在同一行溢出 */
-@media (max-width: 480px) {
+/* 手机端：事实标签居中堆叠，避免三个 pill 在同一行溢出 */@media (max-width: 480px) {
   .hero__facts { flex-direction: column; align-items: center; gap: .5rem; }
-  .hero__facts li { width: 100%; max-width: 260px; justify-content: center; }
-}
+  .hero__facts li { width: 100%; max-width: 260px; justify-content: center; }}
 
-/* 超小屏 */
-@media (max-width: 400px) {
+/* 超小屏 */@media (max-width: 400px) {
   .pr-grid, .week-grid { grid-template-columns: 1fr; }
-  .info-list > div { grid-template-columns: 66px 1fr; }
-}
+  .info-list > div { grid-template-columns: 66px 1fr; }}
 
 /* ==========================================================================
    无障碍：尊重「减少动态效果」设置
-   ========================================================================== */
-@media (prefers-reduced-motion: reduce) {
+   ========================================================================== */@media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: .001ms !important;
@@ -1666,17 +1589,14 @@ img.ph--heart {
   .hero__eyebrow, .hero__title, .hero__subtitle, .hero__cta, .hero__facts, .hero__visual {
     animation: none !important; opacity: 1 !important; transform: none !important;
   }
-  .bar i { transition: none !important; }
-}
+  .bar i { transition: none !important; }}
 
 /* ==========================================================================
    补充布局类（team-lead 补）
    ========================================================================== */
 
-/* 首页技能区：强制四列（仅桌面端；手机/平板随全局断点收拢，避免窄屏 4 列溢出挤压） */
-@media (min-width: 1025px) {
-  .skill-grid--4 { grid-template-columns: repeat(4, 1fr); }
-}
+/* 首页技能区：强制四列（仅桌面端；手机/平板随全局断点收拢，避免窄屏 4 列溢出挤压） */@media (min-width: 1025px) {
+  .skill-grid--4 { grid-template-columns: repeat(4, 1fr); }}
 
 /* 微信二维码容器 */
 .qr-box {
@@ -1701,13 +1621,11 @@ img.ph--heart {
 
 /* ==========================================================================
    打印
-   ========================================================================== */
-@media print {
+   ========================================================================== */@media print {
   .navbar, .to-top, .modal, .toast, .filter-bar, .blog-toolbar, .pagination { display: none !important; }
   body { background: #fff; }
   .section { padding: 1rem 0; overflow: visible; }
-  .js-on .reveal { opacity: 1 !important; transform: none !important; }
-}
+  .js-on .reveal { opacity: 1 !important; transform: none !important; }}
 
 /* ==========================================================================
    内容管理模块 #studio（用户自管理 CRUD · 漫画风）
@@ -1887,10 +1805,8 @@ body.admin-editing .admin-panel { opacity: 1; }
 }
 .admin-hint.is-show { display: block; }
 /* 弹框打开时把提示条略压低一档，避免遮住弹框标题；弹框 z-index 仍最高 */
-.admin-modal ~ .admin-hint { top: 78px; }
-@media (max-width: 720px) {
-  .admin-hint { top: 74px; font-size: .72rem; padding: 7px 12px; }
-}
+.admin-modal ~ .admin-hint { top: 78px; }@media (max-width: 720px) {
+  .admin-hint { top: 74px; font-size: .72rem; padding: 7px 12px; }}
 
 .admin-toast {
   position: fixed; left: 50%; top: 22px; z-index: 10000;
@@ -1974,132 +1890,119 @@ body.admin-editing [contenteditable="true"] {
 .admin-savebar__btn--save { background: var(--c-primary); color: #fff; }
 .admin-savebar__btn:hover { filter: brightness(1.08); }
 [data-theme="dark"] .admin-savebar { background: #211d2b; }
-[data-theme="dark"] .admin-savebar__btn { background: #2c2738; color: #F6F1E7; }
+[data-theme="dark"] .admin-savebar__btn { background: #2c2738; color: #F6F1E7; }@media print {
+  .admin-panel, .admin-hint, .admin-toast, .admin-savebar { display: none !important; }}
+/* ==========================================================================
+   照片墙 · 点击照片弹气泡（小作文 + 背景音乐）
+   ========================================================================== */
+.photo-tile { cursor: pointer; }
+.photo-tile.is-pb-open .ph,
+.photo-tile.is-pb-open:hover .ph { transform: scale(1.05); box-shadow: var(--shadow-hard); }
 
-@media print {
-  .admin-panel, .admin-hint, .admin-toast, .admin-savebar { display: none !important; }
-}
-
-/* ---- 海贼王 · 更多点缀（全站，待确认）---- */
-
-/* 每个内容板块标题上方：航海风分隔线 + 小骷髅 */
-.section-head::before {
-  content: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20260%2036%27%3E%3Cline%20x1%3D%2716%27%20y1%3D%2718%27%20x2%3D%27244%27%20y2%3D%2718%27%20stroke%3D%27%232D3436%27%20stroke-width%3D%272.4%27%20stroke-dasharray%3D%271.5%207%27%20stroke-linecap%3D%27round%27%2F%3E%3Cpath%20d%3D%27M12%2018%20l5%20-5%205%205%20-5%205%20z%27%20fill%3D%27%232D3436%27%2F%3E%3Cpath%20d%3D%27M248%2018%20l-5%20-5%20-5%205%205%205%20z%27%20fill%3D%27%232D3436%27%2F%3E%3Cg%20stroke%3D%27%232D3436%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%3E%3Cline%20x1%3D%27120%27%20y1%3D%2727%27%20x2%3D%27140%27%20y2%3D%279%27%2F%3E%3Cline%20x1%3D%27140%27%20y1%3D%2727%27%20x2%3D%27120%27%20y2%3D%279%27%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%27%232D3436%27%3E%3Ccircle%20cx%3D%27120%27%20cy%3D%2727%27%20r%3D%272.4%27%2F%3E%3Ccircle%20cx%3D%27140%27%20cy%3D%279%27%20r%3D%272.4%27%2F%3E%3Ccircle%20cx%3D%27140%27%20cy%3D%2727%27%20r%3D%272.4%27%2F%3E%3Ccircle%20cx%3D%27120%27%20cy%3D%279%27%20r%3D%272.4%27%2F%3E%3C%2Fg%3E%3Cpath%20fill%3D%27%232D3436%27%20d%3D%27M130%206%20C124%206%20121%2010%20121%2015%20c0%202.4%201%203.6%202%204.4%20V22%20a1.5%201.5%200%200%200%201.5%201.5%20h11%20A1.5%201.5%200%200%200%20137%2022%20v-2.6%20c1-.8%202-2%202-4.4%20C140%2010%20136%206%20130%206%20Z%27%2F%3E%3Cellipse%20cx%3D%27126%27%20cy%3D%2714.5%27%20rx%3D%271.9%27%20ry%3D%272.3%27%20fill%3D%27%23FFFDF7%27%2F%3E%3Cellipse%20cx%3D%27134%27%20cy%3D%2714.5%27%20rx%3D%271.9%27%20ry%3D%272.3%27%20fill%3D%27%23FFFDF7%27%2F%3E%3Cpath%20d%3D%27M130%2016.5%20l-1.4%202.8%20h2.8%20z%27%20fill%3D%27%23FFFDF7%27%2F%3E%3C%2Fsvg%3E");
-  display: block;
-  width: min(260px, 72%);
-  height: auto;
-  margin: 0 auto 1.1rem;
-}
-[data-theme="dark"] .section-head::before {
-  content: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20260%2036%27%3E%3Cline%20x1%3D%2716%27%20y1%3D%2718%27%20x2%3D%27244%27%20y2%3D%2718%27%20stroke%3D%27%23EAE4F2%27%20stroke-width%3D%272.4%27%20stroke-dasharray%3D%271.5%207%27%20stroke-linecap%3D%27round%27%2F%3E%3Cpath%20d%3D%27M12%2018%20l5%20-5%205%205%20-5%205%20z%27%20fill%3D%27%23EAE4F2%27%2F%3E%3Cpath%20d%3D%27M248%2018%20l-5%20-5%20-5%205%205%205%20z%27%20fill%3D%27%23EAE4F2%27%2F%3E%3Cg%20stroke%3D%27%23EAE4F2%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%3E%3Cline%20x1%3D%27120%27%20y1%3D%2727%27%20x2%3D%27140%27%20y2%3D%279%27%2F%3E%3Cline%20x1%3D%27140%27%20y1%3D%2727%27%20x2%3D%27120%27%20y2%3D%279%27%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%27%23EAE4F2%27%3E%3Ccircle%20cx%3D%27120%27%20cy%3D%2727%27%20r%3D%272.4%27%2F%3E%3Ccircle%20cx%3D%27140%27%20cy%3D%279%27%20r%3D%272.4%27%2F%3E%3Ccircle%20cx%3D%27140%27%20cy%3D%2727%27%20r%3D%272.4%27%2F%3E%3Ccircle%20cx%3D%27120%27%20cy%3D%279%27%20r%3D%272.4%27%2F%3E%3C%2Fg%3E%3Cpath%20fill%3D%27%23EAE4F2%27%20d%3D%27M130%206%20C124%206%20121%2010%20121%2015%20c0%202.4%201%203.6%202%204.4%20V22%20a1.5%201.5%200%200%200%201.5%201.5%20h11%20A1.5%201.5%200%200%200%20137%2022%20v-2.6%20c1-.8%202-2%202-4.4%20C140%2010%20136%206%20130%206%20Z%27%2F%3E%3Cellipse%20cx%3D%27126%27%20cy%3D%2714.5%27%20rx%3D%271.9%27%20ry%3D%272.3%27%20fill%3D%27%23100E15%27%2F%3E%3Cellipse%20cx%3D%27134%27%20cy%3D%2714.5%27%20rx%3D%271.9%27%20ry%3D%272.3%27%20fill%3D%27%23100E15%27%2F%3E%3Cpath%20d%3D%27M130%2016.5%20l-1.4%202.8%20h2.8%20z%27%20fill%3D%27%23100E15%27%2F%3E%3C%2Fsvg%3E");
-}
-
-/* 首屏：漂浮草帽 */
-.hero { position: relative; }
-.hero-hat {
-  position: absolute;
-  top: -6px; left: -8px;
-  width: 88px; height: 54px;
-  z-index: 3;
-  pointer-events: none;
-  transform: rotate(-12deg);
-  filter: drop-shadow(4px 4px 0 rgba(45,52,54,.35));
-}
-
-/* 首屏：WANTED 通缉海报贴纸 */
-.wanted-poster {
-  position: absolute;
-  top: -18px; right: -14px;
-  width: 116px;
-  padding: .5rem .4rem .4rem;
-  background: #EFE3C0;
-  border: 3px solid var(--ink);
-  border-radius: 4px;
-  box-shadow: 5px 5px 0 var(--ink);
-  transform: rotate(7deg);
-  text-align: center;
-  pointer-events: none;
-  z-index: 4;
-}
-.wanted-poster__head {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 1.5rem; letter-spacing: .04em;
-  color: var(--ink); line-height: 1;
-}
-.wanted-poster__cn {
-  margin: .1rem 0 .25rem;
-  font-size: .72rem; font-weight: 800; color: var(--ink);
-  letter-spacing: .3em; padding-left: .3em;
-}
-.wanted-poster__skull { width: 38px; height: 30px; margin: .1rem auto; }
-.wanted-poster__skull svg { width: 100%; height: 100%; display: block; }
-.wanted-poster__name {
-  margin: .15rem 0 .1rem;
-  font-family: var(--font-display); font-size: 1.05rem;
-  color: var(--ink); line-height: 1;
-}
-.wanted-poster__foot {
-  margin: 0;
-  font-size: .52rem; font-weight: 800; letter-spacing: .12em;
-  color: var(--ink);
-}
-
-/* 页脚：海贼王台词 */
-.footer__pirate {
-  display: flex; align-items: center; justify-content: center; gap: .5rem;
-  margin: 0 auto; padding: .55rem 1rem; max-width: 720px;
-  font-family: var(--font-display); font-size: 1.15rem; letter-spacing: .04em;
-  color: var(--c-hot);
+.photo-bubble {
+  position: fixed; z-index: 90;
+  width: min(340px, calc(100vw - 24px));
+  padding: .95rem 1rem .9rem;
   background: var(--c-surface);
-  border: var(--border); border-radius: var(--r-blob);
-  box-shadow: var(--shadow-hard-sm);
-  text-align: center;
+  border: var(--border);
+  border-radius: 20px 26px 22px 28px / 26px 20px 28px 22px;
+  box-shadow: var(--shadow-hard);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transform: translateY(10px) scale(.92);
+  transition: opacity .22s ease, transform .28s var(--ease-pop), visibility .22s;
 }
-.footer__pirate::before {
-  content: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%3E%3Cpath%20fill%3D%27%232D3436%27%20d%3D%27M12%203C7%203%204%206.5%204%2011c0%202.8%201.5%204.5%203%205.5V19a1.5%201.5%200%200%200%201.5%201.5h7A1.5%201.5%200%200%200%2017%2019v-2.5c1.5-1%203-2.7%203-5.5C20%206.5%2017%203%2012%203z%27%2F%3E%3Cellipse%20cx%3D%279%27%20cy%3D%2710.5%27%20rx%3D%272%27%20ry%3D%272.4%27%20fill%3D%27%23FFFDF7%27%2F%3E%3Cellipse%20cx%3D%2715%27%20cy%3D%2710.5%27%20rx%3D%272%27%20ry%3D%272.4%27%20fill%3D%27%23FFFDF7%27%2F%3E%3Cpath%20fill%3D%27%23FFFDF7%27%20d%3D%27M12%2013l-1.6%203h3.2z%27%2F%3E%3C%2Fsvg%3E");
-  display: inline-block; width: 1.1em; height: 1.1em; vertical-align: -.15em;
+.photo-bubble.is-open {
+  opacity: 1; visibility: visible; pointer-events: auto;
+  transform: translateY(0) scale(1);
 }
-[data-theme="dark"] .footer__pirate::before {
-  content: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%3E%3Cpath%20fill%3D%27%23EAE4F2%27%20d%3D%27M12%203C7%203%204%206.5%204%2011c0%202.8%201.5%204.5%203%205.5V19a1.5%201.5%200%200%200%201.5%201.5h7A1.5%201.5%200%200%200%2017%2019v-2.5c1.5-1%203-2.7%203-5.5C20%206.5%2017%203%2012%203z%27%2F%3E%3Cellipse%20cx%3D%279%27%20cy%3D%2710.5%27%20rx%3D%272%27%20ry%3D%272.4%27%20fill%3D%27%23100E15%27%2F%3E%3Cellipse%20cx%3D%2715%27%20cy%3D%2710.5%27%20rx%3D%272%27%20ry%3D%272.4%27%20fill%3D%27%23100E15%27%2F%3E%3Cpath%20fill%3D%27%23100E15%27%20d%3D%27M12%2013l-1.6%203h3.2z%27%2F%3E%3C%2Fsvg%3E");
+/* 可爱小图标点缀：沿边角漂浮的 ♡ ★ ♪ */
+.pb-doodle {
+  position: absolute; pointer-events: none; user-select: none;
+  font-size: 1rem; line-height: 1; opacity: .55;
+  animation: pb-float 3.2s ease-in-out infinite;
 }
+.pb-doodle--1 { top: -9px;  left: -8px;  color: var(--c-hot);      font-size: 1.25rem; }
+.pb-doodle--2 { top: -8px;  right: 30px; color: var(--c-accent);   animation-delay: .5s; }
+.pb-doodle--3 { bottom: -8px; left: 22px; color: var(--c-primary); font-size: 1.15rem; animation-delay: 1s; }
+.pb-doodle--4 { bottom: -10px; right: -6px; color: var(--c-secondary); font-size: 1.1rem; animation-delay: 1.4s; }
+.pb-doodle--5 { top: 46%;   left: -12px; color: var(--c-accent);   font-size: .9rem;  animation-delay: 2s; }
+.pb-doodle--6 { top: 30%;   right: -12px; color: var(--c-hot);     font-size: 1.05rem; animation-delay: 2.5s; }
+@keyframes pb-float {
+  0%, 100% { transform: translateY(0) rotate(-6deg); }
+  50%      { transform: translateY(-5px) rotate(8deg); }
+}
+@media (prefers-reduced-motion: reduce) { .pb-doodle { animation: none; } }
 
-/* 次要板块背景：淡海贼王水印 */
-.section--alt {
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20120%20120%27%3E%3Cg%20fill%3D%27%232D3436%27%20fill-opacity%3D%270.05%27%3E%3Cpath%20d%3D%27M60%2018%20C42%2018%2030%2032%2030%2052%20c0%209%204%2014%209%2017%20v9%20a5%205%200%200%200%205%205%20h22%20a5%205%200%200%200%205%20-5%20v-9%20c5%20-3%209%20-8%209%20-17%20C90%2032%2078%2018%2060%2018%20Z%27%2F%3E%3Ccircle%20cx%3D%2748%27%20cy%3D%2752%27%20r%3D%277%27%2F%3E%3Ccircle%20cx%3D%2772%27%20cy%3D%2752%27%20r%3D%277%27%2F%3E%3Cpath%20d%3D%27M60%2060%20l-5%2011%20h10%20z%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
-  background-repeat: no-repeat;
-  background-position: right -30px top 25px;
-  background-size: 190px;
+.photo-bubble__close {
+  position: absolute; top: -10px; right: -10px; z-index: 2;
+  width: 30px; height: 30px;
+  font-size: 1.05rem; font-weight: 800; line-height: 1;
+  color: var(--c-text); background: var(--c-hot);
+  border: var(--border-thin); border-radius: 50%;
+  box-shadow: 2px 2px 0 var(--ink);
+  cursor: pointer;
+  transition: transform .18s var(--ease-pop);
 }
-[data-theme="dark"] .section--alt {
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20120%20120%27%3E%3Cg%20fill%3D%27%23EAE4F2%27%20fill-opacity%3D%270.05%27%3E%3Cpath%20d%3D%27M60%2018%20C42%2018%2030%2032%2030%2052%20c0%209%204%2014%209%2017%20v9%20a5%205%200%200%200%205%205%20h22%20a5%205%200%200%200%205%20-5%20v-9%20c5%20-3%209%20-8%209%20-17%20C90%2032%2078%2018%2060%2018%20Z%27%2F%3E%3Ccircle%20cx%3D%2748%27%20cy%3D%2752%27%20r%3D%277%27%2F%3E%3Ccircle%20cx%3D%2772%27%20cy%3D%2752%27%20r%3D%277%27%2F%3E%3Cpath%20d%3D%27M60%2060%20l-5%2011%20h10%20z%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+.photo-bubble__close:hover { transform: scale(1.12) rotate(90deg); }
+.photo-bubble__head {
+  margin-bottom: .55rem;
+  font-family: var(--font-display); font-size: 1rem; letter-spacing: .04em;
+  color: var(--c-text);
 }
+.photo-bubble__text {
+  width: 100%; min-height: 110px; max-height: 220px;
+  padding: .6rem .7rem;
+  font-family: inherit; font-size: .88rem; line-height: 1.6;
+  color: var(--c-text); background: var(--c-surface-2);
+  border: var(--border-thin); border-radius: var(--r-md);
+  resize: vertical;
+}
+.photo-bubble__text:focus { outline: none; box-shadow: 3px 3px 0 var(--ink); }
+.photo-bubble__row {
+  display: flex; align-items: center; gap: .5rem;
+  margin-top: .55rem;
+}
+.pb-btn {
+  cursor: pointer;
+  padding: .34rem .7rem;
+  font-family: inherit; font-size: .78rem; font-weight: 800; white-space: nowrap;
+  color: var(--c-text); background: var(--c-surface);
+  border: var(--border-thin); border-radius: 999px;
+  box-shadow: 2px 2px 0 var(--ink);
+  transition: transform .18s var(--ease-pop), filter .18s ease;
+}
+.pb-btn:hover { transform: translateY(-2px) rotate(-1deg); filter: brightness(1.05); }
+.pb-btn:active { transform: translateY(1px); }
+.pb-btn--save { background: var(--c-primary); color: var(--c-on-accent); }
+[data-theme="dark"] .pb-btn--save { color: #232027; }
+.photo-bubble__hint {
+  font-size: .74rem; font-weight: 700; color: var(--c-accent);
+  opacity: 0; transition: opacity .25s ease;
+}
+.photo-bubble__hint.is-show { opacity: 1; }
+.photo-bubble__music {
+  display: flex; align-items: center; flex-wrap: wrap; gap: .4rem;
+  margin-top: .65rem; padding-top: .6rem;
+  border-top: 2px dashed rgba(45, 52, 54, .35);
+  border-top: 2px dashed color-mix(in srgb, var(--ink) 35%, transparent);
+}
+.photo-bubble__music-title { font-size: .8rem; font-weight: 800; color: var(--c-text-soft); }
+.photo-bubble__music-name {
+  flex: 1 1 100%;
+  font-size: .78rem; color: var(--c-text-soft);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  min-height: 1.1em;
+}
+[data-theme="dark"] .photo-bubble,
+[data-theme="dark"] .photo-bubble__text { border-color: #3a3450; }
 
+/* 移动端：气泡变成底部弹层，手指好操作 */
 @media (max-width: 720px) {
-  .hero-hat { display: none; }
-  .wanted-poster { width: 92px; top: -8px; right: 0; }
-  .wanted-poster__head { font-size: 1.2rem; }
-}
-@media (max-width: 400px) {
-  .wanted-poster { display: none; }
-}
-
-/* ---- 海贼王 · 角色道具贴纸（加量版，待确认）---- */
-.op-sticker {
-  position: absolute; z-index: 2; pointer-events: none;
-  opacity: .92;
-  filter: drop-shadow(2px 2px 0 rgba(45,52,54,.25));
-}
-.op-sticker svg { width: 100%; height: 100%; display: block; }
-.op-tr { top: 14px; right: 18px; width: 56px; height: 56px; }
-.op-tl { top: 14px; left: 18px; width: 56px; height: 56px; }
-/* 首页背景：淡万里阳光号水印 */
-.section--home {
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20200%20200%27%3E%3Cg%20fill%3D%27%232D3436%27%20fill-opacity%3D%270.04%27%3E%3Cpath%20d%3D%27M40%20130%20L160%20130%20L148%20162%20L52%20162%20Z%27%2F%3E%3Crect%20x%3D%2798%27%20y%3D%2748%27%20width%3D%274%27%20height%3D%2782%27%2F%3E%3Cpath%20d%3D%27M102%2054%20Q152%2070%20102%20112%20Z%27%2F%3E%3Ccircle%20cx%3D%2764%27%20cy%3D%2768%27%20r%3D%2714%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
-  background-repeat: no-repeat;
-  background-position: right -10px bottom 10px;
-  background-size: 180px;
-}
-@media (max-width: 720px) {
-  .op-sticker { display: none; }
+  .photo-bubble {
+    left: 8px !important; right: 8px !important;
+    top: auto !important; bottom: 8px !important;
+    width: auto; max-height: 74vh; overflow-y: auto;
+    padding-bottom: 1.1rem;
+  }
+  .photo-bubble__text { max-height: 160px; }
 }
