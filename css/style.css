@@ -1517,8 +1517,10 @@ img.ph--heart {
    补充布局类（team-lead 补）
    ========================================================================== */
 
-/* 首页技能区：强制四列 */
-.skill-grid--4 { grid-template-columns: repeat(4, 1fr); }
+/* 首页技能区：强制四列（仅桌面端；手机/平板随全局断点收拢，避免窄屏 4 列溢出挤压） */
+@media (min-width: 1025px) {
+  .skill-grid--4 { grid-template-columns: repeat(4, 1fr); }
+}
 
 /* 微信二维码容器 */
 .qr-box {
