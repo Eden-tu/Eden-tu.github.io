@@ -742,6 +742,52 @@
   /* ========================================================================
      10. 启动
      ======================================================================== */
+  /* ---------- 技能栈「花蕊开花」交互 ---------- */
+  function initSkillFlower() {
+    var flower = $('#skillFlower');
+    if (!flower) return;
+    var core = $('#flowerCore', flower);
+    var petals = $$('.flower-petal', flower);
+    var pops = $$('.flower-skills', flower);
+
+    function closePops() {
+      pops.forEach(function (p) { p.classList.remove('is-pop'); p.setAttribute('aria-hidden', 'true'); });
+      petals.forEach(function (p) { p.classList.remove('is-active'); p.setAttribute('aria-expanded', 'false'); });
+    }
+    function closeAll() {
+      flower.classList.remove('is-open');
+      core.setAttribute('aria-expanded', 'false');
+      closePops();
+    }
+
+    core.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = flower.classList.toggle('is-open');
+      core.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (!open) closePops();
+    });
+
+    petals.forEach(function (petal) {
+      petal.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var cat = petal.getAttribute('data-cat');
+        var pop = flower.querySelector('.flower-skills[data-cat="' + cat + '"]');
+        var willOpen = !petal.classList.contains('is-active');
+        closePops();
+        if (willOpen && pop) {
+          petal.classList.add('is-active');
+          petal.setAttribute('aria-expanded', 'true');
+          pop.classList.add('is-pop');
+          pop.setAttribute('aria-hidden', 'false');
+        }
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (flower.classList.contains('is-open') && !flower.contains(e.target)) closeAll();
+    });
+  }
+
   function init() {
     initTheme();
     initNav();
@@ -751,6 +797,7 @@
     initCopy();
     initForm();
     initReveal();
+    initSkillFlower();
     drawFitnessChart();
 
     // 页脚年份自动更新

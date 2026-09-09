@@ -375,43 +375,42 @@
     <!-- ---------- 技能栈 ---------- -->
     <div class="block">
       <h3 data-key="txt-167" class="sub-title reveal">技能栈 <span data-key="txt-168" class="ono-inline">SKILLS</span></h3>
-      <div class="skill-grid skill-grid--4">
-        <div class="stack-card reveal rotate--s-l">
-          <h4 data-key="txt-169" ><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg> 前端</h4>
-          <div class="sticker-row">
-            <span class="sticker" data-color="blue">HTML5</span>
-            <span class="sticker" data-color="blue">CSS3</span>
-            <span class="sticker" data-color="blue">JavaScript</span>
-            <span class="sticker" data-color="blue">Vue</span>
-          </div>
+      <div class="skill-flower" id="skillFlower">
+        <!-- 二级：各分类技能（点花瓣后弹出） -->
+        <div class="flower-skills" data-cat="front" aria-hidden="true">
+          <span class="sticker" data-color="blue">HTML5</span>
+          <span class="sticker" data-color="blue">CSS3</span>
+          <span class="sticker" data-color="blue">JavaScript</span>
+          <span class="sticker" data-color="blue">Vue</span>
         </div>
-        <div class="stack-card reveal rotate--s-r">
-          <h4 data-key="txt-170" ><svg class="icon" aria-hidden="true"><use href="#i-db"/></svg> 后端</h4>
-          <div class="sticker-row">
-            <span class="sticker" data-color="teal">Node.js</span>
-            <span class="sticker" data-color="teal">Python</span>
-            <span class="sticker" data-color="teal">MySQL</span>
-            <span class="sticker" data-color="teal">REST API</span>
-          </div>
+        <div class="flower-skills" data-cat="back" aria-hidden="true">
+          <span class="sticker" data-color="teal">Node.js</span>
+          <span class="sticker" data-color="teal">Python</span>
+          <span class="sticker" data-color="teal">MySQL</span>
+          <span class="sticker" data-color="teal">REST API</span>
         </div>
-        <div class="stack-card reveal rotate--s-l">
-          <h4 data-key="txt-171" ><svg class="icon" aria-hidden="true"><use href="#i-robot"/></svg> AI 工具</h4>
-          <div class="sticker-row">
-            <span class="sticker" data-color="orange">WorkBuddy</span>
-            <span class="sticker" data-color="orange">AI 提示词工程</span>
-            <span class="sticker" data-color="orange">AI 内容创作</span>
-            <span class="sticker" data-color="orange">AI 软件推广运营</span>
-          </div>
+        <div class="flower-skills" data-cat="ai" aria-hidden="true">
+          <span class="sticker" data-color="orange">WorkBuddy</span>
+          <span class="sticker" data-color="orange">AI 提示词工程</span>
+          <span class="sticker" data-color="orange">AI 内容创作</span>
+          <span class="sticker" data-color="orange">AI 软件推广运营</span>
         </div>
-        <div class="stack-card reveal rotate--s-r">
-          <h4 data-key="txt-172" ><svg class="icon" aria-hidden="true"><use href="#i-team"/></svg> 软技能</h4>
-          <div class="sticker-row">
-            <span class="sticker" data-color="pink">先动手再说</span>
-            <span class="sticker" data-color="pink">快速自学</span>
-            <span class="sticker" data-color="pink">沟通表达</span>
-            <span class="sticker" data-color="pink">抗压重启</span>
-          </div>
+        <div class="flower-skills" data-cat="soft" aria-hidden="true">
+          <span class="sticker" data-color="pink">先动手再说</span>
+          <span class="sticker" data-color="pink">快速自学</span>
+          <span class="sticker" data-color="pink">沟通表达</span>
+          <span class="sticker" data-color="pink">抗压重启</span>
         </div>
+        <!-- 一级：四片花瓣 -->
+        <button type="button" class="flower-petal" data-cat="front" data-key="txt-169" style="--angle:-135deg; --delay:0s" aria-expanded="false">前端</button>
+        <button type="button" class="flower-petal" data-cat="back"  data-key="txt-170" style="--angle:-45deg;  --delay:.06s" aria-expanded="false">后端</button>
+        <button type="button" class="flower-petal" data-cat="ai"    data-key="txt-171" style="--angle:45deg;   --delay:.12s" aria-expanded="false">AI 工具</button>
+        <button type="button" class="flower-petal" data-cat="soft"  data-key="txt-172" style="--angle:135deg;  --delay:.18s" aria-expanded="false">软技能</button>
+        <!-- 花蕊 -->
+        <button type="button" class="flower-core" id="flowerCore" aria-expanded="false" aria-controls="skillFlower">
+          <span class="flower-core__zh">技能</span>
+          <span class="flower-core__en">SKILLS</span>
+        </button>
       </div>
     </div>
 
