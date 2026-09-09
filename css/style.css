@@ -742,11 +742,14 @@ img.ph--heart {
 }
 .flower-core {
   z-index: 5;
-  width: 104px; height: 104px;
+  width: 112px; height: 112px;
   border-radius: 50%;
   border: var(--border);
-  background: var(--c-primary);
-  color: var(--c-on-accent);
+  /* 向日葵花盘：深棕底 + 籽点纹理 */
+  background:
+    radial-gradient(circle, rgba(0,0,0,.28) 1.4px, transparent 1.9px) 0 0 / 13px 13px,
+    radial-gradient(circle at 50% 42%, #8a5a2b 0%, #5a3618 55%, #3a2410 100%);
+  color: #FFE66D;
   font-family: var(--font-display);
   display: grid; place-items: center; line-height: 1;
   box-shadow: var(--shadow-hard);
@@ -759,11 +762,13 @@ img.ph--heart {
 .flower-core.is-open { transform: translate(-50%, -50%) scale(.93); }
 .flower-petal {
   z-index: 4;
-  width: 82px; height: 82px;
-  border-radius: 50% 50% 50% 14px;
+  width: 84px; height: 84px;
+  /* 向日葵花瓣：上宽下尖的水滴/花瓣形 */
+  border-radius: 50% 50% 48% 48% / 62% 62% 38% 38%;
   border: var(--border-thin);
-  background: var(--c-surface);
-  color: var(--c-text);
+  /* 统一金色花瓣 */
+  background: linear-gradient(160deg, #FFE066 0%, #FFC107 58%, #F5A623 100%);
+  color: var(--ink);
   font-family: var(--font-display);
   font-size: 1.02rem; letter-spacing: .04em;
   display: grid; place-items: center; text-align: center;
@@ -774,10 +779,11 @@ img.ph--heart {
   transform: translate(-50%, -50%) scale(.3);
   transition: transform .42s var(--ease-pop), opacity .28s ease, box-shadow .2s ease;
 }
-.flower-petal[data-cat="front"],
-.flower-petal[data-cat="back"]  { background: var(--c-secondary); color: var(--c-on-accent); }
-.flower-petal[data-cat="ai"]    { background: var(--c-primary);   color: var(--c-on-accent); }
-.flower-petal[data-cat="soft"]  { background: var(--c-hot);       color: var(--c-on-accent); }
+/* 向日葵花瓣统一金色；用细彩环区分四个分类 */
+.flower-petal[data-cat="front"] { box-shadow: 0 0 0 2px var(--c-secondary), 3px 3px 0 var(--ink); }
+.flower-petal[data-cat="back"]  { box-shadow: 0 0 0 2px var(--c-primary),   3px 3px 0 var(--ink); }
+.flower-petal[data-cat="ai"]    { box-shadow: 0 0 0 2px var(--c-hot),      3px 3px 0 var(--ink); }
+.flower-petal[data-cat="soft"]  { box-shadow: 0 0 0 2px var(--c-accent),   3px 3px 0 var(--ink); }
 .flower-petal.is-active { box-shadow: 0 0 0 3px var(--c-accent), 3px 3px 0 var(--ink); }
 .skill-flower.is-open .flower-petal {
   opacity: 1;
