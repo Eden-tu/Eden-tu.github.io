@@ -762,7 +762,7 @@ img.ph--heart {
 .flower-core.is-open { transform: translate(-50%, -50%) scale(.93); }
 .flower-petal {
   z-index: 4;
-  width: 100px; height: 100px;
+  width: 146px; height: 146px;
   /* 向日葵花瓣：上宽下尖的水滴/花瓣形 */
   border-radius: 50% 50% 48% 48% / 62% 62% 38% 38%;
   border: var(--border-thin);
@@ -813,10 +813,10 @@ img.ph--heart {
   .skill-flower { --petal-dist: 112px; --pop-dist: 142px; width: min(460px, 92vw); height: min(460px, 92vw); }
 }
 @media (max-width: 520px) {
-  .skill-flower { --petal-dist: 96px; --pop-dist: 0px; width: min(340px, 92vw); height: min(340px, 92vw); }
+  .skill-flower { --petal-dist: 100px; --pop-dist: 0px; width: min(360px, 92vw); height: min(360px, 92vw); }
   .flower-core { width: 92px; height: 92px; }
   .flower-core__zh { font-size: 1.3rem; }
-  .flower-petal { width: 84px; height: 84px; font-size: .95rem; }
+  .flower-petal { width: 120px; height: 120px; font-size: 1rem; }
   .flower-skills.is-pop { transform: translate(-50%, calc(-50% + 116px)) scale(1); max-width: 86vw; }
 }
 
